@@ -144,4 +144,9 @@ npx() {
   lazynvm
   npx $@
 }
+
+yarn() {
+  lazynvm
+  yarn $@
+}
 #end lazy loading of nvm
