@@ -111,3 +111,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # if which ruby >/dev/null && which gem >/dev/null; then
 # 	PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 # fi
+
+alias iphone="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
