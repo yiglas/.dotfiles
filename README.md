@@ -1,5 +1,12 @@
 # MacOS config changes
 
+Tools:
+
+- git
+- finicky - https://github.com/johnste/finicky
+- zsh - https://ohmyz.sh/
+- doom emacs - https://github.com/hlissner/doom-emacs
+
 Create symbolic links use the following statements:
 
 ```bash
@@ -24,5 +31,4 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\ /v AllowC
 # install scoop
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
-
 ```
