@@ -6,11 +6,15 @@ Tools:
 - brave - https://brave.com/
 - finicky - https://github.com/johnste/finicky
 - zsh - https://ohmyz.sh/
+- emacs
 - doom emacs - https://github.com/hlissner/doom-emacs
+- remote desktop (app store)
 - homebrew - https://brew.sh/
 - vscode - https://code.visualstudio.com/
 - itsycal - https://www.mowglii.com/itsycal/
 - displaylink - https://www.synaptics.com/products/displaylink-graphics
+- xcode (app store)
+- ssh
 
 Create symbolic links use the following statements:
 
@@ -36,6 +40,17 @@ Install custom fonts:
 ```bash
 ./install-fonts.sh
 ```
+
+### SSH
+
+1. Generate ssh key:
+
+```base
+ssh-keygen -t rsa
+```
+
+2. Copy the contents of the id_rsa.pub file.
+3. Add the pub fingerprint to the `.ssh/authorized_keys` file on the host machine.
 
 # Windows config changes
 
