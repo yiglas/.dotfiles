@@ -20,6 +20,12 @@ ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/
 ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 ```
 
+Install custom fonts:
+
+```bash
+./install-fonts.sh
+```
+
 # Windows config changes
 
 Note: these commands need elevated permissions.
