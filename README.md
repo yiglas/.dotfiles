@@ -41,6 +41,15 @@ Install custom fonts:
 ./install-fonts.sh
 ```
 
+Enable function keys
+
+check the option found: _System Preferences_ -> _Keyboard_ -> _Use F1, F2, etc..._
+
+then set:
+
+Shortcuts -> Launchpad & Dock -> Show Launchpad -> F4
+Shortcuts -> Mission Control -> Mission Control -> F3
+
 ### SSH
 
 1. Generate ssh key:
