@@ -1,5 +1,15 @@
 module.exports = {
   defaultBrowser: "Brave Browser",
+  rewrite: [
+    {
+      // if opening meet and it comes from slack force theorem auth user
+      match: ({ opener, url }) =>
+        url.host === "meet.google.com" &&
+        opener.path &&
+        opener.path.startsWith("/Applications/Slack.app"),
+      url: ({ urlString }) => urlString + "?authuser=1",
+    },
+  ],
   handlers: [
     {
       match: "https://www.figma.com/file/*",
