@@ -31,6 +31,7 @@ module.exports = {
         /.*portal.azure.com.*/,
         /.*clarityfirst.com.*/,
         /.*firstam.sharepoint.com.*/,
+        /.*.firstam.net.*/,
       ],
       browser: "Microsoft Edge",
     },

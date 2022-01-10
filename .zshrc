@@ -106,3 +106,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias iphone="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+export PATH=/opt/homebrew/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/theorem/.sqlpackage:/Users/theorem/.oh-my-zsh/custom/plugins
+export PATH=/opt/homebrew/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Users/theorem/.sqlpackage:/Users/theorem/.oh-my-zsh/custom/plugins
