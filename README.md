@@ -11,6 +11,10 @@
 
 - brave - https://brave.com/
 
+  ```bash
+  brew install --cask brave-browser
+  ```
+
 - finicky - https://github.com/johnste/finicky
 
   ```bash
@@ -25,7 +29,11 @@
   brew install docker
   ```
 
-- remote desktop (app store)
+- remote desktop
+
+  ```bash
+  brew install --cask microsoft-remote-desktop
+  ```
 
 - vscode - https://code.visualstudio.com/
 
@@ -40,8 +48,58 @@
   ```
 
 - displaylink - https://www.synaptics.com/products/displaylink-graphics
+
 - xcode (app store)
-- ssh
+
+- slack
+
+  ```bash
+  brew install --cask slack
+  ```
+
+- miro
+
+  ```bash
+  brew install --cask miro
+  ```
+
+- figma
+
+  ```figma
+  brew install --cask figma
+  ```
+
+- zoom
+
+  ```bash
+  brew install --cask zoom
+  ```
+
+- azure data studio
+
+  ```bash
+  brew install --cask azure-data-studio
+  ```
+
+- meeting bar
+
+  ```bash
+  brew install --cask meetingbar
+  ```
+
+- microsoft edge
+
+  ```bash
+  brew install --cask microsoft-edge
+  ```
+
+- clean my mac
+
+  ```bash
+  brew install --cask cleanmymac
+  ```
+
+- things3 (app store)
 
 - emacs
 - doom emacs - https://github.com/hlissner/doom-emacs
