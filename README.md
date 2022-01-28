@@ -93,6 +93,12 @@
   brew install --cask microsoft-edge
   ```
 
+- flipper
+
+  ```bash
+  brew install --cask flipper
+  ```
+
 - clean my mac
 
   ```bash
@@ -139,6 +145,14 @@ then set:
 
 **Shortcuts** -> **Mission Control** -> **Mission Control** -> **F3**
 
+## Add startup items
+
+1. Go to _System Preferences_ → _Users & Groups_.
+2. Switch to the _Login Items_ tab
+3. Add
+   - Itsycal
+   - DisplayLink Manager
+
 ## SSH
 
 1. Generate ssh key:
@@ -149,6 +163,11 @@ ssh-keygen -t rsa
 
 2. Copy the contents of the id_rsa.pub file.
 3. Add the pub fingerprint to the `.ssh/authorized_keys` file on the host machine.
+
+## Setup react-native environment:
+
+https://www.youtube.com/watch?v=MJEcookWYUI
+https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac-without-rosetta-29fcc7314d70
 
 # Windows config changes
 
