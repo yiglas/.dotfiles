@@ -1,15 +1,10 @@
 zmodload zsh/zprof
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$PATH:~/.sqlpackage
 export PATH=$PATH:~/.oh-my-zsh/custom/plugins
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
-
-# for lazy loading nvm
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -106,7 +101,3 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias iphone="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH
-export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
