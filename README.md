@@ -15,6 +15,36 @@
   brew install --cask brave-browser
   ```
 
+- node
+
+  ```bash
+  brew install node
+  ```
+
+- watchman
+
+  ```bash
+  brew install watchman
+  ```
+
+- ruby
+
+  ```bash
+  brew install ruby
+  ```
+
+- ffi
+
+  ```bash
+  gem install -n /usr/local/bin ffi
+  ```
+
+- cocoapods
+
+  ```bash
+  brew install cocoapods
+  ```
+
 - finicky - https://github.com/johnste/finicky
 
   ```bash
@@ -26,7 +56,7 @@
 - docker
 
   ```bash
-  brew install docker
+  brew install --cask docker
   ```
 
 - remote desktop
@@ -137,13 +167,26 @@ ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 
 ## Enable function keys
 
-check the option found: _System Preferences_ -> _Keyboard_ -> _Use F1, F2, etc..._
+Navigate to : _System Preferences_ -> _Keyboard_
 
-then set:
+For _Touch Bar shows_ **F1, F2, etc. Keys**
+
+Check: _Use F1, F2, etc..._
+
+Then set:
 
 **Shortcuts** -> **Launchpad & Dock** -> **Show Launchpad** -> **F4**
 
 **Shortcuts** -> **Mission Control** -> **Mission Control** -> **F3**
+
+## Fix Keychron K1 keyboard keys
+
+Navigate to _System Preferences_ -> _Keyboard_ the click on _Modifier Keys..._ button.
+
+Select keyboard: **K1-Keyboard**
+
+Set Option Key to **Command**
+Set Command Key to **Option**
 
 ## Add startup items
 
@@ -152,6 +195,7 @@ then set:
 3. Add
    - Itsycal
    - DisplayLink Manager
+   - Finicky
 
 ## SSH
 
@@ -167,6 +211,7 @@ ssh-keygen -t rsa
 ## Setup react-native environment:
 
 https://www.youtube.com/watch?v=MJEcookWYUI
+
 https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac-without-rosetta-29fcc7314d70
 
 # Windows config changes
