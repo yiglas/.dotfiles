@@ -1,12 +1,22 @@
 module.exports = {
   defaultBrowser: "Brave Browser",
   rewrite: [
+    // Uncomment to log incoming URL requests
+    // {
+    //   match: (x) => {
+    //     finicky.log(JSON.stringify(x, null, 2));
+    //     return true;
+    //   },
+    //   url: ({ urlString }) => urlString,
+    // },
     {
       // if opening meet and it comes from slack force theorem auth user
       match: ({ opener, url }) =>
         url.host === "meet.google.com" &&
         opener.path &&
-        opener.path.startsWith("/Applications/Slack.app"),
+        ["com.tinyspeck.slackmacgap", "com.mowglii.ItsycalApp"].includes(
+          opener.bundleId
+        ),
       url: ({ urlString }) => urlString + "?authuser=1",
     },
   ],
