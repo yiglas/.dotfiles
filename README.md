@@ -45,6 +45,12 @@
   brew install cocoapods
   ```
 
+- yarn
+
+  ```bash
+  brew install yarn
+  ```
+
 - finicky - https://github.com/johnste/finicky
 
   ```bash
