@@ -313,12 +313,19 @@ https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac
 For Parallels
 
 ```bash
-ln -sf ~/.dotfiles/PowerShell/Microsoft.PowerShell_profile.ps1 ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+mkdir ~/Documents/PowerShell
+cp ~/.dotfiles/PowerShell/Microsoft.PowerShell_profile.ps1 ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
 ln -sf ~/.dotfiles/PowerShell/robbyrussel.omp.json ~/Documents/PowerShell/robbyrussel.omp.json
 ```
 
 ```powershell
 
+```
+
+## Install custom fonts:
+
+```bash
+./install-fonts.ps1
 ```
 
 ## SSH
