@@ -25,18 +25,19 @@
                     "foreground": "#D0666F",
                     "properties": {
                         "branch_icon": "",
-                        "template": "<#5FAAE8>git:(</>{{ .HEAD }}<#5FAAE8>)</>"
+                        "template": "<#5FAAE8>(</>{{ .HEAD }}<#5FAAE8>)</>"
                     },
                     "style": "plain",
                     "type": "git"
                 },
                 {
-                    "foreground": "#BF616A",
-                    "properties": {
-                        "template": " \u2717"
-                    },
+                    "type": "git",
                     "style": "plain",
-                    "type": "exit"
+                    "foreground": "#ffeb3b",
+                    "properties": {
+                        "fetch_status": true,
+                        "template": "{{ if or (.Working.Changed) (.Staging.Changed) }} ✗{{ end }}"
+                    }
                 }
             ],
             "type": "prompt"

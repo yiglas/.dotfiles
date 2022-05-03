@@ -4,6 +4,12 @@
 
 - homebrew: https://brew.sh/
 
+- iterm2
+
+  ```bash
+  brew install --cask iterm2
+  ```
+
 - brave
 
   ```bash
@@ -148,15 +154,55 @@
   npm install -g @aws-amplify/cli
   ```
 
+- nordvpn
+
+  ```bash
+  brew install --cask nordvpn
+  ```
+
+- folx
+
+  ```bash
+  brew install --cask folx
+  ```
+
+- handbrake
+
+  ```bash
+  brew install --cask handbrake
+  ```
+
 - things3 (app store)
 
 - emacs
+
+  ```bash
+  brew tap d12frosted/emacs-plus
+  brew install emacs-plus@29 --with-native-comp --with-no-frame-refocus --with-modern-sexy-v1-icon
+
+  # To link the application to default Homebrew App location:
+  ln -s /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
+
+  # To start d12frosted/emacs-plus/emacs-plus@29 now and restart at login:
+  brew services start d12frosted/emacs-plus/emacs-plus@29
+  ```
+
 - doom emacs - https://github.com/hlissner/doom-emacs
+
+- vim
+
+  ```bash
+  brew install vim
+
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  ```
 
 ## Create symbolic links use the following statements:
 
 ```bash
 ln -sf ~/.dotfiles/.doom.d ~/.doom.d
+ln -sf ~/.dotfiles/.emacs.d ~/.emacs.d
+ln -sf ~/.dotfiles/.vimrc ~/.vimrc
 ln -sf ~/.dotfiles/.bashrc ~/.bashrc
 ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/.npmrc ~/.npmrc
@@ -186,6 +232,7 @@ ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 4. Switch to the _Shortcuts_ tab
    - Set: **Shortcuts** → **Launchpad & Dock** → **Show Launchpad** → **F4**
    - Set: **Shortcuts** → **Mission Control** → **Mission Control** → **F3**
+   - Set: **Shortcuts** → **Mission Control** → **Show Desktop** → **^F11**
 
 ## Fix Keychron K1 keyboard keys
 
@@ -266,9 +313,10 @@ https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac
 - docker cli
 
   ```powershell
-  choco install -y docker-cli
+  choco install -y docker-machine
   ```
 
+  remove docker from starting up on windows startup
   set **DOCKER_HOST** environment variable = `ssh://{user}@{server}`
 
 - .net
@@ -299,7 +347,7 @@ https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac
 - sudo
 
   ```powershell
-  choco install -y sudo
+  choco install -y gsudo
   ```
 
 - oh-my-posh
@@ -308,19 +356,51 @@ https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac
   choco install -y oh-my-posh
   ```
 
+  When in Parallels:
+
+  1. Edit `This PC` / `Documents` properties
+  2. Set the location to the mapped drive instead of the UNC path i.e.:
+     **Z:\Documents** instead of **\\\\Mac\Home\Documents**
+
+  From Mac run:
+
+  ```bash
+  mkdir ~/Documents/PowerShell
+  cp ~/.dotfiles/PowerShell/Microsoft.PowerShell_profile.ps1 ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+  cp ~/.dotfiles/PowerShell/robbyrussel.omp.json ~/Documents/PowerShell/robbyrussel.omp.json
+  ```
+
+  From Windows VM:
+
+  - Make directory C:\PowerShell
+  - Copy the PowerShell directory into the new directory made
+
+  In Windows VM run:
+
+  ```powershell
+  . $PROFILE
+  ```
+
+- lsd
+
+  ```powershell
+  choco install -y lsd
+  ```
+
+- mitmproxy
+
+  ```powershell
+  choco install -y mitmproxy
+  ```
+
+  - install mitm.it cert
+  - start mitmproxy
+
+  ```powershell
+  mitmproxy
+  ```
+
 ## Create symbolic links use the following statements:
-
-For Parallels
-
-```bash
-mkdir ~/Documents/PowerShell
-cp ~/.dotfiles/PowerShell/Microsoft.PowerShell_profile.ps1 ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
-ln -sf ~/.dotfiles/PowerShell/robbyrussel.omp.json ~/Documents/PowerShell/robbyrussel.omp.json
-```
-
-```powershell
-
-```
 
 ## Install custom fonts:
 
