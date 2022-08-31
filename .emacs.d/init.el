@@ -28,9 +28,10 @@
 (setq global-auto-revert-non-file-buffers t)
 
 ;; Set transparency
-(set-frame-parameter (selected-frame) 'alpha '(90 . 50))
-(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+;;(set-frame-parameter (selected-frame) 'alpha '(90 . 50))
+;;(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
 
 ;; Set theme
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
 (load-theme 'nord t)
+

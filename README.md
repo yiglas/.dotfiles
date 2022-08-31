@@ -172,6 +172,22 @@
   brew install --cask handbrake
   ```
 
+- alt-tab
+
+  ```bash
+  brew install --cask alt-tab
+  ```
+
+  Configuration:
+
+  **Peferences...** -> **Controls** -> change the hold key to **Command**
+
+- vanilla
+
+  ```bash
+  brew install --cask vanilla
+  ```
+
 - things3 (app store)
 
 - emacs

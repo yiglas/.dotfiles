@@ -1,2 +1,3 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/dsac/.emacs.d/init.el" . 931))
+(("/Users/dsac/.dotfiles/.emacs.d/init.el" . 788)
+ ("/Users/dsac/.dotfiles/.finicky.js" . 1199))

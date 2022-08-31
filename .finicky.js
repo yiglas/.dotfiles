@@ -2,13 +2,13 @@ module.exports = {
   defaultBrowser: "Brave Browser",
   rewrite: [
     // Uncomment to log incoming URL requests
-    // {
-    //   match: (x) => {
-    //     finicky.log(JSON.stringify(x, null, 2));
-    //     return true;
-    //   },
-    //   url: ({ urlString }) => urlString,
-    // },
+    {
+      match: (x) => {
+        finicky.log(JSON.stringify(x, null, 2));
+        return true;
+      },
+      url: ({ urlString }) => urlString,
+    },
     {
       // if opening meet and it comes from slack force theorem auth user
       match: ({ opener, url }) =>
@@ -22,12 +22,16 @@ module.exports = {
   ],
   handlers: [
     {
-      match: "https://www.figma.com/file/*",
-      browser: "Figma",
+      match: /figma\.com\/file/,
+      browser: "/Applications/Figma.app",
     },
     {
-      match: "miro.com/app/board/*",
-      browser: "Miro",
+      match: /miro\.com\/app\/board/,
+      browser: "/Applications/Miro.app",
+    },
+    {
+      match: /notion\.so\/theoremone/,
+      browser: "/Applications/Notion.app",
     },
     {
       match: ["zoom.us/*", finicky.matchDomains(/.*\zoom.us/), /zoom.us\/j\//],
@@ -42,6 +46,7 @@ module.exports = {
         /.*clarityfirst.com.*/,
         /.*firstam.sharepoint.com.*/,
         /.*.firstam.net.*/,
+        /.*.firstam.service-now.*/,
       ],
       browser: "Microsoft Edge",
     },
