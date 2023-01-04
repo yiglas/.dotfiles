@@ -101,3 +101,5 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias iphone="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+alias vpn="/usr/local/bin/fa-vpn/vpn.sh"
+export PATH="/opt/homebrew/opt/node@14/bin:$PATH"

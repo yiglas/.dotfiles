@@ -1,0 +1,2 @@
+require("yiglas")
+print("hello")

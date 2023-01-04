@@ -66,12 +66,6 @@
   brew install --cask docker
   ```
 
-- remote desktop
-
-  ```bash
-  brew install --cask microsoft-remote-desktop
-  ```
-
 - vscode - https://code.visualstudio.com/
 
   ```bash
@@ -160,7 +154,7 @@
   brew install --cask nordvpn
   ```
 
-- folx
+- [folx](https://mac.eltima.com/download-manager.html)
 
   ```bash
   brew install --cask folx
@@ -182,10 +176,10 @@
 
   **Peferences...** -> **Controls** -> change the hold key to **Command**
 
-- vanilla
+- [hiddenbar](https://github.com/dwarvesf/hidden/)
 
   ```bash
-  brew install --cask vanilla
+  brew install --cask hiddenbar
   ```
 
 - things3 (app store)
@@ -213,6 +207,35 @@
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   ```
 
+- raycast
+
+  ```bash
+  brew install --cask raycast
+  ```
+
+- notion
+
+  ```bash
+  brew install --cask notion
+  ```
+
+- obsidian
+
+  ```bash
+  brew install --cask obsidian
+
+  # setup Execute Code:
+  npm install typescript -g
+  npm install -g ts-node
+  ```
+
+- neovim
+
+  ```bash
+  brew install ripgrep
+  brew install neovim
+  ```
+
 ## Create symbolic links use the following statements:
 
 ```bash
@@ -226,6 +249,7 @@ ln -sf ~/.dotfiles/.zprofile ~/.zprofile
 ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
 ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
+ln -sf ~/.dotfiles/nvim ~/.config/nvim
 ```
 
 ## Add VSCode's `code` to the path:
@@ -239,6 +263,13 @@ ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 ```bash
 ./install-fonts.sh
 ```
+
+## Finder
+
+1. Open Finder
+2. Under the View menu
+   - Show Path Bar
+   - Show Status Bar
 
 ## Enable function keys
 
