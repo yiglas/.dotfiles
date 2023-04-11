@@ -50,6 +50,7 @@
 
   ```bash
   brew install yarn
+  yarn set version stable
   ```
 
 - finicky
@@ -148,6 +149,12 @@
   npm install -g @aws-amplify/cli
   ```
 
+- aws cli
+
+  ```bash
+  brew install awscli
+  ```
+
 - nordvpn
 
   ```bash
@@ -234,6 +241,19 @@
   ```bash
   brew install ripgrep
   brew install neovim
+  ```
+
+- chrome
+
+  ```bash
+  brew install --cask google-chrome
+  ```
+
+- babashka
+
+  ```bash
+  brew install borkdude/brew/babashka
+  npm install nbb -g
   ```
 
 ## Create symbolic links use the following statements:

@@ -101,5 +101,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias iphone="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-alias vpn="/usr/local/bin/fa-vpn/vpn.sh"
-export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+alias lvim="/Users/dsac/.local/bin/lvim"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export DOTFILES=~/.dotfiles
+
+source $DOTFILES/helper.sh

@@ -32,7 +32,7 @@ module.exports = {
       browser: "/Applications/Miro.app",
     },
     {
-      match: /notion\.so\/theoremone/,
+      match: /notion\.so/,
       browser: "/Applications/Notion.app",
     },
     {
