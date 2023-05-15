@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: "Brave Browser",
+  defaultBrowser: "Arc",
   rewrite: [
     // Uncomment to log incoming URL requests
     // {
