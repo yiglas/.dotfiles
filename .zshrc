@@ -110,3 +110,4 @@ export NVM_DIR="$HOME/.nvm"
 export DOTFILES=~/.dotfiles
 
 source $DOTFILES/helper.sh
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"

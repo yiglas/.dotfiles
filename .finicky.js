@@ -50,8 +50,11 @@ module.exports = {
         /.*.firstam.net.*/,
         /.*.firstam.service-now.*/,
         /.*login.microsoftonline.com\/organizations\/oauth2\/v2.0\/authorize.*/,
+        /.*firstamncsba.tpondemand.com.*/,
+        /.*firstam.enterprise.slack.com.*/,
+        /.*firstam-my.sharepoint.com.*/,
       ],
-      browser: "Microsoft Edge",
+      browser: "/Applications/Microsoft Edge.app",
     },
   ],
 };
