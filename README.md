@@ -8,6 +8,10 @@
 
   ```bash
   brew install --cask iterm2
+  # Specify the preferences directory
+  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/iTerm"
+  # Tell iTerm2 to use the custom preferences in the directory
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
   ```
 
 - brave
@@ -254,6 +258,21 @@
   ```bash
   brew install borkdude/brew/babashka
   npm install nbb -g
+  ```
+
+- localstack
+
+  ```bash
+  brew install localstack/tap/localstack-cli
+  npm install -g amplify-localstack
+  amplify plugin add amplify-localstack
+  ```
+
+- Fonts
+
+  ```bash
+  brew tap homebrew/cask-fonts
+  brew install font-meslo-lg-nerd-font
   ```
 
 ## Create symbolic links use the following statements:
