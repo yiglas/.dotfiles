@@ -1,8 +1,8 @@
 # MacOS config changes
 
-## Tools:
+## Tools
 
-- homebrew: https://brew.sh/
+- homebrew: <https://brew.sh/>
 
 - iterm2
 
@@ -63,7 +63,7 @@
   brew install --cask finicky
   ```
 
-- zsh - https://ohmyz.sh/
+- zsh - <https://ohmyz.sh/>
 
 - docker
 
@@ -71,19 +71,19 @@
   brew install --cask docker
   ```
 
-- vscode - https://code.visualstudio.com/
+- vscode - <https://code.visualstudio.com/>
 
   ```bash
   brew install --cask visual-studio-code
   ```
 
-- itsycal - https://www.mowglii.com/itsycal/
+- itsycal - <https://www.mowglii.com/itsycal/>
 
   ```bash
   brew install --cask itsycal
   ```
 
-- displaylink - https://www.synaptics.com/products/displaylink-graphics
+- displaylink - <https://www.synaptics.com/products/displaylink-graphics>
 
 - xcode (app store)
 
@@ -208,15 +208,7 @@
   brew services start d12frosted/emacs-plus/emacs-plus@29
   ```
 
-- doom emacs - https://github.com/hlissner/doom-emacs
-
-- vim
-
-  ```bash
-  brew install vim
-
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  ```
+- doom emacs - <https://github.com/hlissner/doom-emacs>
 
 - raycast
 
@@ -245,6 +237,7 @@
   ```bash
   brew install ripgrep
   brew install neovim
+  brew install tmux
   ```
 
 - chrome
@@ -275,7 +268,7 @@
   brew install font-meslo-lg-nerd-font
   ```
 
-## Create symbolic links use the following statements:
+## Create symbolic links use the following statements
 
 ```bash
 ln -sf ~/.dotfiles/.doom.d ~/.doom.d
@@ -291,13 +284,13 @@ ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 ln -sf ~/.dotfiles/nvim ~/.config/nvim
 ```
 
-## Add VSCode's `code` to the path:
+## Add VSCode's `code` to the path
 
 1. inside vscode
 2. open command palette
 3. run: `Shell Command: Install ‘code’ command in PATH`
 
-## Install custom fonts:
+## Install custom fonts
 
 ```bash
 ./install-fonts.sh
@@ -366,17 +359,17 @@ Restart OpenSSH:
 1. Go to _System Preferences_ → _Sharing_.
 2. uncheck & recheck _Remote Login_
 
-## Setup react-native environment:
+## Setup react-native environment
 
-https://www.youtube.com/watch?v=MJEcookWYUI
+<https://www.youtube.com/watch?v=MJEcookWYUI>
 
-https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac-without-rosetta-29fcc7314d70
+<https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac-without-rosetta-29fcc7314d70>
 
 # Windows config changes
 
-## Tools:
+## Tools
 
-- choco: https://chocolatey.org/install
+- choco: <https://chocolatey.org/install>
 
 - git
 
@@ -486,9 +479,9 @@ https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac
   mitmproxy
   ```
 
-## Create symbolic links use the following statements:
+## Create symbolic links use the following statements
 
-## Install custom fonts:
+## Install custom fonts
 
 ```bash
 ./install-fonts.ps1
