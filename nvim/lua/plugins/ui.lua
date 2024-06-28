@@ -89,6 +89,12 @@ return {
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
           local ft_icon, ft_color = require("nvim-web-devicons").get_icon_color(filename)
           local modified = vim.bo[props.buf].modified
+          local m = vim.api.nvim_get_mode().mode
+
+          local mode = ""
+          if m ~= "n" then
+            mode = " " .. m
+          end
 
           local modified_icon = {}
           if modified then
@@ -100,6 +106,7 @@ return {
             " ",
             { filename, gui = modified and "bold,italic" or "bold" },
             modified_icon,
+            mode,
             " ",
             guibg = "#363944",
           }
@@ -143,10 +150,6 @@ return {
         },
         view = {
           width = 30,
-          mappings = {
-            custom_only = false,
-            list = {},
-          },
           number = false,
           relativenumber = false,
           signcolumn = "yes",
@@ -178,7 +181,59 @@ return {
         vim.cmd("NvimTreeFocus")
       end
     end,
+    enabled = not vim.g.vscode,
   },
 
-  { "HiPhish/rainbow-delimiters.nvim" },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    config = function()
+      local rainbow_delimiters = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+          "RainbowDelimiterRed",
+        },
+      }
+    end,
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    mapping = {
+      select = {
+        ["<CR>"] = {},
+      },
+    },
+  },
 }

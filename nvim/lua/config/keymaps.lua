@@ -11,12 +11,11 @@ keymap.set("n", "-", "<C-x>")
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Save file and quit
-keymap.set("n", "<leader>w", ":update<Return>", opts)
-keymap.set("n", "<leader>q", ":quit<Return>", opts)
+keymap.set("n", "<leader>w", ":w<Return>", opts)
+keymap.set("n", "<leader>q", ":q<Return>", opts)
 keymap.set("n", "<leader>Q", ":qa<Return>", opts)
 
 -- File explorer with NvimTree
-keymap.set("n", "<leader>e", ":NvimTreeToggle<Return>", opts)
 
 -- Tabs
 keymap.set("n", "te", ":tabedit")
@@ -24,9 +23,11 @@ keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 keymap.set("n", "tw", ":tabclose<Return>", opts)
 
+keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<Return>", opts)
+
 -- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
+-- keymap.set("n", "ss", ":split<Return>", opts)
+-- keymap.set("n", "sv", ":vsplit<Return>", opts)
 
 -- Move window
 keymap.set("n", "sh", "<C-w>h")
@@ -48,3 +49,13 @@ end, opts)
 -- move lines
 keymap.set("n", "mj", ":m +1<Return>", { desc = "Move line down" })
 keymap.set("n", "mk", ":m -2<Return>", { desc = "Move line up" })
+
+-- paste without overwritting
+keymap.set("v", "p", "P")
+
+-- redo
+keymap.set("n", "U", "<C-r>")
+
+-- skip folds (down, up)
+vim.cmd("nmap j gj")
+vim.cmd("nmap k gk")

@@ -75,6 +75,10 @@
 
   ```bash
   brew install --cask visual-studio-code
+
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+  defaults write -g InitialKeyRepeat -int 10
+  defaults write -g KeyRepeat -int 1
   ```
 
 - itsycal - <https://www.mowglii.com/itsycal/>
@@ -238,6 +242,7 @@
   brew install ripgrep
   brew install neovim
   brew install tmux
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   ```
 
 - chrome
@@ -268,6 +273,13 @@
   brew install font-meslo-lg-nerd-font
   ```
 
+- Yo
+
+  ```bash
+  brew install yo
+  npm install generator-code
+  ```
+
 ## Create symbolic links use the following statements
 
 ```bash
@@ -282,6 +294,7 @@ ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
 ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 ln -sf ~/.dotfiles/nvim ~/.config/nvim
+ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
 ## Add VSCode's `code` to the path
