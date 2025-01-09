@@ -14,6 +14,12 @@
   defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
   ```
 
+- ghostty
+
+  ```bash
+  brew install --cask ghostty
+  ```
+
 - brave
 
   ```bash
