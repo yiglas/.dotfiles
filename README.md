@@ -291,6 +291,12 @@
   npm install generator-code
   ```
 
+- Logi-Options+
+
+  ```bash
+  brew install --cask logi-options+
+  ```
+
 ## Create symbolic links use the following statements
 
 ```bash
