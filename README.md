@@ -20,6 +20,12 @@
   brew install --cask brave-browser
   ```
 
+- arc
+
+  ```bash
+  brew install --cask arc
+  ```
+
 - node
 
   ```bash
