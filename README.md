@@ -199,6 +199,12 @@
   brew install --cask alt-tab
   ```
 
+- chatgpt
+
+  ```bash
+  brew install --cask chatgpt
+  ```
+
   Configuration:
 
   **Peferences...** -> **Controls** -> change the hold key to **Command**
