@@ -41,20 +41,8 @@ module.exports = {
     },
     {
       // FirstAM
-      match: [
-        /.*teams.microsoft.com.*/,
-        /.*dev.azure.com.*/,
-        /.*portal.azure.com.*/,
-        /.*clarityfirst.com.*/,
-        /.*firstam.sharepoint.com.*/,
-        /.*.firstam.net.*/,
-        /.*.firstam.service-now.*/,
-        /.*login.microsoftonline.com\/organizations\/oauth2\/v2.0\/authorize.*/,
-        /.*firstamncsba.tpondemand.com.*/,
-        /.*firstam.enterprise.slack.com.*/,
-        /.*firstam-my.sharepoint.com.*/,
-      ],
-      browser: "/Applications/Microsoft Edge.app",
+      match: [/.*filevine.*/, /.*localhost.*/, /.*leaddocket.*/],
+      browser: "Google Chrome",
     },
   ],
 };

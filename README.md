@@ -1,370 +1,137 @@
 # MacOS config changes
 
-## Tools
+## Keyboard changes:
 
-- homebrew: <https://brew.sh/>
+## Install
 
-- iterm2
+### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
 
-  ```bash
-  brew install --cask iterm2
-  # Specify the preferences directory
-  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/iTerm"
-  # Tell iTerm2 to use the custom preferences in the directory
-  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-  ```
+### [Homebrew](https://brew.sh/)
 
-- ghostty
-
-  ```bash
-  brew install --cask ghostty
-  ```
-
-- brave
-
-  ```bash
-  brew install --cask brave-browser
-  ```
-
-- arc
-
-  ```bash
-  brew install --cask arc
-  ```
-
-- node
-
-  ```bash
-  brew install node
-  ```
-
-- watchman
-
-  ```bash
-  brew install watchman
-  ```
-
-- ruby
-
-  ```bash
-  brew install ruby
-  ```
-
-- ffi
-
-  ```bash
-  gem install -n /usr/local/bin ffi
-  ```
-
-- cocoapods
-
-  ```bash
-  brew install cocoapods
-  ```
-
-- yarn
-
-  ```bash
-  brew install yarn
-  yarn set version stable
-  ```
-
-- finicky
-
-  ```bash
-  brew install --cask finicky
-  ```
-
-- zsh - <https://ohmyz.sh/>
-
-- docker
-
-  ```bash
-  brew install --cask docker
-  ```
-
-- vscode - <https://code.visualstudio.com/>
-
-  ```bash
-  brew install --cask visual-studio-code
-
-  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-  defaults write -g InitialKeyRepeat -int 10
-  defaults write -g KeyRepeat -int 1
-  ```
-
-- itsycal - <https://www.mowglii.com/itsycal/>
-
-  ```bash
-  brew install --cask itsycal
-  ```
-
-- displaylink - <https://www.synaptics.com/products/displaylink-graphics>
-
-- xcode (app store)
-
-- slack
-
-  ```bash
-  brew install --cask slack
-  ```
-
-- miro
-
-  ```bash
-  brew install --cask miro
-  ```
-
-- figma
-
-  ```figma
-  brew install --cask figma
-  ```
-
-- zoom
-
-  ```bash
-  brew install --cask zoom
-  ```
-
-- azure data studio
-
-  ```bash
-  brew install --cask azure-data-studio
-  ```
-
-- meeting bar
-
-  ```bash
-  brew install --cask meetingbar
-  ```
-
-- microsoft edge
-
-  ```bash
-  brew install --cask microsoft-edge
-  ```
-
-- flipper
-
-  ```bash
-  brew install --cask flipper
-  ```
-
-- react-native debugger
-
-  ```bash
-  brew install --cask react-native-debugger
-  ```
-
-- clean my mac
-
-  ```bash
-  brew install --cask cleanmymac
-  ```
-
-- aws amplify cli
-
-  ```bash
-  npm install -g @aws-amplify/cli
-  ```
-
-- aws cli
-
-  ```bash
-  brew install awscli
-  ```
-
-- nordvpn
-
-  ```bash
-  brew install --cask nordvpn
-  ```
-
-- [folx](https://mac.eltima.com/download-manager.html)
-
-  ```bash
-  brew install --cask folx
-  ```
-
-- handbrake
-
-  ```bash
-  brew install --cask handbrake
-  ```
-
-- alt-tab
-
-  ```bash
-  brew install --cask alt-tab
-  ```
-
-- chatgpt
-
-  ```bash
-  brew install --cask chatgpt
-  ```
-
-  Configuration:
-
-  **Peferences...** -> **Controls** -> change the hold key to **Command**
-
-- [hiddenbar](https://github.com/dwarvesf/hidden/)
-
-  ```bash
-  brew install --cask hiddenbar
-  ```
-
-- things3 (app store)
-
-- emacs
-
-  ```bash
-  brew tap d12frosted/emacs-plus
-  brew install emacs-plus@29 --with-native-comp --with-no-frame-refocus --with-modern-sexy-v1-icon
-
-  # To link the application to default Homebrew App location:
-  ln -s /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
-
-  # To start d12frosted/emacs-plus/emacs-plus@29 now and restart at login:
-  brew services start d12frosted/emacs-plus/emacs-plus@29
-  ```
-
-- doom emacs - <https://github.com/hlissner/doom-emacs>
-
-- raycast
-
-  ```bash
-  brew install --cask raycast
-  ```
-
-- notion
-
-  ```bash
-  brew install --cask notion
-  ```
-
-- obsidian
-
-  ```bash
-  brew install --cask obsidian
-
-  # setup Execute Code:
-  npm install typescript -g
-  npm install -g ts-node
-  ```
-
-- neovim
-
-  ```bash
-  brew install ripgrep
-  brew install neovim
-  brew install tmux
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  ```
-
-- chrome
-
-  ```bash
-  brew install --cask google-chrome
-  ```
-
-- babashka
-
-  ```bash
-  brew install borkdude/brew/babashka
-  npm install nbb -g
-  ```
-
-- localstack
-
-  ```bash
-  brew install localstack/tap/localstack-cli
-  npm install -g amplify-localstack
-  amplify plugin add amplify-localstack
-  ```
-
-- Fonts
-
-  ```bash
-  brew install --cask font-meslo-lg-nerd-font
-  ```
-
-- Yo
-
-  ```bash
-  brew install yo
-  npm install generator-code
-  ```
-
-- Logi-Options+
-
-  ```bash
-  brew install --cask logi-options+
-  ```
-
-## Create symbolic links use the following statements
+### Fonts
 
 ```bash
-ln -sf ~/.dotfiles/.doom.d ~/.doom.d
-ln -sf ~/.dotfiles/.emacs.d ~/.emacs.d
-ln -sf ~/.dotfiles/.vimrc ~/.vimrc
-ln -sf ~/.dotfiles/.bashrc ~/.bashrc
-ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/.npmrc ~/.npmrc
-ln -sf ~/.dotfiles/.zprofile ~/.zprofile
-ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+brew install --cask font-meslo-lg-nerd-font
+
+~/install-fonts.sh
+```
+
+### Terminal
+
+```bash
+brew install --cask ghostty
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
-ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
-ln -sf ~/.dotfiles/nvim ~/.config/nvim
-ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
-## Add VSCode's `code` to the path
-
-1. inside vscode
-2. open command palette
-3. run: `Shell Command: Install ‘code’ command in PATH`
-
-## Install custom fonts
+### Developer Tools
 
 ```bash
-./install-fonts.sh
+brew install ripgrep
+brew install neovim
+ln -sf ~/.dotfiles/nvim ~/.config/nvim
+
+brew install --cask visual-studio-code
+
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+
+brew install --cask docker
 ```
 
-## Finder
+### Browsers
+
+```bash
+brew install --cask google-chrome
+brew install --cask arc
+brew install --cask finicky
+ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
+```
+
+### Extras
+
+```bash
+brew install --cask windows-app # remote desktop
+brew install --cask slack
+brew install --cask itsycal # [itsycal](https://www.mowglii.com/itsycal)
+brew install --cask logi-options+
+brew install --cask meetingbar
+brew install --cask zoom
+brew install --cask cleanmymac
+brew install --cask chatgpt
+brew install --cask raycast
+brew install --cask zoom
+```
+
+### Legacy installs:
+
+```bash
+# Terminal
+brew install --cask iterm2
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/iTerm" # Specify the preferences directory
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true # Tell iTerm2 to use the custom preferences in the directory
+
+# Browsers
+brew install --cask brave-browser
+brew install --cask zen-browser
+brew install --cask microsoft-edge
+
+# Development
+brew install --cask azure-data-studio
+brew install node
+brew install watchman
+brew install ruby
+gem install -n /usr/local/bin ffi
+brew install awscli
+brew install cocoapods
+npm install -g @aws-amplify/cli
+
+# Extras
+brew install --cask miro
+brew install --cask figma
+brew install --cask handbrake
+brew install --cask alt-tab
+brew install --cask nordvpn
+brew install --cask folx # [Folx](https://mac.eltima.com/download-manager.html)
+brew install --cask hiddenbar
+brew install --cask notion
+brew install --cask obsidian
+```
+
+## Finder Configuration
 
 1. Open Finder
 2. Under the View menu
    - Show Path Bar
    - Show Status Bar
 
-## Enable function keys
+## Open at Login
 
-1. Go to _System Preferences_ → _Keyboard_.
-2. Select: _Touch Bar shows_ **F1, F2, etc. Keys**
-3. Check: _Use F1, F2, etc..._
-4. Switch to the _Shortcuts_ tab
-   - Set: **Shortcuts** → **Launchpad & Dock** → **Show Launchpad** → **F4**
-   - Set: **Shortcuts** → **Mission Control** → **Mission Control** → **F3**
-   - Set: **Shortcuts** → **Mission Control** → **Show Desktop** → **^F11**
+1. Open `System Settings`
+2. Search: `Open at Login`
+3. Add `DisplayLink Manager` Application to the list
+4. Add `Finicky` Application to the list
+5. Add `Itsycal` Application to the list
+6. Add `MeetingBar` Application to the list
+7. Add `Raycast` Application to the list
 
-## Fix Keychron K1 keyboard keys
+## Keyboard changes
 
-1. Go to _System Preferences_ → _Keyboard_.
-2. Click on _Modifier Keys_ button
-3. Select keyboard: **K1-Keyboard**
-   - Set: **Option Key** → **Command**
-   - Set: **Command Key** → **Option**
+1. Open `System Settings`
+2. Search: `Keyboard shortcuts`
+3. Under `Launchpad & Dock`
 
-## Add startup items
+- Set `Show Launchpad` = **F4**
 
-1. Go to _System Preferences_ → _Users & Groups_.
-2. Switch to the _Login Items_ tab
-3. Add
-   - Itsycal
-   - DisplayLink Manager
-   - Finicky
+4. Under `Mission Control`
+
+- Set `Mission Control` = **F3**
+- Set `Show Desktop` = **Ctrl + F11**
+
+5. Under `Function Keys`
+
+- Enable `Use F1, F2, etc. keys as standard function keys`
 
 ## SSH
 
