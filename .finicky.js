@@ -24,7 +24,7 @@ module.exports = {
   ],
   handlers: [
     {
-      match: /figma\.com\/file/,
+      match: /figma\.com/,
       browser: "/Applications/Figma.app",
     },
     {
@@ -40,8 +40,16 @@ module.exports = {
       browser: "us.zoom.xos",
     },
     {
-      // FirstAM
-      match: [/.*filevine.*/, /.*localhost.*/, /.*leaddocket.*/],
+      match: [
+        /.*filevine.*/,
+        /.*localhost.*/,
+        /.*leaddocket.*/,
+        /.*transmission.*/,
+      ],
+      browser: "Google Chrome",
+    },
+    {
+      match: [/.*getguru.*/],
       browser: "Google Chrome",
     },
   ],
