@@ -5,4 +5,5 @@
 .clj-kondo
 .lsp
 .vscode
-
+.emacs.d
+.doom.d
