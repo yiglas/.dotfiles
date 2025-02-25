@@ -19,9 +19,10 @@ brew install --cask font-meslo-lg-nerd-font
 ### Terminal
 
 ```bash
-brew install --cask ghostty
+brew install --cask wezterm
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
+ln -sf ~/.dotfiles/wezterm ~/.config/wezterm
 ```
 
 ### Developer Tools
@@ -40,6 +41,7 @@ defaults write -g KeyRepeat -int 1
 brew install --cask docker
 
 brew install dotnet
+brew install node
 ```
 
 ### Browsers
@@ -70,6 +72,7 @@ brew install --cask zoom
 
 ```bash
 # Terminal
+brew install --cask ghostty
 brew install --cask iterm2
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/iTerm" # Specify the preferences directory
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true # Tell iTerm2 to use the custom preferences in the directory
@@ -82,6 +85,7 @@ brew install --cask microsoft-edge
 # Development
 brew install --cask azure-data-studio
 brew install node
+brew install pnpm
 brew install watchman
 brew install ruby
 gem install -n /usr/local/bin ffi

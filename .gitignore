@@ -1,3 +1,8 @@
 .DS_Store
 *.*~
 */eln-cache/*
+.calva
+.clj-kondo
+.lsp
+.vscode
+
