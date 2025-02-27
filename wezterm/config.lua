@@ -5,6 +5,12 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+local username = os.getenv("USER")
+
+if not username then
+	username = os.getenv("USERNAME")
+end
+
 config = {
 	default_cursor_style = "SteadyBar",
 	automatically_reload_config = true,
@@ -27,7 +33,7 @@ config = {
 	background = {
 		{
 			source = {
-				File = "/Users/" .. os.getenv("USER") .. "/.config/wezterm/dark-desert.jpg",
+				File = "/Users/" .. username .. "/.config/wezterm/dark-desert.jpg",
 			},
 			hsb = {
 				hue = 1.0,
@@ -90,4 +96,9 @@ config = {
 		},
 	},
 }
+
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	config.default_prog = { "pwsh" }
+end
+
 return config
