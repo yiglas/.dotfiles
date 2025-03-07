@@ -6,7 +6,7 @@ return {
     "nvim-telescope/telescope.nvim", -- optional
   },
   keys = {
-    { "<leader>g", ":Neogit kind=replace<Return>", silent = true, noremap = true },
+    { "<leader>gg", ":Neogit kind=replace<Return>", silent = true, noremap = true },
   },
   config = true,
 }

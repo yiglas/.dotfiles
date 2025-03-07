@@ -48,14 +48,16 @@ if vim.g.vscode then
   -- search in all files <leader>-s {something else}
   -- fix gcc & gc0
 
-  vim.keymap.set("n", "<leader>g", action("magit.status"), opts)
+  vim.keymap.set("n", "<leader>gg", action("magit.status"), opts)
   vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", print_test, opts)
   vim.keymap.set("n", "<leader>K", print_test, opts) -- TODO should send Keywordprg
   vim.keymap.set({ "n", "i", "v" }, "<A-j>", action("editor.action.moveLinesDownAction"), opts)
   vim.keymap.set({ "n", "i", "v" }, "<A-k>", action("editor.action.moveLinesUpAction"), opts)
   vim.keymap.set("n", "<leader>e", action("workbench.files.action.showActiveFileInExplorer"), opts)
 
-  vim.keymap.set("n", "gcc", print_test, opts)
+  vim.keymap.set({ "n", "v" }, "gcc", action("editor.action.commentLine"), opts)
+
+  vim.keymap.set({ "n", "v" }, "<leader>sg", action("search.action.openNewEditor"), opts)
 
   return
 end

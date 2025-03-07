@@ -11,6 +11,9 @@ if not username then
 	username = os.getenv("USERNAME")
 end
 
+math.randomseed(os.time())
+local background = math.random(1, 9)
+
 config = {
 	default_cursor_style = "SteadyBar",
 	automatically_reload_config = true,
@@ -33,7 +36,7 @@ config = {
 	background = {
 		{
 			source = {
-				File = "/Users/" .. username .. "/.config/wezterm/dark-desert.jpg",
+				File = "/Users/" .. username .. "/.config/wezterm/backgrounds/" .. tostring(background) .. ".jpg",
 			},
 			hsb = {
 				hue = 1.0,
