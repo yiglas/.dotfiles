@@ -35,10 +35,10 @@ module.exports = {
       match: /notion\.so/,
       browser: "/Applications/Notion.app",
     },
-    {
-      match: ["zoom.us/*", finicky.matchDomains(/.*\zoom.us/), /zoom.us\/j\//],
-      browser: "us.zoom.xos",
-    },
+    // {
+    //   match: ["zoom.us/*", finicky.matchDomains(/.*\zoom.us/), /zoom.us\/j\//],
+    //   browser: "us.zoom.xos",
+    // },
     {
       match: [
         /.*filevine.*/,

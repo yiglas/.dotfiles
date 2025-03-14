@@ -95,6 +95,8 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>dO", action("workbench.action.debug.stepOver"), opts)
   vim.keymap.set("n", "<leader>dP", action("workbench.action.debug.pause"), opts)
 
+  vim.keymap.set("n", "<leader><leader>", action("workbench.action.quickOpen"), opts)
+
   return
 end
 
