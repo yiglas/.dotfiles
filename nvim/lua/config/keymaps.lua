@@ -53,7 +53,8 @@ if vim.g.vscode then
   vim.keymap.set({ "n", "i", "v" }, "<A-k>", action("editor.action.moveLinesUpAction"), opts)
   vim.keymap.set("n", "<leader>e", action("workbench.files.action.showActiveFileInExplorer"), opts)
 
-  vim.keymap.set({ "n", "v" }, "gcc", action("editor.action.commentLine"), opts)
+  vim.keymap.set("n", "gcc", action("editor.action.commentLine"), opts)
+  vim.keymap.set("v", "gc", action("editor.action.commentLine"), opts)
 
   vim.keymap.set("n", "gco", function()
     vscode.action("editor.action.insertLineAfter")
@@ -94,8 +95,17 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>do", action("workbench.action.debug.stepOut"), opts)
   vim.keymap.set("n", "<leader>dO", action("workbench.action.debug.stepOver"), opts)
   vim.keymap.set("n", "<leader>dP", action("workbench.action.debug.pause"), opts)
+  vim.keymap.set("n", "<leader>du", action("workbench.view.debug"), opts)
 
   vim.keymap.set("n", "<leader><leader>", action("workbench.action.quickOpen"), opts)
+
+  vim.keymap.set("n", "<Up>", action("workbench.action.increaseViewHeight"), opts)
+  vim.keymap.set("n", "<Down>", action("workbench.action.decreaseViewHeight"), opts)
+  vim.keymap.set("n", "<Left>", action("workbench.action.decreaseViewWidth"), opts)
+  vim.keymap.set("n", "<Right>", action("workbench.action.increaseViewWidth"), opts)
+
+  vim.keymap.set("n", "<leader>cf", action("editor.action.formatDocument"), opts)
+  vim.keymap.set("v", "<leader>cf", action("editor.action.formatSelection"), opts)
 
   return
 end
