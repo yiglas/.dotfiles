@@ -107,6 +107,8 @@ if vim.g.vscode then
   vim.keymap.set("n", "<leader>cf", action("editor.action.formatDocument"), opts)
   vim.keymap.set("v", "<leader>cf", action("editor.action.formatSelection"), opts)
 
+  vim.keymap.set("n", "<leader>aa", action("augment-chat.focus"), opts)
+
   return
 end
 
