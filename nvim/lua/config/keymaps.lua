@@ -22,30 +22,6 @@ if vim.g.vscode then
     return "<cmd>lua require('vscode').action('" .. command .. "')<cr>"
   end
 
-  -- vim.keymap.set("n", "<C-s>", action("workbench.action.files.save"), opts)
-  -- vim.keymap.set("n", "<C-h>", action("workbench.action.navigateLeft"), opts)
-  -- vim.keymap.set("n", "<C-j>", action("workbench.action.navigateDown"), opts)
-  -- vim.keymap.set("n", "<C-k>", action("workbench.action.navigateUp"), opts)
-  -- vim.keymap.set("n", "<C-l>", action("workbench.action.navigateRight"), opts)
-
-  -- vim.keymap.set({ "n", "i", "v" }, "<A-j>", ":m .+1<cr>", opts)
-
-  -- editorTextFocus && neovim.ctrlKeysNormal.s && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'
-  -- vscode-neovim.send
-
-  -- move line up
-  -- move line down
-  -- open command pallet
-  -- set x to undo checkout in magit
-  -- set k to move to next line in magit
-  -- correct terminal space
-  -- close all editors
-  -- in explorer on enter close explorer
-  -- close explorer is open and pressed <leader>-e
-  -- list projects
-  -- in explorer when pressing h show/hide hidden files
-  -- search in all files <leader>-s {something else}
-
   vim.keymap.set("n", "<leader>gg", action("magit.status"), opts)
   -- vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", print_test, opts)
   vim.keymap.set("n", "<leader>K", print_test, opts) -- TODO should send Keywordprg
@@ -108,6 +84,10 @@ if vim.g.vscode then
   vim.keymap.set("v", "<leader>cf", action("editor.action.formatSelection"), opts)
 
   vim.keymap.set("n", "<leader>aa", action("augment-chat.focus"), opts)
+
+  vim.keymap.set("n", "<leader>su", action("workbench.view.extension.objectExplorer"), opts)
+  vim.keymap.set({ "n", "v" }, "<leader>sr", action("mssql.runCurrentStatement"), opts)
+  vim.keymap.set({ "n", "v" }, "<leader>sc", action("mssql.runQuery"), opts)
 
   return
 end
