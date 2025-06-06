@@ -1,14 +1,12 @@
-# MacOS config changes
+## MacOS config changes
 
-## Keyboard changes:
+### Install
 
-## Install
+#### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
 
-### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
+#### [Homebrew](https://brew.sh/)
 
-### [Homebrew](https://brew.sh/)
-
-### Fonts
+#### Fonts
 
 ```bash
 brew install --cask font-meslo-lg-nerd-font
@@ -16,7 +14,7 @@ brew install --cask font-meslo-lg-nerd-font
 ~/install-fonts.sh
 ```
 
-### Terminal
+#### Terminal
 
 ```bash
 brew install --cask wezterm
@@ -25,7 +23,7 @@ ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/
 ln -sf ~/.dotfiles/wezterm ~/.config/wezterm
 ```
 
-### Developer Tools
+#### Developer Tools
 
 ```bash
 brew install ripgrep
@@ -44,7 +42,7 @@ brew install dotnet
 brew install node
 ```
 
-### Browsers
+#### Browsers
 
 ```bash
 brew install --cask google-chrome
@@ -53,7 +51,7 @@ brew install --cask finicky
 ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
 ```
 
-### Extras
+#### Extras
 
 ```bash
 brew install --cask windows-app # remote desktop
@@ -65,10 +63,9 @@ brew install --cask zoom
 brew install --cask cleanmymac
 brew install --cask chatgpt
 brew install --cask raycast
-brew install --cask zoom
 ```
 
-### Legacy installs:
+#### Legacy installs
 
 ```bash
 # Terminal
@@ -105,14 +102,14 @@ brew install --cask notion
 brew install --cask obsidian
 ```
 
-## Finder Configuration
+#### Finder Configuration
 
 1. Open Finder
 2. Under the View menu
    - Show Path Bar
    - Show Status Bar
 
-## Open at Login
+#### Open at Login
 
 1. Open `System Settings`
 2. Search: `Open at Login`
@@ -122,7 +119,7 @@ brew install --cask obsidian
 6. Add `MeetingBar` Application to the list
 7. Add `Raycast` Application to the list
 
-## Keyboard changes
+#### Keyboard changes
 
 1. Open `System Settings`
 2. Search: `Keyboard shortcuts`
@@ -139,227 +136,132 @@ brew install --cask obsidian
 
 - Enable `Use F1, F2, etc. keys as standard function keys`
 
-## SSH
-
-1. Generate ssh key:
-
-   ```base
-   ssh-keygen -t rsa
-   ```
-
-2. Copy the contents of the id_rsa.pub file.
-3. Add the pub fingerprint to the `.ssh/authorized_keys` file on the host machine.
-
-### Enable OpenSSH Server
-
-```bash
-sudo -E vi /etc/ssh/sshd_config
-
-#update sshd_config with the following
-# PermitUserEnvironment yes
-
-vi ~/.ssh/environment
-
-# PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/dsac/.oh-my-zsh/custom/plugins
-```
-
-Restart OpenSSH:
-
-1. Go to _System Preferences_ → _Sharing_.
-2. uncheck & recheck _Remote Login_
-
-## Setup react-native environment
+#### Setup react-native environment
 
 <https://www.youtube.com/watch?v=MJEcookWYUI>
 
 <https://medium.com/@davidjasonharding/developing-a-react-native-app-on-an-m1-mac-without-rosetta-29fcc7314d70>
 
-# Windows config changes
+## Windows config changes
 
-## Tools
+### Install
 
-- choco: <https://chocolatey.org/install>
+#### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
 
-- git
+#### [Chocolatey](https://chocolatey.org/)
 
-  ```powershell
-  choco install -y git
-  ```
-
-- vscode
-
-  ```powershell
-  choco install -y vscode
-  ```
-
-- powershell core
-
-  ```powershell
-  choco install -y powershell-core
-  ```
-
-- docker cli
-
-  ```powershell
-  choco install -y docker-machine
-  ```
-
-  remove docker from starting up on windows startup
-  set **DOCKER_HOST** environment variable = `ssh://{user}@{server}`
-
-- .net
-
-  ```powershell
-  choco install -y dotnetcore-sdk --version=3.1.414
-  choco install -y dotnet
-  ```
-
-- azure cli
-
-  ```powershell
-  choco install -y azure-cli
-  ```
-
-- vim
-
-  ```powershell
-  choco install -y vim
-  ```
-
-- which
-
-  ```powershell
-  choco install -y which
-  ```
-
-- sudo
-
-  ```powershell
-  choco install -y gsudo
-  ```
-
-- oh-my-posh
-
-  ```powershell
-  choco install -y oh-my-posh
-  ```
-
-  When in Parallels:
-
-  1. Edit `This PC` / `Documents` properties
-  2. Set the location to the mapped drive instead of the UNC path i.e.:
-     **Z:\Documents** instead of **\\\\Mac\Home\Documents**
-
-  From Mac run:
-
-  ```bash
-  mkdir ~/Documents/PowerShell
-  cp ~/.dotfiles/PowerShell/Microsoft.PowerShell_profile.ps1 ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
-  cp ~/.dotfiles/PowerShell/robbyrussel.omp.json ~/Documents/PowerShell/robbyrussel.omp.json
-  ```
-
-  From Windows VM:
-
-  - Make directory C:\PowerShell
-  - Copy the PowerShell directory into the new directory made
-
-  In Windows VM run:
-
-  ```powershell
-  . $PROFILE
-  ```
-
-- lsd
-
-  ```powershell
-  choco install -y lsd
-  ```
-
-- mitmproxy
-
-  ```powershell
-  choco install -y mitmproxy
-  ```
-
-  - install mitm.it cert
-  - start mitmproxy
-
-  ```powershell
-  mitmproxy
-  ```
-
-## Create symbolic links use the following statements
-
-## Install custom fonts
+#### Fonts
 
 ```bash
+choco install nerd-fonts-meslo
+
 ./install-fonts.ps1
 ```
 
-## SSH
+#### Terminal
 
-1. Generate ssh key:
+```bash
+choco install powershell-core
+choco install oh-my-posh
+choco install which
+choco install grep
+choco install wezterm
 
-   ```base
-   ssh-keygen -t rsa
-   ```
+cmd /c mklink ~\.config\wezterm ~\.dotfiles\wezterm
+mkdir ~\Documents\PowerShell
+cmd /c mklink ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
+cmd /c mklink ~\Documents\PowerShell\Microsoft.VSCode_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
+cmd /c mklink ~\Documents\PowerShell\robbyrussel.omp.json ~\.dotfiles\PowerShell\robbyrussel.omp.json
+```
 
-2. Copy the contents of the id_rsa.pub file.
-3. Add the pub fingerprint to the `.ssh/authorized_keys` file on the host machine.
+#### Developer Tools
 
-### Enable OpenSSH Server
+```bash
+choco install neovim
+choco install mingw
+cmd /c mklink /D ~\AppData\Local\nvim ~\.dotfiles\nvim
 
-1. admin powershell terminal
+choco install vscode
+choco install docker-desktop
+choco install dotnet
+choco install nodejs
 
-   ```powershell
-   $OpenSSHServer = Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Server*'
-   Add-WindowsCapability -Online -Name $OpenSSHServer.Name
-   $SSHDaemonSvc = Get-Service -Name 'sshd'
-   Set-Service -Name $SSHDaemonSvc.Name -StartupType Automatic
+choco install sqlpackage
+```
 
-   Start-Service -Name $SSHDaemonSvc.Name
-   Stop-Service -Name $SSHDaemonSvc.Name
-   notepad $env:PROGRAMDATA\ssh\sshd_config
+#### Browsers
 
-   #update sshd_config with the following
-   #
-   # PubkeyAuthentication yes
-   # PasswordAuthentication no
-   # PermitEmptyPasswords no
-   # #Match Group administrators
-   # #       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
+```bash
+choco install googlechrome
+# arc browser https://arc.net/
+```
 
-   mkdir "$HOME\.ssh"
+#### Extras
 
-   $authorizedKeyFilePath = "$HOME\.ssh\authorized_keys"
-   New-Item $authorizedKeyFilePath
-   notepad.exe $authorizedKeyFilePath
+```bash
+choco install slack
+choco install logioptionsplus
+choco install zoom
+choco install chatgpt
+```
 
-   #add the SSH keys
+#### Legacy installs
 
-   icacls.exe $authorizedKeyFilePath /remove "NT AUTHORITY\Authenticated Users"
-   icacls.exe $authorizedKeyFilePath /inheritance:r
-   Get-Acl "$env:ProgramData\ssh\ssh_host_dsa_key" | Set-Acl $authorizedKeyFilePath
+```bash
+choco install brave
+choco install azure-data-studio
+choco install microsoftazurestorageexplorer
+choco install awscli
+choco install powertoys
+choco install flow-launcher
+choco install rainmeter
+choco install startallback
+choco install sqlpackage
+```
 
-   Start-Service -Name $SSHDaemonSvc.Name
-   ```
+#### Make windows 11 look more like Mac
 
-## disable clipboard history
+- **Invert Mouse**: 
+  Settings / Bluetooth & devices / Mouse
+  change Scrolling Direction to `Down motion scrolls up`
+
+- Enable sudo mode by going to Settings / System / For developers toggle `Enable sudo mode`
+
+#### Proxy: mitmproxy
+
+```bash
+choco install -y mitmproxy
+```
+
+- install mitm.it cert
+- start mitmproxy
+
+```bash
+mitmproxy
+```
+
+#### Disable clipboard history
 
 ```powershell
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\ /v AllowClipboardHistory /t REG_DWORD /d 0
 ```
 
-# Parallel settings
+## SSH
 
-1. to remove Mac application inside of Windows' Parallels VM
+<https://www.youtube.com/watch?v=Wx7WPDnwcDg>
 
-_Parallel_ → _Configuration_ → _Options_ → _Application_ → uncheck `Share Mac application with Windows`
+### Windows: Set `pwsh` as default PowerShell Command
 
-2. to hide Parallels' applications from spotlight search
+```bash
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Program Files\PowerShell\7\pwsh.exe" -PropertyType String -Force
 
-   1. Go to _System Preferences_ → _Spotlight_.
-   2. Switch to the _Privacy_ tab
-   3. Add
-      - Applications (Parallels)
-      - Parallels
+Restart-Service sshd
+```
+
+### Troubleshooting:
+
+#### WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+```bash
+ssh-keygen -R <Windows IP or hostname>
+```
