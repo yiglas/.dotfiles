@@ -131,16 +131,16 @@ brew install --cask obsidian
 2. Search: `Keyboard shortcuts`
 3. Under `Launchpad & Dock`
 
-- Set `Show Launchpad` = **F4**
+   - Set `Show Launchpad` = **F4**
 
 4. Under `Mission Control`
 
-- Set `Mission Control` = **F3**
-- Set `Show Desktop` = **Ctrl + F11**
+   - Set `Mission Control` = **F3**
+   - Set `Show Desktop` = **Ctrl + F11**
 
 5. Under `Function Keys`
 
-- Enable `Use F1, F2, etc. keys as standard function keys`
+   - Enable `Use F1, F2, etc. keys as standard function keys`
 
 #### Setup react-native environment
 
