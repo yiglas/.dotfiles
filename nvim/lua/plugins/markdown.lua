@@ -2,13 +2,15 @@ return {
   { import = "lazyvim.plugins.extras.lang.markdown" },
   {
     "mfussenegger/nvim-lint",
-    opts = {
-      linters = {
-        markdownlint = {
-          args = { "--config", "~/.markdownlint.jsonc", "--" },
-        },
-      },
-    },
+    config = function()
+      local markdownlint = require("lint").linters.markdownlint
+
+      markdownlint.args = {
+        "--config",
+        "~/.dotfiles/markdownlint.jsonc",
+        "--",
+      }
+    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
