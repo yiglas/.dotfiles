@@ -109,3 +109,6 @@ map("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", {})
 map("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", {})
 map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
 map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
+
+-- terminal
+map({ "n", "v", "i" }, "<c-/>", "<cmd>ToggleTerm<cr>", opts)

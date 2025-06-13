@@ -1,10 +1,16 @@
+# Machine Configuration
+
 ## MacOS config changes
 
 ### Install
 
-#### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
-
 #### [Homebrew](https://brew.sh/)
+
+#### DisplayLink Manager
+
+```bash
+brew install --cask displaylink
+```
 
 #### Fonts
 
@@ -146,11 +152,17 @@ brew install --cask obsidian
 
 ### Install
 
-#### [DisplayLink Manager](https://www.synaptics.com/products/displaylink-graphics)
+#### Without WSL
 
-#### [Chocolatey](https://chocolatey.org/)
+##### [Chocolatey](https://chocolatey.org/)
 
-#### Fonts
+##### DisplayLink
+
+```bash
+choco install displaylink
+```
+
+##### Fonts
 
 ```bash
 choco install nerd-fonts-meslo
@@ -158,7 +170,7 @@ choco install nerd-fonts-meslo
 ./install-fonts.ps1
 ```
 
-#### Terminal
+##### Terminal
 
 ```bash
 choco install powershell-core
@@ -174,7 +186,7 @@ cmd /c mklink ~\Documents\PowerShell\Microsoft.VSCode_profile.ps1 ~\.dotfiles\Po
 cmd /c mklink ~\Documents\PowerShell\robbyrussel.omp.json ~\.dotfiles\PowerShell\robbyrussel.omp.json
 ```
 
-#### Developer Tools
+##### Developer Tools
 
 ```bash
 choco install neovim
@@ -189,23 +201,24 @@ choco install nodejs
 choco install sqlpackage
 ```
 
-#### Browsers
+##### Browsers
 
 ```bash
 choco install googlechrome
 # arc browser https://arc.net/
 ```
 
-#### Extras
+##### Extras
 
 ```bash
 choco install slack
 choco install logioptionsplus
 choco install zoom
 choco install chatgpt
+choco install flow-launcher
 ```
 
-#### Legacy installs
+##### Legacy installs
 
 ```bash
 choco install brave
@@ -219,9 +232,65 @@ choco install startallback
 choco install sqlpackage
 ```
 
+#### With WSL
+
+##### Install WSL
+
+```bash
+wsl --install
+```
+
+##### WSL
+
+###### Apt update
+
+```bash
+sudo apt update
+```
+
+###### [Homebrew](https://brew.sh/)
+
+###### Fonts
+
+```bash
+brew install --cask font-meslo-lg-nerd-font
+
+~/install-fonts.sh
+```
+
+#### Developer Tools
+
+```bash
+brew install ripgrep
+brew install neovim
+ln -sf ~/.dotfiles/nvim ~/.config/nvim
+
+brew install dotnet
+brew install node
+```
+
+##### Outside of WSL
+
+###### Browsers
+
+```bash
+choco install googlechrome
+# arc browser https://arc.net/
+```
+
+###### Extras
+
+```bash
+choco install slack
+choco install logioptionsplus
+choco install zoom
+choco install chatgpt
+choco install flow-launcher
+```
+
 #### Make windows 11 look more like Mac
 
-- **Invert Mouse**: 
+- **Invert Mouse**:
   Settings / Bluetooth & devices / Mouse
   change Scrolling Direction to `Down motion scrolls up`
 
@@ -258,9 +327,9 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 Restart-Service sshd
 ```
 
-### Troubleshooting:
+### Troubleshooting
 
-#### WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+#### WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
 
 ```bash
 ssh-keygen -R <Windows IP or hostname>

@@ -13,3 +13,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "lazyvim_wrap_spell",
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    if vim.g.vscode then
+      vim.opt_local.wrap = false
+      vim.opt_local.spell = false
+    else
+      vim.opt_local.wrap = true
+      vim.opt_local.spell = true
+    end
+  end,
+})
