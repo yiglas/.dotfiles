@@ -7,4 +7,4 @@
 .vscode
 .emacs.d
 .doom.d
-nvim/lazy-lock.json
+**/lazy-lock.json
