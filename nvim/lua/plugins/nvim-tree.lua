@@ -114,7 +114,12 @@ return {
         dotfiles = false,
         custom = {
           "node_modules",
+          "bin",
+          "obj",
         },
+      },
+      git = {
+        ignore = false,
       },
       log = {
         enable = true,

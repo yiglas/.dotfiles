@@ -14,7 +14,30 @@ end
 math.randomseed(os.time())
 local background = math.random(1, 9)
 
+wezterm.on("update-status", function(window, pane)
+	local time = wezterm.strftime("🕒 %H:%M ")
+	window:set_right_status(time)
+end)
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	return {
+		{ Text = "" }, -- Empty text = invisible tab title
+	}
+end)
+
 config = {
+	status_update_interval = 1,
+	window_frame = {
+		font_size = 10.0,
+	},
+	hide_tab_bar_if_only_one_tab = false,
+	show_new_tab_button_in_tab_bar = false,
+	colors = {
+		tab_bar = {
+			background = "#000000",
+		},
+	},
+
 	default_cursor_style = "SteadyBar",
 	automatically_reload_config = true,
 	window_close_confirmation = "NeverPrompt",
@@ -23,10 +46,10 @@ config = {
 	check_for_updates = false,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = false,
-	font_size = 14,
+	font_size = 10,
 	line_height = 1.2,
 	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
-	enable_tab_bar = false,
+	-- enable_tab_bar = false,
 	window_padding = {
 		left = 5,
 		right = 5,
@@ -98,10 +121,15 @@ config = {
 			format = "mailto:$0",
 		},
 	},
+	keys = {
+		{ key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
+		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
+	},
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	config.default_prog = { "pwsh" }
+	config.default_prog = { "nu" }
 end
 
 return config

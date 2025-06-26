@@ -6,6 +6,8 @@ local opts = { noremap = true, silent = true }
 
 vim.keymap.set({ "x", "v" }, "p", "P", opts)
 
+vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+
 if vim.g.vscode then
   local vscode = require("vscode")
 
@@ -94,21 +96,50 @@ end
 
 local map = LazyVim.safe_keymap_set
 
-map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
+map({ "n", "v" }, "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
 
 map({ "n", "v" }, "<Up>", ":resize -2<CR>", {})
 map({ "n", "v" }, "<Down>", ":resize +2<CR>", {})
 map({ "n", "v" }, "<Right>", ":vertical resize +2<CR>", {})
 map({ "n", "v" }, "<Left>", ":vertical resize -2<CR>", {})
 
-map("n", "<C-t>", ":ToggleTerm<cr>", {})
-
 -- Dap
-map("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", {})
-map("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", {})
-map("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", {})
-map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
-map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
+-- map("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", {})
+-- map("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", {})
+-- map("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", {})
+-- map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
+-- map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
 
 -- terminal
 map({ "n", "v", "i" }, "<c-/>", "<cmd>ToggleTerm<cr>", opts)
+map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+
+-- dadbod
+map({ "n", "v" }, "<leader>S", function()
+  -- Save current position
+  local start_pos = vim.fn.getpos(".")
+
+  -- Select paragraph and yank to register a
+  vim.cmd('normal! vip"ay')
+
+  -- Get yanked SQL query
+  local sql = vim.fn.getreg("a")
+
+  -- Execute SQL via :DB
+  vim.cmd("DB " .. sql)
+
+  -- Restore cursor
+  vim.fn.setpos(".", start_pos)
+end, { desc = "Execute SQL at point" })
+
+-- conform
+map({ "n", "v" }, "<leader>cf", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format file or selection" })
+
+-- neotest
+map("n", "<leader>ta", function()
+  local neotest = require("neotest")
+  neotest.run.run(vim.fn.expand("%"))
+  neotest.summary.open()
+end, { desc = "Run all tests" })
