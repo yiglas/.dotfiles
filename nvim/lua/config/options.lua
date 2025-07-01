@@ -7,3 +7,5 @@ vim.o.cursorline = false
 
 vim.g.lazyvim_check_order = false
 vim.g.lazyvim_picker = "telescope"
+
+vim.g.augment_disable_tab_mapping = true
