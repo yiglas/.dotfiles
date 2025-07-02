@@ -23,17 +23,19 @@ def randomize-background [] {
   $updatedJson | to json -r | save -f $settingsPath
 }
 
-randomize-background
+if ($nu.os-info.name == "windows") {
+  randomize-background
+
+  def ld [] {
+    cd ~/code/filevine/lead-docket
+    nvim .
+  }
+
+}
 
 # alias
 def nvc [] {
   cd ~/.dotfiles/nvim
-  nvim .
-}
-
-
-def ld [] {
-  cd ~/code/filevine/lead-docket
   nvim .
 }
 
