@@ -72,13 +72,7 @@ config = {
 	font_size = 10,
 	line_height = 1.2,
 	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
-	-- enable_tab_bar = false,
-	window_padding = {
-		left = 10,
-		right = 10,
-		top = 10,
-		bottom = 10,
-	},
+
 	background = {
 		{
 			source = {
@@ -89,9 +83,6 @@ config = {
 				saturation = 1.02,
 				brightness = 0.25,
 			},
-			-- attachment = { Parallax = 0.3 },
-			-- width = "100%",
-			-- height = "100%",
 		},
 		{
 			source = {
@@ -204,5 +195,12 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
 	}
 end
+
+config.window_padding = {
+	left = 5,
+	right = 5,
+	top = 10,
+	bottom = 10,
+}
 
 return config

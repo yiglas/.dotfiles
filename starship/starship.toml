@@ -1,0 +1,48 @@
+add_newline = false
+format = """
+$character\
+$directory\
+${custom.open_paren}\
+$git_branch\
+${custom.close_paren}\
+$git_status \
+"""
+
+[custom.open_paren]
+command = "echo '('"
+format = ' [$symbol($output)]($style)'
+require_repo = true
+when = true
+style = "blue"
+
+[custom.close_paren]
+command = "echo ')'"
+format = '[$symbol($output)]($style)'
+require_repo = true
+when = true
+style = "blue"
+
+[custom.dirty]
+command = "echo '✗'"
+when = "has_git_changes"
+format = '[$symbol($output)]($style)'
+style = "red"
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[➜](bold red) "
+
+[directory]
+style = "cyan"
+format = "[$path]($style)"
+truncation_length = 1
+
+[git_branch]
+format = "[$branch]($style)"
+style = "red"
+
+[git_status]
+format = " [$modified]($style)"
+style = "yellow"
+modified = "✗"
+

@@ -3,7 +3,7 @@ $env.config.shell_integration.osc133 = false
 $env.config.show_banner = false
 
 def randomize-background [] {
-  let backgroundsPath = "C:\\Users\\Devin\\.dotfiles\\wezterm\\backgrounds"
+  let backgroundsPath = "C:\\Users\\Devin\\.dotfiles\\backgrounds"
 
   let images = (
     ls $backgroundsPath
@@ -31,6 +31,13 @@ if ($nu.os-info.name == "windows") {
     nvim .
   }
 
+  alias cat = open
+}
+
+if ($nu.os-info.name == "macos") {
+  $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/sbin")
+  $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/bin")
+  $env.PATH = ($env.PATH | split row (char esep) | prepend "/Users/devinsackett/Library/pnpm")
 }
 
 # alias
@@ -39,5 +46,6 @@ def nvc [] {
   nvim .
 }
 
-alias vim = nvim
+alias vim = nvim .
 alias .. = cd ..
+
