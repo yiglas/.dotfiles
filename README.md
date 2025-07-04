@@ -24,9 +24,13 @@ brew install --cask font-meslo-lg-nerd-font
 
 ```bash
 brew install --cask wezterm
+brew install nushell
+brew install starship
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
 ln -sf ~/.dotfiles/wezterm ~/.config/wezterm
+ln -sf ~/.dotfiles/nushell ~/Library/Application\ Support/nushell
+ln -sf ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
 ```
 
 #### Developer Tools
@@ -37,13 +41,11 @@ brew install neovim
 ln -sf ~/.dotfiles/nvim ~/.config/nvim
 
 brew install --cask visual-studio-code
-
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
 brew install --cask docker
-
 brew install dotnet
 brew install node
 ```
@@ -150,11 +152,75 @@ brew install --cask obsidian
 
 ## Windows config changes
 
+1. installed chocolatey
+2. installed logi+
+
+- configured logi+
+- mouse -> point and scroll -> scroll wheel -> scroll direction inverted
+
+2. add windows feature windows hypervisor platform & virtual machine platform
+3. installed wsl
+
+4. in wsl
+
+- sudo apt update
+- sudo apt install build-essential
+- sudo apt install zsh
+  - chsh -s $(which zsh)
+- install oh-my-zsh: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+- git clone my .dotfiles
+- ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
+
+- install brew
+- eval shellevn temp to load brew into current path
+- brew install gcc
+- brew install unzip
+- brew install ripgrep
+- brew install node
+- sudo apt install gcc
+- brew install --cask font-meslo-lg-nerd-font
+- ~/.install-fonts.sh
+- brew install neovim
+- mkdir ~/.config
+- ln -sf ~/.dotfiles/nvim ~/.config/nvim
+
+5. outside of wsl
+
+-choco instal sqlcmd
+
+- choco install git
+- git clone my .dotfiles
+- choco install nerd-fonts-meslo
+- ~/.install-fonts.ps1
+- choco install powershell-core
+- choco install oh-my-posh
+- choco install which
+- choco install grep
+- choco install wezterm
+  cmd /c mklink /d c:\users\{}\.config\wezterm c:\users\{}\.dotfiles\wezterm
+  mkdir ~\Documents\PowerShell
+  cmd /c mklink ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
+  cmd /c mklink ~\Documents\PowerShell\Microsoft.VSCode_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
+  cmd /c mklink ~\Documents\PowerShell\robbyrussel.omp.json ~\.dotfiles\PowerShell\robbyrussel.omp.json
+
+- choco install docker-desktop
+- choco install flow-launcher
+- install arc browser
+
+- choco instal nu
+  TODO: soft link to nu config folder
+- choco install python3
+- choco install starship
+  TODO: soft link to startship.toml file
+
+Troubleshooting:
+if cert error go here: blog.tymek.dev/fixing-wsl-certificates when install brew
+
 ### Install
 
-#### Without WSL
+#### [Chocolatey](https://chocolatey.org/)
 
-##### [Chocolatey](https://chocolatey.org/)
+#### Without WSL
 
 ##### DisplayLink
 
@@ -189,6 +255,7 @@ cmd /c mklink ~\Documents\PowerShell\robbyrussel.omp.json ~\.dotfiles\PowerShell
 ##### Developer Tools
 
 ```bash
+choco install ripgrep
 choco install neovim
 choco install mingw
 cmd /c mklink /D ~\AppData\Local\nvim ~\.dotfiles\nvim
