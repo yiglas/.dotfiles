@@ -5,22 +5,29 @@ $directory\
 ${custom.open_paren}\
 $git_branch\
 ${custom.close_paren}\
-$git_status \
+${custom.space}$git_status${custom.space}\
 """
 
 [custom.open_paren]
-command = "echo '('"
-format = ' [$symbol($output)]($style)'
+# command = "echo '('"
+# format = ' [$symbol($output)]($style)'
+format = ' [\(]($style)'
 require_repo = true
 when = true
 style = "blue"
 
 [custom.close_paren]
-command = "echo ')'"
-format = '[$symbol($output)]($style)'
+# command = "echo ')'"
+# format = '[$symbol($output)]($style)'
+format = '[\)]($style)'
 require_repo = true
 when = true
 style = "blue"
+
+[custom.space]
+format = " "
+require_repo = true
+when = true
 
 [custom.dirty]
 command = "echo '✗'"
@@ -42,7 +49,7 @@ format = "[$branch]($style)"
 style = "red"
 
 [git_status]
-format = " [$modified]($style) "
+format = "[$modified]($style)"
 style = "yellow"
 modified = "✗"
 
