@@ -29,8 +29,8 @@ format = '[$symbol($output)]($style)'
 style = "red"
 
 [character]
-success_symbol = "[➜](bold green) "
-error_symbol = "[➜](bold red) "
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
 
 [directory]
 style = "cyan"
@@ -42,7 +42,7 @@ format = "[$branch]($style)"
 style = "red"
 
 [git_status]
-format = " [$modified]($style)"
+format = " [$modified]($style) "
 style = "yellow"
 modified = "✗"
 
