@@ -1,7 +1,7 @@
 add_newline = false
 format = """
 $character\
-$directory\
+$directory \
 ${custom.open_paren}\
 $git_branch\
 ${custom.close_paren}\
@@ -9,7 +9,7 @@ ${custom.space}$git_status${custom.space}\
 """
 
 [custom.open_paren]
-format = ' [\(]($style)'
+format = '[\(]($style)'
 require_repo = true
 when = true
 style = "blue"
