@@ -104,14 +104,14 @@ map({ "n", "v" }, "<Right>", ":vertical resize +2<CR>", {})
 map({ "n", "v" }, "<Left>", ":vertical resize -2<CR>", {})
 
 -- Dap
--- map("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", {})
--- map("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", {})
--- map("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", {})
--- map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
--- map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
+map("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", {})
+map("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", {})
+map("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", {})
+map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
+map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
 
 -- terminal
-map({ "n", "v", "i" }, "<c-/>", "<cmd>ToggleTerm<cr>", opts)
+map({ "n", "v", "i" }, "<c-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
 map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- dadbod
