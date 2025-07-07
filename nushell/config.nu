@@ -24,8 +24,6 @@ def randomize-background [] {
 }
 
 if ($nu.os-info.name == "windows") {
-  randomize-background
-
   def ld [] {
     cd ~/code/filevine/lead-docket
     nvim .
