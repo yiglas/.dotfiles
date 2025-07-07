@@ -1,7 +1,7 @@
 add_newline = false
 format = """
 $character\
-$directory\
+$directory \
 ${custom.open_paren}\
 $git_branch\
 ${custom.close_paren}\
@@ -9,16 +9,12 @@ ${custom.space}$git_status${custom.space}\
 """
 
 [custom.open_paren]
-# command = "echo '('"
-# format = ' [$symbol($output)]($style)'
 format = ' [\(]($style)'
 require_repo = true
 when = true
 style = "blue"
 
 [custom.close_paren]
-# command = "echo ')'"
-# format = '[$symbol($output)]($style)'
 format = '[\)]($style)'
 require_repo = true
 when = true
@@ -28,12 +24,6 @@ style = "blue"
 format = " "
 require_repo = true
 when = true
-
-[custom.dirty]
-command = "echo '✗'"
-when = "has_git_changes"
-format = '[$symbol($output)]($style)'
-style = "red"
 
 [character]
 success_symbol = "[➜](bold green)"
