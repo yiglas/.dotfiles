@@ -54,7 +54,7 @@ config = {
 	},
 	color_scheme = "nord",
 	show_new_tab_button_in_tab_bar = false,
-	tab_and_split_indices_are_zero_based = true,
+	tab_and_split_indices_are_zero_based = false,
 	colors = {
 		tab_bar = {
 			background = "#000000",
@@ -69,7 +69,7 @@ config = {
 	check_for_updates = false,
 	use_fancy_tab_bar = true,
 	tab_bar_at_bottom = false,
-	font_size = 10,
+	font_size = 12,
 	line_height = 1.2,
 	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
 
@@ -139,7 +139,7 @@ config = {
 
 -- plugins
 config.leader = { key = "b", mods = "CTRL" }
-wezterm.plugin.require("https://github.com/sei40kr/wez-tmux").apply_to_config(config, {})
+require("keymaps").apply_to_config(config, {})
 
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 tabline.setup({
@@ -152,11 +152,11 @@ tabline.setup({
 		theme_overrides = {},
 	},
 	sections = {
-		tabline_a = { "" },
+		tabline_a = { "mode" },
 		tabline_b = { "" },
 		tabline_c = { "" },
-		tab_active = { { "index", zero_indexed = true }, { "process", padding = { left = 0, right = 1 } } },
-		tab_inactive = { { "index", zero_indexed = true }, { "process", padding = { left = 0, right = 1 } } },
+		tab_active = { { "index" }, { "process", padding = { left = 0, right = 1 } } },
+		tab_inactive = { { "index" }, { "process", padding = { left = 0, right = 1 } } },
 		tabline_x = { "" },
 		tabline_y = { "datetime" },
 		tabline_z = { "" },

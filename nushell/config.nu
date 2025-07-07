@@ -48,4 +48,4 @@ def nvc [] {
 
 alias vim = nvim .
 alias .. = cd ..
-
+alias e = exit
