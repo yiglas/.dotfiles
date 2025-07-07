@@ -1,7 +1,7 @@
 add_newline = false
 format = """
 $character\
-$directory \
+$directory\
 ${custom.open_paren}\
 $git_branch\
 ${custom.close_paren}\
