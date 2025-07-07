@@ -187,10 +187,7 @@ M.action = {
 ---@param config unknown
 ---@param _ { }
 function M.apply_to_config(config, _)
-	if not config.leader then
-		config.leader = { key = "b", mods = "CTRL" }
-		wezterm.log_warn("No leader key set, using default: Ctrl-b")
-	end
+	config.leader = { key = "b", mods = "CTRL" }
 
 	local keys = {
 		{ key = config.leader.key, mods = "LEADER|" .. config.leader.mods, action = act.SendKey(config.leader) },

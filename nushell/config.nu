@@ -44,6 +44,11 @@ def nvc [] {
   nvim .
 }
 
+def nvd [] {
+  cd ~/.dotfiles
+  nvim .
+}
+
 alias vim = nvim .
 alias .. = cd ..
 alias e = exit

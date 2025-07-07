@@ -138,54 +138,9 @@ config = {
 }
 
 -- plugins
-config.leader = { key = "b", mods = "CTRL" }
-require("keymaps").apply_to_config(config, {})
-
-local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
-tabline.setup({
-	options = {
-		icons_enabled = true,
-		tabs_enabled = true,
-		section_separators = "",
-		component_separators = "",
-		tab_separators = "",
-		theme_overrides = {},
-	},
-	sections = {
-		tabline_a = { "mode" },
-		tabline_b = { "" },
-		tabline_c = { "" },
-		tab_active = { { "index" }, { "process", padding = { left = 0, right = 1 } } },
-		tab_inactive = { { "index" }, { "process", padding = { left = 0, right = 1 } } },
-		tabline_x = { "" },
-		tabline_y = { "datetime" },
-		tabline_z = { "" },
-	},
-	extensions = {},
-})
-tabline.apply_to_config(config)
-
-local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
-smart_splits.apply_to_config(config, {
-	-- the default config is here, if you'd like to use the default keys,
-	-- you can omit this configuration table parameter and just use
-	-- smart_splits.apply_to_config(config)
-
-	-- directional keys to use in order of: left, down, up, right
-	-- if you want to use separate direction keys for move vs. resize, you
-	-- can also do this:
-	direction_keys = {
-		move = { "h", "j", "k", "l" },
-		resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
-	},
-	-- modifier keys to combine with direction_keys
-	modifiers = {
-		move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
-		resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
-	},
-	-- log level to use: info, warn, error
-	log_level = "info",
-})
+-- require("keymaps").apply_to_config(config, {})
+-- require("plugins.smart-splits").apply_to_config(config, {})
+-- require("plugins.tabline").apply_to_config(config, {})
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.default_prog = { "nu" }
@@ -208,4 +163,5 @@ wezterm.on("gui-startup", function()
 	window:gui_window():maximize()
 end)
 
-return config
+return {}
+-- return config
