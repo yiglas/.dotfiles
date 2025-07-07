@@ -1,6 +1,6 @@
-local wezterm = require("wezterm")
+-- local wezterm = require("wezterm")
 local config = require("config")
-require("events")
+-- require("events")
 
 -- Apply color scheme based on the WEZTERM_THEME environment variable
 -- local themes = {

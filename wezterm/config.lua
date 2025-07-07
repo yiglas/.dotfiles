@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local config = {}
+local mux = wezterm.mux
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
@@ -14,8 +15,19 @@ end
 local function get_random_file(dir)
 	local files = {}
 
-	-- Run 'ls' (Unix/macOS) or 'dir /b' (Windows)
-	local handle = io.popen('ls "' .. dir .. '"')
+	-- Detect platform
+	local is_windows = package.config:sub(1, 1) == "\\"
+	local command
+
+	if is_windows then
+		-- Windows: use dir /b and handle escaping
+		command = 'dir /b "' .. dir:gsub("/", "\\") .. '"'
+	else
+		-- macOS/Linux: use ls
+		command = 'ls "' .. dir .. '"'
+	end
+
+	local handle = io.popen(command)
 	if handle then
 		for file in handle:lines() do
 			table.insert(files, file)
@@ -23,29 +35,18 @@ local function get_random_file(dir)
 		handle:close()
 	end
 
-	-- Seed and pick random file
+	-- Seed and select random file
 	if #files > 0 then
 		math.randomseed(os.time())
 		local index = math.random(1, #files)
-		return dir .. "/" .. files[index]
+
+		-- Use appropriate path separator
+		local sep = is_windows and "\\" or "/"
+		return dir .. sep .. files[index]
 	end
 
 	return nil
 end
-
-math.randomseed(os.time())
-local background = math.random(1, 9)
-
--- wezterm.on("update-status", function(window, pane)
--- 	local time = wezterm.strftime("🕒 %H:%M ")
--- 	window:set_right_status(time)
--- end)
-
--- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
--- 	return {
--- 		{ Text = "" }, -- Empty text = invisible tab title
--- 	}
--- end)
 
 config = {
 	status_update_interval = 1,
@@ -60,7 +61,6 @@ config = {
 			background = "#000000",
 		},
 	},
-
 	default_cursor_style = "SteadyBar",
 	automatically_reload_config = true,
 	window_close_confirmation = "NeverPrompt",
@@ -202,5 +202,10 @@ config.window_padding = {
 	top = 10,
 	bottom = 10,
 }
+
+wezterm.on("gui-startup", function()
+	local tab, pane, window = mux.spawn_window({})
+	window:gui_window():maximize()
+end)
 
 return config
