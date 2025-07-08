@@ -42,7 +42,23 @@ return {
       dotnet.setup({
         test_runner = {
           enable_buffer_test_execution = true,
-          viewmode = "float",
+          viewmode = "vsplit",
+          vsplit_width = 30,
+          mappings = {
+            run_test_from_buffer = { lhs = "<leader>r", desc = "run test from buffer" },
+            filter_failed_tests = { lhs = "<leader>fe", desc = "filter failed tests" },
+            debug_test = { lhs = "<leader>d", desc = "debug test" },
+            go_to_file = { lhs = "g", desc = "go to file" },
+            run_all = { lhs = "<leader>R", desc = "run all tests" },
+            run = { lhs = "<leader>r", desc = "run test" },
+            peek_stacktrace = { lhs = "<leader>p", desc = "peek stacktrace of failed test" },
+            expand = { lhs = "l", desc = "expand" },
+            expand_node = { lhs = "E", desc = "expand node" },
+            expand_all = { lhs = "-", desc = "expand all" },
+            collapse_all = { lhs = "W", desc = "collapse all" },
+            close = { lhs = "q", desc = "close testrunner" },
+            refresh_testrunner = { lhs = "r", desc = "refresh testrunner" },
+          },
         },
         auto_bootstrap_namespace = {
           type = "file_scoped",
@@ -169,14 +185,14 @@ return {
   --   end,
   -- },
 
-  {
-    "nvim-telescope/telescope-dap.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("telescope").load_extension("dap")
-      vim.keymap.set("n", "<leader>dc", "<cmd>Telescope dap commands<cr>", { desc = "DAP Commands" })
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope-dap.nvim",
+  --   dependencies = { "nvim-telescope/telescope.nvim" },
+  --   config = function()
+  --     require("telescope").load_extension("dap")
+  --     vim.keymap.set("n", "<leader>dc", "<cmd>Telescope dap commands<cr>", { desc = "DAP Commands" })
+  --   end,
+  -- },
 
   -- {
   --   "mason-org/mason.nvim",

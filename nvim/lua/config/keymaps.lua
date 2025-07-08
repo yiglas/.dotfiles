@@ -111,11 +111,11 @@ map("n", "<F12>", "<cmd>lua require'dap'.step_out()<cr>", {})
 map("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {})
 
 -- terminal
-map({ "n", "v", "i" }, "<c-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
+map({ "n", "v", "i" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
 map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- dadbod
-map({ "n", "v" }, "<leader>S", function()
+map({ "n", "v" }, "<C-c><C-c>", function()
   -- Save current position
   local start_pos = vim.fn.getpos(".")
 
