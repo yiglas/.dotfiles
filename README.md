@@ -212,6 +212,7 @@ brew install --cask obsidian
 - choco install python3
 - choco install starship
   TODO: soft link to startship.toml file
+- choco install microsoftazurestorageexplorer
 
 Troubleshooting:
 if cert error go here: blog.tymek.dev/fixing-wsl-certificates when install brew
