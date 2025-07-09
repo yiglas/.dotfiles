@@ -2,21 +2,19 @@ local wezterm = require("wezterm")
 local config = {}
 local mux = wezterm.mux
 
+local is_windows = wezterm.os == "Windows"
+local font_size = (is_windows and 10 or 12)
+
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-local username = os.getenv("USER")
-
-if not username then
-	username = os.getenv("USERNAME")
-end
+local username = os.getenv((is_windows and "USERNAME" or "USER"))
 
 local function get_random_file(dir)
 	local files = {}
 
 	-- Detect platform
-	local is_windows = package.config:sub(1, 1) == "\\"
 	local command
 
 	if is_windows then
@@ -51,7 +49,7 @@ end
 config = {
 	status_update_interval = 1,
 	window_frame = {
-		font_size = 10.0,
+		font_size = font_size,
 	},
 	color_scheme = "nord",
 	show_new_tab_button_in_tab_bar = false,
@@ -69,7 +67,7 @@ config = {
 	check_for_updates = false,
 	use_fancy_tab_bar = true,
 	tab_bar_at_bottom = false,
-	font_size = 10,
+	font_size = font_size,
 	line_height = 1.2,
 	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
 
@@ -142,7 +140,7 @@ require("keymaps").apply_to_config(config, {})
 require("plugins.smart-splits").apply_to_config(config, {})
 require("plugins.tabline").apply_to_config(config, {})
 
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+if is_windows then
 	config.default_prog = { "nu" }
 	config.keys = {
 		{ key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
