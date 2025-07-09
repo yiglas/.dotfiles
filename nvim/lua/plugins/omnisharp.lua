@@ -93,8 +93,8 @@ return {
           vim.cmd("Dotnet testrunner")
         end, { desc = "Show testrunner" })
 
-        vim.keymap.set("n", "<C-p>", dotnet.run_with_profile, { desc = "Run with profile" })
-        vim.keymap.set("n", "<C-b>", dotnet.build, { desc = "Build" })
+        -- vim.keymap.set("n", "<C-p>", dotnet.run_with_profile, { desc = "Run with profile" })
+        -- vim.keymap.set("n", "<C-b>", dotnet.build, { desc = "Build" })
         vim.keymap.set("n", "<C-r>", dotnet.run, { desc = "Run" })
         vim.keymap.set("n", "<leader>tt", function()
           require("easy-dotnet").show_test_runner()
@@ -319,73 +319,106 @@ return {
       },
     },
   },
-  {
-    "mfussenegger/nvim-dap",
-    config = function()
-      local dap = require("dap")
-
-      vim.keymap.set("n", "<F5>", dap.continue, {})
-      vim.keymap.set("n", "<F10>", dap.step_over, {})
-      vim.keymap.set("n", "<F11>", dap.step_into, {})
-      vim.keymap.set("n", "<F12>", dap.step_out, {})
-      vim.keymap.set("n", "<F2>", require("dap.ui.widgets").hover, {})
-      vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, {})
-
-      local dotnet = require("easy-dotnet")
-      local debug_dll = nil
-
-      local function ensure_dll()
-        if debug_dll ~= nil then
-          return debug_dll
-        end
-        local dll = dotnet.get_debug_dll(true)
-        debug_dll = dll
-        return dll
-      end
-
-      for _, value in ipairs({ "cs", "fsharp" }) do
-        dap.configurations[value] = {
-          {
-            type = "coreclr",
-            name = "Program",
-            request = "launch",
-            env = function()
-              local dll = ensure_dll()
-              local vars = dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
-              return vars or nil
-            end,
-            program = function()
-              local dll = ensure_dll()
-              local co = coroutine.running()
-              rebuild_project(co, dll.project_path)
-              return dll.relative_dll_path
-            end,
-            cwd = function()
-              local dll = ensure_dll()
-              return dll.relative_project_path
-            end,
-          },
-          {
-            type = "coreclr",
-            name = "Test",
-            request = "attach",
-            processId = function()
-              local res = require("easy-dotnet").experimental.start_debugging_test_project()
-              return res.process_id
-            end,
-          },
-        }
-      end
-
-      dap.listeners.before["event_terminated"]["easy-dotnet"] = function()
-        debug_dll = nil
-      end
-
-      dap.adapters.coreclr = {
-        type = "executable",
-        command = "netcoredbg",
-        args = { "--interpreter=vscode" },
-      }
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   optional = true,
+  --   opts = function()
+  --     local dap = require("dap")
+  --     if not dap.adapters["netcoredbg"] then
+  --       require("dap").adapters["netcoredbg"] = {
+  --         type = "executable",
+  --         command = vim.fn.exepath("netcoredbg"),
+  --         args = { "--interpreter=vscode" },
+  --         options = {
+  --           detached = false,
+  --         },
+  --       }
+  --     end
+  --     for _, lang in ipairs({ "cs", "fsharp", "vb" }) do
+  --       if not dap.configurations[lang] then
+  --         dap.configurations[lang] = {
+  --           {
+  --             type = "netcoredbg",
+  --             name = "Launch file",
+  --             request = "launch",
+  --             ---@diagnostic disable-next-line: redundant-parameter
+  --             program = function()
+  --               return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
+  --             end,
+  --             cwd = "${workspaceFolder}",
+  --           },
+  --         }
+  --       end
+  --     end
+  --   end,
+  -- },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   config = function()
+  --     local dap = require("dap")
+  --
+  --     vim.keymap.set("n", "<F5>", dap.continue, {})
+  --     vim.keymap.set("n", "<F10>", dap.step_over, {})
+  --     vim.keymap.set("n", "<F11>", dap.step_into, {})
+  --     vim.keymap.set("n", "<F12>", dap.step_out, {})
+  --     vim.keymap.set("n", "<F2>", require("dap.ui.widgets").hover, {})
+  --     vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, {})
+  --
+  --     local dotnet = require("easy-dotnet")
+  --     local debug_dll = nil
+  --
+  --     local function ensure_dll()
+  --       if debug_dll ~= nil then
+  --         return debug_dll
+  --       end
+  --       local dll = dotnet.get_debug_dll(true)
+  --       debug_dll = dll
+  --       return dll
+  --     end
+  --
+  --     for _, value in ipairs({ "cs", "fsharp" }) do
+  --       dap.configurations[value] = {
+  --         {
+  --           type = "coreclr",
+  --           name = "Program",
+  --           request = "launch",
+  --           env = function()
+  --             local dll = ensure_dll()
+  --             local vars = dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
+  --             return vars or nil
+  --           end,
+  --           program = function()
+  --             local dll = ensure_dll()
+  --             local co = coroutine.running()
+  --             rebuild_project(co, dll.project_path)
+  --             return dll.relative_dll_path
+  --           end,
+  --           cwd = function()
+  --             local dll = ensure_dll()
+  --             return dll.relative_project_path
+  --           end,
+  --         },
+  --         {
+  --           type = "coreclr",
+  --           name = "Test",
+  --           request = "attach",
+  --           processId = function()
+  --             local res = require("easy-dotnet").experimental.start_debugging_test_project()
+  --             return res.process_id
+  --           end,
+  --         },
+  --       }
+  --     end
+  --
+  --     dap.listeners.before["event_terminated"]["easy-dotnet"] = function()
+  --       debug_dll = nil
+  --     end
+  --
+  --     dap.adapters.coreclr = {
+  --       type = "executable",
+  --       command = vim.fn.exepath("netcoredbg"),
+  --       args = { "--interpreter=vscode" },
+  --     }
+  --   end,
+  -- },
 }
