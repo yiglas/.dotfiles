@@ -38,6 +38,10 @@ if ($nu.os-info.name == "macos") {
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/Users/devinsackett/Library/pnpm")
 }
 
+def cnvim [] {
+  NVIM_APPNAME=cnvim nvim .
+}
+
 # alias
 def nvc [] {
   cd ~/.dotfiles/nvim

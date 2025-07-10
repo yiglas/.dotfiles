@@ -2,14 +2,15 @@ local wezterm = require("wezterm")
 local config = {}
 local mux = wezterm.mux
 
-local is_windows = wezterm.os == "Windows"
+local is_windows = string.match(wezterm.target_triple, "^.*%-windows%-.+$")
 local font_size = (is_windows and 10 or 12)
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-local username = os.getenv((is_windows and "USERNAME" or "USER"))
+local username = os.getenv("USER")
+username = username and username or os.getenv("USERNAME")
 
 local function get_random_file(dir)
 	local files = {}
@@ -40,6 +41,9 @@ local function get_random_file(dir)
 
 		-- Use appropriate path separator
 		local sep = is_windows and "\\" or "/"
+
+		-- os.execute('msg * "' .. dir .. sep .. files[index] .. '"')
+
 		return dir .. sep .. files[index]
 	end
 
