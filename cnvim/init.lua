@@ -1,4 +1,10 @@
-vim.cmd.colorscheme("vim")
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- vim.cmd.colorscheme("vim")
+
+require("config.lazy")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -52,8 +58,12 @@ vim.opt.foldlevel = 99
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- utility functions
+local function is_win()
+	return vim.uv.os_uname().sysname:find("Windows") ~= nil
+end
+
+
 
 vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<cmd>:w<CR>", { desc = "Save file" })
 
@@ -233,7 +243,7 @@ local function FloatingTerminal()
   end
 
   if not has_terminal then
-    vim.fn.termopen(os.getenv("SHELL"))
+    vim.fn.termopen(is_win() and "nu" or os.getenv("nu"))
   end
 
   terminal_state.is_open = true
@@ -269,8 +279,6 @@ vim.keymap.set("t", "<Esc>", function()
   end
 end, { noremap = true, silent = true, desc = "Close floating terminal from terminal mode" })
 
--- lazy package manager
--- nord
 -- neogit
 -- lsp
 -- mason
