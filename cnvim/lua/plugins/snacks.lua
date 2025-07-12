@@ -25,6 +25,7 @@ return {{
 			enabled = true,
 			sources = {
 				explorer = {
+					-- auto_close = true,
 					layout = {
 						auto_hide = { "input" }
 					}

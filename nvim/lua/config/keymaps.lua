@@ -115,22 +115,22 @@ map({ "n", "v", "i" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal
 map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- dadbod
-map({ "n", "v" }, "<C-c><C-c>", function()
-  -- Save current position
-  local start_pos = vim.fn.getpos(".")
-
-  -- Select paragraph and yank to register a
-  vim.cmd('normal! vip"ay')
-
-  -- Get yanked SQL query
-  local sql = vim.fn.getreg("a")
-
-  -- Execute SQL via :DB
-  vim.cmd("DB " .. sql)
-
-  -- Restore cursor
-  vim.fn.setpos(".", start_pos)
-end, { desc = "Execute SQL at point" })
+-- map({ "n", "v" }, "<C-c><C-c>", function()
+--   -- Save current position
+--   local start_pos = vim.fn.getpos(".")
+--
+--   -- Select paragraph and yank to register a
+--   vim.cmd('normal! vip"ay')
+--
+--   -- Get yanked SQL query
+--   local sql = vim.fn.getreg("a")
+--
+--   -- Execute SQL via :DB
+--   vim.cmd("DB " .. sql)
+--
+--   -- Restore cursor
+--   vim.fn.setpos(".", start_pos)
+-- end, { desc = "Execute SQL at point" })
 
 -- conform
 map({ "n", "v" }, "<leader>cf", function()
