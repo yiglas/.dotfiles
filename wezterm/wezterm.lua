@@ -140,14 +140,14 @@ config = {
 }
 
 -- plugins
-require("keymaps").apply_to_config(config, {})
+-- require("keymaps").apply_to_config(config, {})
 require("plugins.smart-splits").apply_to_config(config, {})
 require("plugins.tabline").apply_to_config(config, {})
 
 if is_windows then
 	config.default_prog = { "nu" }
 	config.keys = {
-		{ key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+		-- { key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
 		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
 		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
 	}

@@ -6,39 +6,6 @@ require("config").setup()
 
 
 
--- vim.g.mapleader = " "
--- vim.g.maplocalleader = " "
---:q:
--- -- vim.cmd.colorscheme("vim")
---
--- require("config.lazy")
---
---
--- -- utility functions
--- local function is_win()
--- 	return vim.uv.os_uname().sysname:find("Windows") ~= nil
--- end
---
---
---
---
---
---
---
---
---
---
---
--- vim.opt.wildmenu = true;
--- vim.opt.wildmode = "longest:full,full"
--- vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
---
--- vim.opt.diffopt:append("linematch:60")
---
--- vim.opt.redrawtime = 10000
---
--- vim.opt.maxmempattern = 20000
---
 
 
 -- neogit
