@@ -53,5 +53,9 @@ vim.opt.foldlevel = 99
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
+
+-- vim.o.winblend = 20
+-- vim.o.pumblend = 20
 
 return {}
