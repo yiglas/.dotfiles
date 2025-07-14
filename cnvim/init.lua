@@ -26,5 +26,4 @@ require("config").setup()
 -- treesitter
 -- session persistence
 -- rainbowbrackets
--- nvim-tree ??
 -- keyboard shortcuts like lazyvim
