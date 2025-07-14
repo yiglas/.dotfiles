@@ -8,10 +8,8 @@ require("config").setup()
 
 
 
--- neogit
 -- lsp
 -- mason
--- snacks
 -- conform
 -- look into built in completion
 -- todo-comments
@@ -20,8 +18,6 @@ require("config").setup()
 -- lua
 -- nu
 -- json / jsonc
--- mini.pairs 
--- noice
 -- remove bufferline for inline
 -- which-key
 -- flash

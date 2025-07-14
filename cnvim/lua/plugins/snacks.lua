@@ -1,5 +1,4 @@
 return {
-	{ 'echasnovski/mini.icons', version = '*' },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
