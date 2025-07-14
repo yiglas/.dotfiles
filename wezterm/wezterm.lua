@@ -140,7 +140,7 @@ config = {
 }
 
 -- plugins
--- require("keymaps").apply_to_config(config, {})
+require("keymaps").apply_to_config(config, {})
 require("plugins.smart-splits").apply_to_config(config, {})
 require("plugins.tabline").apply_to_config(config, {})
 
