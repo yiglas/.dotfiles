@@ -7,7 +7,6 @@ require("config").setup()
 
 
 
-
 -- lsp
 -- mason
 -- conform
@@ -19,11 +18,8 @@ require("config").setup()
 -- nu
 -- json / jsonc
 -- remove bufferline for inline
--- which-key
 -- flash
--- gitsigns.nvim
 -- trouble
 -- treesitter
 -- session persistence
 -- rainbowbrackets
--- keyboard shortcuts like lazyvim

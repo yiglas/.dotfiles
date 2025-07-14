@@ -134,3 +134,17 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = augroup("auto_format"),
+  callback = function()
+    if vim.g.autoformat then
+      vim.lsp.buf.format({ async = false })
+    end
+  end,
+})
+
+vim.api.nvim_create_user_command("ToggleAutoFormat", function()
+  vim.g.autoformat = not vim.g.autoformat
+  print("Autoformat is now " .. (vim.g.autoformat and "ON" or "OFF"))
+end, {})
