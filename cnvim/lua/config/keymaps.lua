@@ -44,11 +44,13 @@ end, { desc = 'Delete Other Buffers' })
 map('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
 
 -- Clear search and stop snippet on escape
-map({ 'i', 'n', 's' }, '<esc>', function()
-  vim.cmd('noh')
-  --LazyVim.cmp.actions.snippet_stop()
-  return '<esc>'
-end, { expr = true, desc = 'Escape and Clear hlsearch' })
+map('n', '<Esc>', function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd('nohlsearch')
+  else
+    vim.cmd('stopinsert') -- acts like default <Esc> when not searching
+  end
+end, { noremap = true, silent = true })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua

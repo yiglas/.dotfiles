@@ -4,11 +4,10 @@ require('config').setup()
 
 -- look into built in completion
 -- c#
--- typescript
--- lua
 -- nu
--- json / jsonc
--- flash
+-- spell check similar to vscode
+-- typescript
 -- trouble
 -- treesitter
 -- session persistence
+-- docker
