@@ -1,11 +1,6 @@
 -- vim.uv = vim.uv or vim.loop
 
-require("config").setup()
-
-
-
-
-
+require('config').setup()
 
 -- look into built in completion
 -- todo-comments

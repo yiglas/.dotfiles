@@ -1,6 +1,6 @@
 -- This file is automatically loaded by plugins.core
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 vim.g.autoformat = true
 
@@ -23,36 +23,36 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 vim.opt.showmatch = true
 vim.opt.matchtime = 2
 vim.opt.cmdheight = 1
-vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.completeopt = 'menuone,noinsert,noselect'
 vim.opt.showmode = false
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 vim.opt.winblend = 0
 vim.opt.conceallevel = 0
-vim.opt.concealcursor = ""
+vim.opt.concealcursor = ''
 vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 300
 
 vim.opt.hidden = true
 vim.opt.errorbells = false
-vim.opt.backspace = "indent,eol,start"
+vim.opt.backspace = 'indent,eol,start'
 vim.opt.autochdir = false
-vim.opt.iskeyword:append("-")
-vim.opt.path:append("**")
-vim.opt.selection = "exclusive"
-vim.opt.mouse = "a"
-vim.opt.encoding = "UTF-8"
+vim.opt.iskeyword:append('-')
+vim.opt.path:append('**')
+vim.opt.selection = 'exclusive'
+vim.opt.mouse = 'a'
+vim.opt.encoding = 'UTF-8'
 
-vim.opt.foldmethod = "expr"
+vim.opt.foldmethod = 'expr'
 -- vim.wo.vim.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 
 return {}

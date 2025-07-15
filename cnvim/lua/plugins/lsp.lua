@@ -1,13 +1,13 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"mason-org/mason-lspconfig.nvim",
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
-			'saghen/blink.cmp'
-		},
-		config = function(_, opts)
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'saghen/blink.cmp',
+    },
+    config = function(_, opts)
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -16,29 +16,59 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
           end
 
-					map("<leader>cl", function() Snacks.picker.lsp_config() end, "Lsp Info")
-					map("gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
-					map("gr", function() Snacks.picker.lsp_references() end, "References") -- nowait = true
-					map("gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
-					map("gy", function() Snacks.picker.lsp_type_definitions() end, "Goto T[y]pe Definition")
-					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-					map("K", function() return vim.lsp.buf.hover() end, "Hover")
-					map("gK", function() return vim.lsp.buf.signature_help() end, "Signature Help") -- has = "signatureHelp"
-					map("<c-k>", function() return vim.lsp.buf.signature_help() end, "Signature Help", "i") -- has = "signatureHelp"
-					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" }) -- has = "codeAction"
-					map("<leader>cc", vim.lsp.codelens.run, "Run Codelens", { "n", "v" }) -- has = "codeLens"
-					map("<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens", "n") -- has = "codeLens"
-					map("<leader>cR", function() Snacks.rename.rename_file() end, "Rename File", "n") -- has = { "workspace/didRenameFiles", "workspace/willRenameFiles" }
-					map("<leader>cr", vim.lsp.buf.rename, "Rename") -- has = "rename"
-					-- map("<leader>cA", LazyVim.lsp.action.source, "Source Action") -- has = "codeAction"
-					map("]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference") -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
-					map("[[", function() Snacks.words.jump(-vim.v.count1) end, "Prev Reference") -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
-					map("<a-n>", function() Snacks.words.jump(vim.v.count1, true) end, "Next Reference") -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
-					map("<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, "Prev Reference") -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
-					map("<leader>ss", function() Snacks.picker.lsp_symbols() end, "LSP Symbols") -- { filter = LazyVim.config.kind_filter }, has = "documentSymbol"
-					map("<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, "LSP Workspace Symbols") -- { filter = LazyVim.config.kind_filter }, has = "workspace/symbols"
+          map('<leader>cl', function()
+            Snacks.picker.lsp_config()
+          end, 'Lsp Info')
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, 'Goto Definition')
+          map('gr', function()
+            Snacks.picker.lsp_references()
+          end, 'References') -- nowait = true
+          map('gI', function()
+            Snacks.picker.lsp_implementations()
+          end, 'Goto Implementation')
+          map('gy', function()
+            Snacks.picker.lsp_type_definitions()
+          end, 'Goto T[y]pe Definition')
+          map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+          map('K', function()
+            return vim.lsp.buf.hover()
+          end, 'Hover')
+          map('gK', function()
+            return vim.lsp.buf.signature_help()
+          end, 'Signature Help') -- has = "signatureHelp"
+          map('<c-k>', function()
+            return vim.lsp.buf.signature_help()
+          end, 'Signature Help', 'i') -- has = "signatureHelp"
+          map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'v' }) -- has = "codeAction"
+          map('<leader>cc', vim.lsp.codelens.run, 'Run Codelens', { 'n', 'v' }) -- has = "codeLens"
+          map('<leader>cC', vim.lsp.codelens.refresh, 'Refresh & Display Codelens', 'n') -- has = "codeLens"
+          map('<leader>cR', function()
+            Snacks.rename.rename_file()
+          end, 'Rename File', 'n') -- has = { "workspace/didRenameFiles", "workspace/willRenameFiles" }
+          map('<leader>cr', vim.lsp.buf.rename, 'Rename') -- has = "rename"
+          -- map("<leader>cA", LazyVim.lsp.action.source, "Source Action") -- has = "codeAction"
+          map(']]', function()
+            Snacks.words.jump(vim.v.count1)
+          end, 'Next Reference') -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
+          map('[[', function()
+            Snacks.words.jump(-vim.v.count1)
+          end, 'Prev Reference') -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
+          map('<a-n>', function()
+            Snacks.words.jump(vim.v.count1, true)
+          end, 'Next Reference') -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
+          map('<a-p>', function()
+            Snacks.words.jump(-vim.v.count1, true)
+          end, 'Prev Reference') -- has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end
+          map('<leader>ss', function()
+            Snacks.picker.lsp_symbols()
+          end, 'LSP Symbols') -- { filter = LazyVim.config.kind_filter }, has = "documentSymbol"
+          map('<leader>sS', function()
+            Snacks.picker.lsp_workspace_symbols()
+          end, 'LSP Workspace Symbols') -- { filter = LazyVim.config.kind_filter }, has = "workspace/symbols"
 
-					-- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
+          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
           ---@param bufnr? integer some lsp support methods only in specific files
@@ -53,7 +83,10 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          if
+            client
+            and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+          then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -71,7 +104,7 @@ return {
               group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = event2.buf })
               end,
             })
           end
@@ -82,7 +115,7 @@ return {
           -- This may be unwanted, since they displace some of your code
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, '[T]oggle Inlay [H]ints')
           end
         end,
@@ -90,7 +123,7 @@ return {
 
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
-      vim.diagnostic.config {
+      vim.diagnostic.config({
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
         underline = { severity = vim.diagnostic.severity.ERROR },
@@ -115,7 +148,7 @@ return {
             return diagnostic_message[diagnostic.severity]
           end,
         },
-      }
+      })
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -161,7 +194,7 @@ return {
       --     },
       --   },
       -- }
-			local servers = opts.servers
+      local servers = opts.servers
 
       -- Ensure the servers and tools above are installed
       --
@@ -180,9 +213,9 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-      require('mason-lspconfig').setup {
+      require('mason-lspconfig').setup({
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
         handlers = {
@@ -195,7 +228,7 @@ return {
             require('lspconfig')[server_name].setup(server)
           end,
         },
-      }
+      })
     end,
-	}
+  },
 }
