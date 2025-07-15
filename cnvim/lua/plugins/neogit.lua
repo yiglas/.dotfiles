@@ -5,7 +5,6 @@ return {
       'nvim-lua/plenary.nvim', -- required
       'sindrets/diffview.nvim', -- optional - Diff integration
     },
-    event = 'VeryLazy',
     cmd = { 'Neogit' },
     keys = {
       { '<leader>gg', ':Neogit kind=replace<Return>', silent = true, noremap = true },
