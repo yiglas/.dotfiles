@@ -26,7 +26,6 @@ vim.opt.termguicolors = true
 vim.opt.signcolumn = 'yes'
 vim.opt.showmatch = true
 vim.opt.matchtime = 2
-vim.opt.cmdheight = 1
 vim.opt.completeopt = 'menuone,noinsert,noselect'
 vim.opt.showmode = false
 vim.opt.pumheight = 10
@@ -36,6 +35,10 @@ vim.opt.conceallevel = 0
 vim.opt.concealcursor = ''
 vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 300
+
+vim.opt.laststatus = 0
+vim.opt.cmdheight = 0
+vim.opt.ruler = false
 
 vim.opt.hidden = true
 vim.opt.errorbells = false
