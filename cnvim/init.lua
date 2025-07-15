@@ -7,9 +7,6 @@ require("config").setup()
 
 
 
--- lsp
--- mason
--- conform
 -- look into built in completion
 -- todo-comments
 -- c#
