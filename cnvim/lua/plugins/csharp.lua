@@ -50,11 +50,9 @@ return {
     },
     opts = {
       servers = {
-        roslyn = {
-          enable_roslyn_analyzers = true,
-          organize_imports_on_format = true,
-          enable_import_completion = true,
-        },
+        roslyn = {},
+        csharpier = {},
+        netcoredbg = {},
       },
     },
   },
@@ -67,7 +65,7 @@ return {
       formatters = {
         csharpier = {
           command = 'csharpier',
-          args = { 'fromat', '--write-stdout' },
+          args = { 'format', '--write-stdout' },
         },
       },
     },
