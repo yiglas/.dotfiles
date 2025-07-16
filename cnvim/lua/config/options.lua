@@ -49,6 +49,7 @@ vim.opt.path:append('**')
 vim.opt.selection = 'exclusive'
 vim.opt.mouse = 'a'
 vim.opt.encoding = 'UTF-8'
+vim.opt.fillchars:append({ eob = ' ' })
 
 vim.opt.foldmethod = 'expr'
 -- vim.wo.vim.foldexpr = "v:lua.vim.treesitter.foldexpr()"

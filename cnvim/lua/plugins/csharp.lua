@@ -6,23 +6,16 @@ vim.filetype.add({
 
 return {
   {
-    'seblyng/roslyn.nvim',
-    ft = { 'cs', 'razor' },
-    {
-      -- By loading as a dependencies, we ensure that we are available to set
-      -- the handlers for Roslyn.
-      'tris203/rzls.nvim',
-      config = true,
-    },
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
-    opts = {
-      -- your configuration comes here; leave empty for default settings
-    },
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     opts = { ensure_installed = { 'c_sharp' } },
+  },
+  {
+    'nvimtools/none-ls.nvim',
+    opts = function(_, opts)
+      local nls = require('null-ls')
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, nls.builtins.formatting.csharpier)
+    end,
   },
   -- {
   --   'Cliffback/netcoredbg-macOS-arm64.nvim',
@@ -33,26 +26,22 @@ return {
   -- },
   {
     'mason-org/mason.nvim',
-    opts = { ensure_installed = { 'csharpier', 'netcoredbg', 'roslyn', 'rzls' } },
+    opts = { ensure_installed = { 'csharpier', 'netcoredbg' } },
   },
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      {
-        'mason-org/mason.nvim',
-        opts = {
-          registries = {
-            'github:mason-org/mason-registry',
-            'github:Crashdummyy/mason-registry',
-          },
-        },
-      },
-    },
     opts = {
       servers = {
-        roslyn = {},
-        csharpier = {},
-        netcoredbg = {},
+        omnisharp = {
+          handlers = {
+            ['textDocument/definition'] = function(...)
+              return require('omnisharp_extended').handler(...)
+            end,
+          },
+          enable_roslyn_analyzers = true,
+          organize_imports_on_format = true,
+          enable_import_completion = true,
+        },
       },
     },
   },

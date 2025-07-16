@@ -16,10 +16,7 @@ return {
       quickfile = { enabled = true },
       rename = { enabled = true },
       scratch = { enabled = true },
-      explorer = {
-        enabled = true,
-        replaces_netrw = true,
-      },
+      explorer = { enabled = true },
       picker = {
         enabled = true,
         sources = {
@@ -67,7 +64,7 @@ return {
     },
     keys = {
       {
-        '<leader>e',
+        '<leader>E',
         function()
           Snacks.explorer()
         end,

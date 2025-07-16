@@ -3,7 +3,7 @@ local config = {}
 local mux = wezterm.mux
 
 local is_windows = string.match(wezterm.target_triple, "^.*%-windows%-.+$")
-local font_size = (is_windows and 10 or 12)
+local font_size = (is_windows and 9 or 11)
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
@@ -146,11 +146,11 @@ require("plugins.tabline").apply_to_config(config, {})
 
 if is_windows then
 	config.default_prog = { "nu" }
-	config.keys = {
-		-- { key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
-		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
-		{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
-	}
+	-- config.keys = {
+	-- 	-- { key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+	-- 	{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
+	-- 	{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
+	-- }
 end
 
 config.window_padding = {
