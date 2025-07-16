@@ -146,11 +146,12 @@ require("plugins.tabline").apply_to_config(config, {})
 
 if is_windows then
 	config.default_prog = { "nu" }
-	-- config.keys = {
-	-- 	-- { key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
-	-- 	{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
-	-- 	{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") },
-	-- }
+	-- table.insert(
+	-- 	config.keys,
+	-- 	{ key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") }
+	-- )
+	table.insert(config.keys, { key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") })
+	table.insert(config.keys, { key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") })
 end
 
 config.window_padding = {
