@@ -64,7 +64,91 @@ return {
           -- vim.keymap.set('n', 'h', api.tree.close, opts 'Close')
           vim.keymap.set('n', 'H', api.tree.collapse_all, opts('Collapse All'))
         end,
+        sort_by = 'case_sensitive',
+        view = {
+          width = 35,
+          side = 'left',
+          preserve_window_proportions = true,
+          number = false,
+          relativenumber = false,
+          signcolumn = 'yes',
+        },
+        renderer = {
+          highlight_git = true,
+          highlight_opened_files = 'name',
+          root_folder_modifier = ':t',
+          indent_markers = {
+            enable = true,
+            icons = {
+              corner = '└ ',
+              edge = '│ ',
+              item = '├ ',
+              none = '  ',
+            },
+          },
+          icons = {
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = false,
+              git = true,
+            },
+            glyphs = {
+              default = '󰈚',
+              symlink = '',
+              folder = {
+                arrow_closed = '',
+                arrow_open = '',
+                default = '',
+                open = '',
+                empty = '',
+                empty_open = '',
+                symlink = '',
+              },
+              git = {
+                unstaged = '✗',
+                staged = '✓',
+                unmerged = '',
+                renamed = '➜',
+                deleted = '',
+                untracked = '★',
+                ignored = '◌',
+              },
+            },
+          },
+        },
+        diagnostics = {
+          enable = true,
+          show_on_dirs = true,
+          show_on_open_dirs = true,
+          icons = {
+            hint = '',
+            info = '',
+            warning = '',
+            error = '',
+          },
+        },
+        update_focused_file = {
+          enable = true,
+          update_root = true,
+        },
+        git = {
+          enable = true,
+          ignore = false,
+        },
+        actions = {
+          open_file = {
+            quit_on_open = false,
+            resize_window = true,
+          },
+        },
+        filters = {
+          dotfiles = false,
+          custom = { '.DS_Store' },
+        },
       })
+
+      vim.keymap.set('n', '<leader>E', ':NvimTreeFindFileToggle<Return>', { noremap = true, silent = true })
     end,
   },
 }
