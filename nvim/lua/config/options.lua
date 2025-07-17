@@ -2,12 +2,10 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-vim.opt.laststatus = 0
-vim.o.cursorline = false
+-- vim.opt.laststatus = 0
+-- vim.o.cursorline = false
 
 vim.g.lazyvim_check_order = false
-vim.g.lazyvim_picker = "telescope"
-
 vim.g.augment_disable_tab_mapping = true
 
 vim.g.root_spec = { "cwd" }
@@ -41,7 +39,7 @@ if vim.g.neovide then
 
   -- Specify the font used by Neovide
   -- vim.o.guifont = "MesloLGM_Nerd_Font:h14"
-  vim.o.guifont = "CaskaydiaCove NF"
+  vim.o.guifont = "JetBrains Mono:h12:b"
   vim.opt.linespace = 2
   -- This is limited by the refresh rate of your physical hardware, but can be
   -- lowered to increase battery life
@@ -93,6 +91,11 @@ if vim.g.neovide then
   vim.g.neovide_normal_opacity = 0.8
   vim.g.neovide_title_background_color =
     string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
+
+  vim.g.neovide_padding_top = 10
+  vim.g.neovide_padding_bottom = 5
+  vim.g.neovide_padding_right = 10
+  vim.g.neovide_padding_left = 10
 end
 
 -- I also want the vim.g.neovim_mode cursor color to be changed
@@ -104,11 +107,6 @@ vim.opt.guicursor = {
   "i-ci-ve:ver25-lCursor", -- Use 'lCursor' highlight for insert and visual-exclusive modes
   "r-cr:hor20-CursorIM", -- Use 'CursorIM' for replace mode
 }
-
-vim.g.neovide_padding_top = 10
-vim.g.neovide_padding_bottom = 10
-vim.g.neovide_padding_right = 10
-vim.g.neovide_padding_left = 10
 -- ############################################################################
 --                           End of Neovide section
 -- ############################################################################

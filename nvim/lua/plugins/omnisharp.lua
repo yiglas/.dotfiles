@@ -261,6 +261,7 @@ return {
   -- },
   {
     "Cliffback/netcoredbg-macOS-arm64.nvim",
+    ft = { "cs" },
     config = function()
       require("netcoredbg-macOS-arm64").setup(require("dap"))
     end,
