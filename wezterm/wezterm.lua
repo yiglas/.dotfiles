@@ -74,7 +74,6 @@ config = {
 	font_size = font_size,
 	line_height = 1.2,
 	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
-
 	background = {
 		{
 			source = {

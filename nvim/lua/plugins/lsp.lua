@@ -4,4 +4,5 @@ return {
       enabled = true,
     },
   } },
+  { "mason-lspconfig.nvim", event = "VeryLazy" },
 }

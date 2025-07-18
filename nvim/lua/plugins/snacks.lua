@@ -1,22 +1,22 @@
 return {
-  { import = "lazyvim.plugins.extras.editor.snacks_picker" },
-  { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
+  -- { import = "lazyvim.plugins.extras.editor.snacks_picker" },
+  -- { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
   {
     "folke/snacks.nvim",
     opts = {
-      explorer = {
-        sync_cwd = false,
-      },
+      -- explorer = {
+      --   sync_cwd = false,
+      -- },
       picker = {
         enabled = true,
-        sources = {
-          explorer = {
-            auto_close = true,
-            layout = {
-              auto_hide = { "input" },
-            },
-          },
-        },
+        -- sources = {
+        --   explorer = {
+        --     auto_close = true,
+        --     layout = {
+        --       auto_hide = { "input" },
+        --     },
+        --   },
+        -- },
         layout = {
           preset = "telescope",
         },

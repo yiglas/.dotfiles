@@ -1,0 +1,6 @@
+[font]
+normal = ["JetBrains Mono"]
+size = 10.0
+
+[box-drawing]
+mode = "native"

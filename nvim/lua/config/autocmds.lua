@@ -29,21 +29,21 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-local notifier = require("snacks.notifier")
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client then
-      notifier.notify("LSP starting: " .. client.name, "info", { spinner = "dots" })
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("LspDetach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client then
-      notifier.notify("LSP stopped: " .. client.name)
-    end
-  end,
-})
+-- local notifier = require("snacks.notifier")
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if client then
+--       notifier.notify("LSP starting: " .. client.name, "info", { spinner = "dots" })
+--     end
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("LspDetach", {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if client then
+--       notifier.notify("LSP stopped: " .. client.name)
+--     end
+--   end,
+-- })

@@ -2,8 +2,10 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- vim.opt.laststatus = 0
--- vim.o.cursorline = false
+-- vim.g.lazyvim_picker = "snacks"
+
+vim.opt.laststatus = 0
+vim.o.cursorline = false
 
 vim.g.lazyvim_check_order = false
 vim.g.augment_disable_tab_mapping = true
@@ -39,7 +41,7 @@ if vim.g.neovide then
 
   -- Specify the font used by Neovide
   -- vim.o.guifont = "MesloLGM_Nerd_Font:h14"
-  vim.o.guifont = "JetBrains Mono:h12:b"
+  vim.o.guifont = "JetBrains Mono:h10:b"
   vim.opt.linespace = 2
   -- This is limited by the refresh rate of your physical hardware, but can be
   -- lowered to increase battery life

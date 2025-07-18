@@ -6,7 +6,8 @@ end
 
 return {
   "mrjones2014/smart-splits.nvim",
-  lazy = false,
+  event = "VeryLazy",
+  enabled = not vim.g.neovide,
   keys = {
     { "<C-h>", lazymap("smart-splits", "move_cursor_left"), desc = "Move to left window" },
     { "<C-j>", lazymap("smart-splits", "move_cursor_down"), desc = "Move to downward window" },
