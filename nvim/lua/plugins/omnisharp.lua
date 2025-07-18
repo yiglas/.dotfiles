@@ -33,7 +33,6 @@ end
 
 return {
   { import = "lazyvim.plugins.extras.lang.omnisharp" },
-
   {
     "GustavEikaas/easy-dotnet.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -67,7 +66,7 @@ return {
         },
         auto_bootstrap_namespace = {
           type = "file_scoped",
-          enabled = true,
+          enabled = false,
         },
         terminal = function(path, action, args)
           local commands = {
@@ -107,6 +106,7 @@ return {
       end
 
       vim.api.nvim_create_autocmd("VimEnter", {
+        pattern = "*.cs",
         callback = function()
           if dotnet.is_dotnet_project() then
             add_dotnet_mappings()

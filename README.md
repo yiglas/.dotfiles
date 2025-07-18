@@ -213,8 +213,9 @@ brew install --cask obsidian
 - choco install starship
   TODO: soft link to startship.toml file
 - choco install microsoftazurestorageexplorer
+- pip install sqlfluff
 
-Troubleshooting:
+Troubleshooting: e
 if cert error go here: blog.tymek.dev/fixing-wsl-certificates when install brew
 
 ### Install

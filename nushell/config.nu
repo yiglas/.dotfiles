@@ -23,15 +23,6 @@ def randomize-background [] {
   $updatedJson | to json -r | save -f $settingsPath
 }
 
-if ($nu.os-info.name == "windows") {
-  def ld [] {
-    cd ~/code/filevine/lead-docket
-    nvim .
-  }
-
-  alias cat = open
-}
-
 if ($nu.os-info.name == "macos") {
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/sbin")
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/bin")
@@ -40,6 +31,10 @@ if ($nu.os-info.name == "macos") {
 
 def cnvim [] {
   NVIM_APPNAME=cnvim nvim .
+}
+
+match $nu.os-info.name {
+  'windows' => { alias cat = open }
 }
 
 # alias
