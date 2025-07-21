@@ -1,17 +1,3 @@
--- Must be BEFORE require("lspconfig").<server>.setup()
-vim.lsp.handlers['textDocument/hover'] = function(err, result, ctx, config)
-  config = config or {}
-  config.border = 'rounded'
-
-  local bufnr, winid = vim.lsp.handlers.hover(err, result, ctx, config)
-
-  if winid and vim.api.nvim_win_is_valid(winid) then
-    vim.keymap.set('n', '<Esc>', function()
-      vim.api.nvim_win_close(winid, true)
-    end, { buffer = bufnr, nowait = true, silent = true })
-  end
-end
-
 return {
   {
     'neovim/nvim-lspconfig',
@@ -47,7 +33,9 @@ return {
           end, 'Goto T[y]pe Definition')
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
           map('K', function()
-            return vim.lsp.buf.hover()
+            return vim.lsp.buf.hover({
+              border = 'rounded',
+            })
           end, 'Hover')
 
           map('gK', function()

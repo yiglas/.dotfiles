@@ -7,6 +7,7 @@ function M.setup(_)
   require('config.lazy')
   require('config.keymaps')
   require('config.autocmds')
+  require('config.usercmds')
   vim.cmd('colorscheme tokyonight-storm')
 end
 
