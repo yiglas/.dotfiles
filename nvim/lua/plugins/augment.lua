@@ -1,9 +1,10 @@
 return {
   {
     "augmentcode/augment.vim",
-    event = "VeryLazy",
-    key = {
-      { "<C-y>", "<cmd>call augment#Accept()<cr>", desc = "Accept Agument Suggestion" },
-    },
+    event = "InsertEnter",
+    config = function()
+      vim.g.augment_accept_key = "<C-y>"
+      vim.g.augment_disable_tab_mapping = true
+    end,
   },
 }

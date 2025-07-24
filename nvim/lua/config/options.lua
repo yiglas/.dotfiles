@@ -8,13 +8,8 @@ vim.opt.laststatus = 0
 vim.o.cursorline = false
 
 vim.g.lazyvim_check_order = false
-vim.g.augment_disable_tab_mapping = true
 
 vim.g.root_spec = { "cwd" }
-
--- NOTE: When in LazyGit if inside or outside neovim, if you want to edit files with
--- Neovide, you have to set the os.edit option in the
--- ~/github/dotfiles-latest/lazygit/config.yml file
 
 -- NOTE: Also remember that there are settings in the file:
 -- ~/github/dotfiles-latest/neovide/config.toml
@@ -41,7 +36,7 @@ if vim.g.neovide then
 
   -- Specify the font used by Neovide
   -- vim.o.guifont = "MesloLGM_Nerd_Font:h14"
-  vim.o.guifont = "JetBrains Mono:h10:b"
+  vim.o.guifont = "JetBrainsMono Nerd Font:h9:b"
   vim.opt.linespace = 2
   -- This is limited by the refresh rate of your physical hardware, but can be
   -- lowered to increase battery life
