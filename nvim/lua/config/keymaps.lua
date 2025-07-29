@@ -108,3 +108,19 @@ map({ "n", "v" }, "<Left>", ":vertical resize -2<CR>", {})
 -- terminal
 map({ "n", "v", "i" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
 map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+
+if vim.g.neovide then
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+
+  vim.keymap.set({ "n", "v" }, "<C-=>", function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set({ "n", "v" }, "<C-->", function()
+    change_scale_factor(1 / 1.25)
+  end)
+  vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+  vim.keymap.set({ "v", "x" }, "<C-c>", '"+y')
+  vim.keymap.set({ "n", "v", "x", "t", "c" }, "<C-v>", '"+P')
+end
