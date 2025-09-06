@@ -1,10 +1,10 @@
+vim.g.augment_disable_tab_mapping = true
+vim.g.augment_accept_key = "<C-y>"
+
 return {
   {
     "augmentcode/augment.vim",
+    -- enabled = false,
     event = "InsertEnter",
-    config = function()
-      vim.g.augment_accept_key = "<C-y>"
-      vim.g.augment_disable_tab_mapping = true
-    end,
   },
 }

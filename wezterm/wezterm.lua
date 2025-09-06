@@ -52,91 +52,93 @@ end
 
 config = {
 	status_update_interval = 1,
-	window_frame = {
-		font_size = font_size,
-	},
-	color_scheme = "nord",
+	use_fancy_tab_bar = false,
+	window_close_confirmation = "NeverPrompt",
+
+	font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" }),
+	font_size = 10,
+	line_height = 1.2,
+
+	automatically_reload_config = true,
+
 	show_new_tab_button_in_tab_bar = false,
-	tab_and_split_indices_are_zero_based = false,
+
 	colors = {
 		tab_bar = {
 			background = "#000000",
 		},
 	},
-	default_cursor_style = "SteadyBar",
-	automatically_reload_config = true,
-	window_close_confirmation = "NeverPrompt",
-	adjust_window_size_when_changing_font_size = false,
-	window_decorations = "RESIZE",
-	check_for_updates = false,
-	use_fancy_tab_bar = true,
-	tab_bar_at_bottom = false,
-	font_size = font_size,
-	line_height = 1.2,
-	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
-	background = {
-		{
-			source = {
-				File = tostring(get_random_file("/Users/" .. username .. "/.dotfiles/backgrounds")),
-			},
-			hsb = {
-				hue = 1.0,
-				saturation = 1.02,
-				brightness = 0.25,
-			},
-		},
-		{
-			source = {
-				Color = "#282c35",
-			},
-			width = "100%",
-			height = "100%",
-			opacity = 0.55,
-		},
-	},
-	-- from: https://akos.ma/blog/adopting-wezterm/
-	hyperlink_rules = {
-		-- Matches: a URL in parens: (URL)
-		{
-			regex = "\\((\\w+://\\S+)\\)",
-			format = "$1",
-			highlight = 1,
-		},
-		-- Matches: a URL in brackets: [URL]
-		{
-			regex = "\\[(\\w+://\\S+)\\]",
-			format = "$1",
-			highlight = 1,
-		},
-		-- Matches: a URL in curly braces: {URL}
-		{
-			regex = "\\{(\\w+://\\S+)\\}",
-			format = "$1",
-			highlight = 1,
-		},
-		-- Matches: a URL in angle brackets: <URL>
-		{
-			regex = "<(\\w+://\\S+)>",
-			format = "$1",
-			highlight = 1,
-		},
-		-- Then handle URLs not wrapped in brackets
-		{
-			-- Before
-			--regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
-			--format = '$0',
-			-- After
-			regex = "[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)",
-			format = "$1",
-			highlight = 1,
-		},
-		-- implicit mailto link
-		{
-			regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
-			format = "mailto:$0",
-		},
-	},
+
+	window_background_opacity = 0.8,
 }
+
+-- config = {
+-- 	adjust_window_size_when_changing_font_size = false,
+-- 	window_decorations = "RESIZE",
+-- 	check_for_updates = false,
+-- 	background = {
+-- 		{
+-- 			source = {
+-- 				File = tostring(get_random_file("/Users/" .. username .. "/.dotfiles/backgrounds")),
+-- 			},
+-- 			hsb = {
+-- 				hue = 1.0,
+-- 				saturation = 1.02,
+-- 				brightness = 0.25,
+-- 			},
+-- 		},
+-- 		{
+-- 			source = {
+-- 				Color = "#282c35",
+-- 			},
+-- 			width = "100%",
+-- 			height = "100%",
+-- 			opacity = 0.55,
+-- 		},
+-- 	},
+-- 	-- from: https://akos.ma/blog/adopting-wezterm/
+-- 	hyperlink_rules = {
+-- 		-- Matches: a URL in parens: (URL)
+-- 		{
+-- 			regex = "\\((\\w+://\\S+)\\)",
+-- 			format = "$1",
+-- 			highlight = 1,
+-- 		},
+-- 		-- Matches: a URL in brackets: [URL]
+-- 		{
+-- 			regex = "\\[(\\w+://\\S+)\\]",
+-- 			format = "$1",
+-- 			highlight = 1,
+-- 		},
+-- 		-- Matches: a URL in curly braces: {URL}
+-- 		{
+-- 			regex = "\\{(\\w+://\\S+)\\}",
+-- 			format = "$1",
+-- 			highlight = 1,
+-- 		},
+-- 		-- Matches: a URL in angle brackets: <URL>
+-- 		{
+-- 			regex = "<(\\w+://\\S+)>",
+-- 			format = "$1",
+-- 			highlight = 1,
+-- 		},
+-- 		-- Then handle URLs not wrapped in brackets
+-- 		{
+-- 			-- Before
+-- 			--regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+-- 			--format = '$0',
+-- 			-- After
+-- 			regex = "[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)",
+-- 			format = "$1",
+-- 			highlight = 1,
+-- 		},
+-- 		-- implicit mailto link
+-- 		{
+-- 			regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
+-- 			format = "mailto:$0",
+-- 		},
+-- 	},
+-- }
 
 -- plugins
 require("keymaps").apply_to_config(config, {})
@@ -160,6 +162,8 @@ config.window_padding = {
 	top = 10,
 	bottom = 10,
 }
+
+config.window_decorations = "TITLE | RESIZE"
 
 wezterm.on("gui-startup", function()
 	local tab, pane, window = mux.spawn_window({})
