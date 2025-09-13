@@ -27,6 +27,8 @@ if ($nu.os-info.name == "macos") {
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/sbin")
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/bin")
   $env.PATH = ($env.PATH | split row (char esep) | prepend "/Users/devinsackett/Library/pnpm")
+
+  $env.DOTNET_ROOT = "/opt/homebrew/opt/dotnet/libexec"
 }
 
 def cnvim [] {

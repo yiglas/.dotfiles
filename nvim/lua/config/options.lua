@@ -21,6 +21,15 @@ vim.g.root_spec = { "cwd" }
 -- The copy and paste sections were found on:
 -- https://neovide.dev/faq.html#how-can-i-use-cmd-ccmd-v-to-copy-and-paste
 if vim.g.neovide then
+  vim.o.cmdheight = 0
+
+  local font_size = "9"
+  local os_info = vim.loop.os_uname()
+  if os_info.sysname == "Darwin" then
+    -- Code to execute specifically for macOS
+    font_size = "12"
+  end
+
   -- vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
   -- vim.keymap.set("v", "<D-c>", '"+y') -- Copy
   -- vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
@@ -36,7 +45,7 @@ if vim.g.neovide then
   --
   -- Specify the font used by Neovide
   -- vim.o.guifont = "MesloLGM_Nerd_Font:h14"
-  vim.o.guifont = "JetBrainsMono Nerd Font:h9:b"
+  vim.o.guifont = "JetBrainsMono Nerd Font:h" .. font_size .. ":b"
   vim.opt.linespace = 2
   -- This is limited by the refresh rate of your physical hardware, but can be
   -- lowered to increase battery life
