@@ -31,6 +31,20 @@ end
 --   vim.keymap.set("n", "<C-r>", dotnet.run, { nowait = true, desc = "Run" })
 -- end
 
+-- local rz_handlers = require("rzls.roslyn_handlers")
+--
+-- rz_handlers["$/progress"] = function(err, result, ctx, cfg)
+--   if not result or result.token == nil then
+--     return
+--   end
+--
+--   --after guarding, forward to whatever global handler (e.g. Noice) is installed
+--   local h = vim.lsp.handlers["$/progress"]
+--   if type(h) == "function" then
+--     return h(err, result, ctx, cfg)
+--   end
+-- end
+
 return {
   {
     "Cliffback/netcoredbg-macOS-arm64.nvim",
@@ -115,24 +129,38 @@ return {
         vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
       }
 
+      local rz_handlers = require("rzls.roslyn_handlers")
+
+      rz_handlers["$/progress"] = function(err, result, ctx, cfg)
+        if not result or result.token == nil then
+          return
+        end
+
+        --after guarding, forward to whatever global handler (e.g. Noice) is installed
+        local h = vim.lsp.handlers["$/progress"]
+        if type(h) == "function" then
+          return h(err, result, ctx, cfg)
+        end
+      end
+
       vim.lsp.config("roslyn", {
         cmd = cmd,
-        handlers = require("rzls.roslyn_handlers"),
+        handlers = rz_handlers,
         settings = {
           ["csharp|inlay_hints"] = {
-            csharp_enable_inlay_hints_for_implicit_object_creation = true,
-            csharp_enable_inlay_hints_for_implicit_variable_types = true,
+            csharp_enable_inlay_hints_for_implicit_object_creation = false,
+            csharp_enable_inlay_hints_for_implicit_variable_types = false,
 
-            csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-            csharp_enable_inlay_hints_for_types = true,
-            dotnet_enable_inlay_hints_for_indexer_parameters = true,
-            dotnet_enable_inlay_hints_for_literal_parameters = true,
-            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-            dotnet_enable_inlay_hints_for_other_parameters = true,
-            dotnet_enable_inlay_hints_for_parameters = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = false,
+            csharp_enable_inlay_hints_for_types = false,
+            dotnet_enable_inlay_hints_for_indexer_parameters = false,
+            dotnet_enable_inlay_hints_for_literal_parameters = false,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = false,
+            dotnet_enable_inlay_hints_for_other_parameters = false,
+            dotnet_enable_inlay_hints_for_parameters = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = false,
           },
           ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
@@ -154,6 +182,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
+    event = "VeryLazy",
     opts = function()
       local dap = require("dap")
       local netcoredbg_adapter = {
@@ -164,11 +193,43 @@ return {
 
       dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
       dap.adapters.coreclr = netcoredbg_adapter -- needed for unit test debugging
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "launch - netcoredbg",
+          request = "launch",
+          program = function()
+            -- return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/src/", "file")
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/net9.0/", "file")
+          end,
+
+          -- justMyCode = false,
+          -- stopAtEntry = false,
+          -- -- program = function()
+          -- --   -- todo: request input from ui
+          -- --   return "/path/to/your.dll"
+          -- -- end,
+          -- env = {
+          --   ASPNETCORE_ENVIRONMENT = function()
+          --     -- todo: request input from ui
+          --     return "Development"
+          --   end,
+          --   ASPNETCORE_URLS = function()
+          --     -- todo: request input from ui
+          --     return "http://localhost:5050"
+          --   end,
+          -- },
+          -- cwd = function()
+          --   -- todo: request input from ui
+          --   return vim.fn.getcwd()
+          -- end,
+        },
+      }
     end,
   },
   {
     "nvim-neotest/neotest",
-    commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     optional = true,
     dependencies = {
       "Issafalcon/neotest-dotnet",
@@ -181,6 +242,84 @@ return {
       },
     },
   },
+  -- {
+  --   "nvim-neotest/neotest",
+  --   commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
+  --   optional = true,
+  --   dependencies = {
+  --     "nsidorenco/neotest-vstest",
+  --   },
+  --   opts = {
+  --     adapters = {
+  --       ["neotest-vstest"] = {},
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "nvim-neotest/neotest",
+  --   commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
+  --   optional = true,
+  --   dependencies = {
+  --     "Issafalcon/neotest-dotnet",
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>tf",
+  --       function()
+  --         require("neotest").summary.refresh()
+  --       end,
+  --       desc = "Refresh tree (Neotest)",
+  --     },
+  --   },
+  --   opts = {
+  --     discovery = {
+  --       enabled = true,
+  --       concurrent = 1,
+  --       filter_dir = function(name, rel_path)
+  --         local skip = {
+  --           ["bin"] = true,
+  --           ["obj"] = true,
+  --           [".git"] = true,
+  --           ["node_modules"] = true,
+  --           ["packages"] = true,
+  --           [".venv"] = true,
+  --           [".idea"] = true,
+  --           [".vscode"] = true,
+  --           [".gradle"] = true,
+  --           ["dist"] = true,
+  --           ["build"] = true,
+  --           [".vs"] = true,
+  --           [".docker"] = true,
+  --           ["lib"] = true,
+  --           ["tools"] = true,
+  --           [".gitlab"] = true,
+  --         }
+  --
+  --         if name:sub(1, 1) == "." then
+  --           return false
+  --         end
+  --         return not skip[name]
+  --       end,
+  --     },
+  --     adapters = {
+  --       ["neotest-dotnet"] = {
+  --         filter_dir = function(name, rel_path, root) -- TODO: move to .lazy.lua
+  --           if rel_path:match("playwright") then
+  --             return false
+  --           end
+  --
+  --           return true
+  --         end,
+  --         -- is_test_file = function(path)
+  --         --   return path:match("Tests?%.cs$") ~= nil
+  --         -- end,
+  --         -- framework = "xunit",
+  --       },
+  --     },
+  --   },
+  -- },
+
+  -- OLD CONFIG
   -- { import = "lazyvim.plugins.extras.lang.omnisharp" },
   -- {
   --   "GustavEikaas/easy-dotnet.nvim",

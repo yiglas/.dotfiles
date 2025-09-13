@@ -31,6 +31,10 @@ ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/
 ln -sf ~/.dotfiles/wezterm ~/.config/wezterm
 ln -sf ~/.dotfiles/nushell ~/Library/Application\ Support/nushell
 ln -sf ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
+
+git config --global alias.ignore 'update-index --skip-worktree'
+git config --global alias.uningnore 'update-index --no-skip-worktree'
+git config --global alais.ignored 'ls-files -v | grep "^S"'
 ```
 
 #### Developer Tools
@@ -132,16 +136,13 @@ brew install --cask obsidian
 1. Open `System Settings`
 2. Search: `Keyboard shortcuts`
 3. Under `Launchpad & Dock`
-
    - Set `Show Launchpad` = **F4**
 
 4. Under `Mission Control`
-
    - Set `Mission Control` = **F3**
    - Set `Show Desktop` = **Ctrl + F11**
 
 5. Under `Function Keys`
-
    - Enable `Use F1, F2, etc. keys as standard function keys`
 
 #### Setup react-native environment
@@ -252,6 +253,10 @@ mkdir ~\Documents\PowerShell
 cmd /c mklink ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
 cmd /c mklink ~\Documents\PowerShell\Microsoft.VSCode_profile.ps1 ~\.dotfiles\PowerShell\Microsoft.PowerShell_profile.ps1
 cmd /c mklink ~\Documents\PowerShell\robbyrussel.omp.json ~\.dotfiles\PowerShell\robbyrussel.omp.json
+
+git config --global alias.ignore 'update-index --skip-worktree'
+git config --global alias.uningnore 'update-index --no-skip-worktree'
+git config --global alais.ignored 'ls-files -v | grep "^S"'
 ```
 
 ##### Developer Tools
