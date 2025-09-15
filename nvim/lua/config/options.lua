@@ -27,7 +27,7 @@ if vim.g.neovide then
   local os_info = vim.loop.os_uname()
   if os_info.sysname == "Darwin" then
     -- Code to execute specifically for macOS
-    font_size = "12"
+    font_size = "13"
   end
 
   -- vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
