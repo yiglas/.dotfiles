@@ -27,7 +27,7 @@ if vim.g.neovide then
   local os_info = vim.loop.os_uname()
   if os_info.sysname == "Darwin" then
     -- Code to execute specifically for macOS
-    font_size = "13"
+    font_size = "11.5"
   end
 
   -- vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
@@ -46,7 +46,7 @@ if vim.g.neovide then
   -- Specify the font used by Neovide
   -- vim.o.guifont = "MesloLGM_Nerd_Font:h14"
   vim.o.guifont = "JetBrainsMono Nerd Font:h" .. font_size .. ":b"
-  vim.opt.linespace = 2
+  vim.opt.linespace = 3
   -- This is limited by the refresh rate of your physical hardware, but can be
   -- lowered to increase battery life
   -- This setting is only effective when not using vsync,
