@@ -9,14 +9,18 @@ return {
       -- },
       picker = {
         enabled = true,
-        -- sources = {
-        --   explorer = {
-        --     auto_close = true,
-        --     layout = {
-        --       auto_hide = { "input" },
-        --     },
-        --   },
-        -- },
+        sources = {
+          files = {
+            no_ignore_vsc = true,
+            ignore = {
+              "%__virtual.cs$",
+              "bin/*",
+              "obj/*",
+              ".vs/*",
+              "node_modules/*",
+            },
+          },
+        },
         layout = {
           preset = "telescope",
         },

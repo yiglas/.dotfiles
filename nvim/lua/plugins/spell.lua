@@ -2,7 +2,7 @@
 return {
   -- make sure the server binary is available (uses npm)
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       -- the package name is from npm; mason won’t install this automatically,

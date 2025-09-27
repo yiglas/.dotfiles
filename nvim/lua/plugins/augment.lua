@@ -11,6 +11,7 @@ return {
   },
   {
     "augmentcode/augment.vim",
+    event = "BufReadPre",
     keys = {
       { "<C-y>", "<cmd>call augment#Accept()<CR>", mode = "i", desc = "Augment: accept" },
     },
