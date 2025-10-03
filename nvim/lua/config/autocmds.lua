@@ -28,3 +28,33 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "l", "<Plug>(DBUI_SelectLine)", opts)
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.cs", "*.go" }, -- Adjust file types as needed
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+
+    -- Example for TypeScript/JavaScript (using source.organizeImports)
+    if ft == "typescript" or ft == "typescriptreact" or ft == "javascript" or ft == "javascriptreact" then
+      vim.lsp.buf.code_action({
+        bufnr = bufnr,
+        apply = true,
+        context = {
+          only = { "source.organizeImports" },
+          diagnostics = {},
+        },
+      })
+      -- Example for C# (using source.removeUnusedUsings)
+    elseif ft == "cs" then
+      vim.lsp.buf.code_action({
+        bufnr = bufnr,
+        apply = true,
+        context = {
+          only = { "source.removeUnusedUsings" }, -- Or a similar action provided by OmniSharp
+          diagnostics = {},
+        },
+      })
+    end
+  end,
+})

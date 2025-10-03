@@ -9,3 +9,4 @@
 .doom.d
 **/lazy-lock.json
 nushell/history.txt
+nushell/keys.nu

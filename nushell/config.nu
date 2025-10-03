@@ -9,12 +9,11 @@ match $nu.os-info.name {
   _ => { }
 }
 
+use ./keys.nu
+
 if $nu.os-info.name == "windows" {
   alias cat = open
 }
-
-# use ./windows.nu *
-print "here"
 
 # alias
 def nvc [] {
