@@ -1,50 +1,3 @@
-local function rebuild_project(co, path)
-  local spinner = require("easy-dotnet.ui-modules.spinner").new()
-  spinner:start_spinner("building")
-
-  vim.fn.jobstart(string.format("dotnet build %s", path), {
-    on_exit = function(_, return_code)
-      if return_code == 0 then
-        spinner:stop_spinner("Built Successfully")
-      else
-        spinner:stop_spinner("Build failed with exit code" .. return_code, vim.log.levels.ERROR)
-        error("Build failed")
-      end
-      coroutine.resume(co)
-    end,
-  })
-end
-
--- local function add_dotnet_mappings()
---   local dotnet = require("easy-dotnet")
---
---   vim.keymap.set({ "n", "v" }, "<leader>to", function()
---     vim.cmd("Dotnet testrunner")
---   end, { nowait = true, desc = "Show testrunner" })
---
---   vim.keymap.set({ "n", "v" }, "<C-p>", function()
---     dotnet.run_with_profile(true)
---   end, { nowait = true, desc = "Run with profile" })
---
---   vim.keymap.set("n", "<C-b>", dotnet.build, { nowait = true, desc = "Build" })
---
---   vim.keymap.set("n", "<C-r>", dotnet.run, { nowait = true, desc = "Run" })
--- end
-
--- local rz_handlers = require("rzls.roslyn_handlers")
---
--- rz_handlers["$/progress"] = function(err, result, ctx, cfg)
---   if not result or result.token == nil then
---     return
---   end
---
---   --after guarding, forward to whatever global handler (e.g. Noice) is installed
---   local h = vim.lsp.handlers["$/progress"]
---   if type(h) == "function" then
---     return h(err, result, ctx, cfg)
---   end
--- end
-
 return {
   {
     "Cliffback/netcoredbg-macOS-arm64.nvim",
@@ -177,6 +130,12 @@ return {
           cshtml = "razor",
         },
       })
+    end,
+  },
+  {
+    "khoido2003/roslyn-filewatch.nvim",
+    config = function()
+      require("roslyn_filewatch").setup({})
     end,
   },
   {

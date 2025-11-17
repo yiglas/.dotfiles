@@ -4,7 +4,7 @@ $env.config.show_banner = false
 
 # Conditionally enable the right OS overlay
 match $nu.os-info.name {
-  'windows' => { overlay use ./windows.nu },
+  'windows' => { use ./windows.nu * },
   'macos' => { use ./macos.nu * },
   _ => { }
 }
