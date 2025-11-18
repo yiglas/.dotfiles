@@ -12,51 +12,13 @@ end
 local username = os.getenv("USER")
 username = username and username or os.getenv("USERNAME")
 
-local function get_random_file(dir)
-	local files = {}
-
-	-- Detect platform
-	local command
-
-	if is_windows then
-		-- Windows: use dir /b and handle escaping
-		command = 'dir /b "' .. dir:gsub("/", "\\") .. '"'
-	else
-		-- macOS/Linux: use ls
-		command = 'ls "' .. dir .. '"'
-	end
-
-	local handle = io.popen(command)
-	if handle then
-		for file in handle:lines() do
-			table.insert(files, file)
-		end
-		handle:close()
-	end
-
-	-- Seed and select random file
-	if #files > 0 then
-		math.randomseed(os.time())
-		local index = math.random(1, #files)
-
-		-- Use appropriate path separator
-		local sep = is_windows and "\\" or "/"
-
-		-- os.execute('msg * "' .. dir .. sep .. files[index] .. '"')
-
-		return dir .. sep .. files[index]
-	end
-
-	return nil
-end
-
 config = {
 	status_update_interval = 1,
 	use_fancy_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
 
 	font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" }),
-	font_size = 10,
+	font_size = font_size,
 	line_height = 1.2,
 
 	automatically_reload_config = true,
@@ -71,74 +33,6 @@ config = {
 
 	window_background_opacity = 0.9,
 }
-
--- config = {
--- 	adjust_window_size_when_changing_font_size = false,
--- 	window_decorations = "RESIZE",
--- 	check_for_updates = false,
--- 	background = {
--- 		{
--- 			source = {
--- 				File = tostring(get_random_file("/Users/" .. username .. "/.dotfiles/backgrounds")),
--- 			},
--- 			hsb = {
--- 				hue = 1.0,
--- 				saturation = 1.02,
--- 				brightness = 0.25,
--- 			},
--- 		},
--- 		{
--- 			source = {
--- 				Color = "#282c35",
--- 			},
--- 			width = "100%",
--- 			height = "100%",
--- 			opacity = 0.55,
--- 		},
--- 	},
--- 	-- from: https://akos.ma/blog/adopting-wezterm/
--- 	hyperlink_rules = {
--- 		-- Matches: a URL in parens: (URL)
--- 		{
--- 			regex = "\\((\\w+://\\S+)\\)",
--- 			format = "$1",
--- 			highlight = 1,
--- 		},
--- 		-- Matches: a URL in brackets: [URL]
--- 		{
--- 			regex = "\\[(\\w+://\\S+)\\]",
--- 			format = "$1",
--- 			highlight = 1,
--- 		},
--- 		-- Matches: a URL in curly braces: {URL}
--- 		{
--- 			regex = "\\{(\\w+://\\S+)\\}",
--- 			format = "$1",
--- 			highlight = 1,
--- 		},
--- 		-- Matches: a URL in angle brackets: <URL>
--- 		{
--- 			regex = "<(\\w+://\\S+)>",
--- 			format = "$1",
--- 			highlight = 1,
--- 		},
--- 		-- Then handle URLs not wrapped in brackets
--- 		{
--- 			-- Before
--- 			--regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
--- 			--format = '$0',
--- 			-- After
--- 			regex = "[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)",
--- 			format = "$1",
--- 			highlight = 1,
--- 		},
--- 		-- implicit mailto link
--- 		{
--- 			regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
--- 			format = "mailto:$0",
--- 		},
--- 	},
--- }
 
 -- plugins
 require("keymaps").apply_to_config(config, {})
