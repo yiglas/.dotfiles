@@ -43,7 +43,7 @@ return {
     opts = {
       -- add any opts here
       -- this file can contain specific instructions for your project
-      instructions_file = "instructions.md",
+      -- instructions_file = "instructions.md",
       -- for example
       provider = "claude",
       providers = {
