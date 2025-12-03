@@ -12,24 +12,14 @@ local function toggle_terminal(id, auto_opencode)
       direction = "float",
       start_in_insert = true,
       on_open = function(term)
-        -- Auto-execute opencode for terminal 2 on first open
-        if auto_opencode and id == 2 then
-          -- Small delay to ensure terminal is ready
+        -- Auto-execute opencode for terminal 2
+        if id == 2 then
           vim.defer_fn(function()
-            -- Check if there's an active job/process running
-            if term.job_id and vim.fn.jobwait({ term.job_id }, 0)[1] == -1 then
-              -- Job is running, check if it's just the shell or if opencode is running
-              -- We'll send opencode command only if terminal seems idle (just shell)
-              local has_content = vim.api.nvim_buf_line_count(term.bufnr) > 1
-
-              if not has_content then
-                -- Terminal is fresh, send opencode command
-                pcall(function()
-                  vim.api.nvim_chan_send(term.job_id, "opencode\n")
-                end)
-              end
+            if term.job_id then
+              -- Send the command followed by carriage return to execute
+              vim.api.nvim_chan_send(term.job_id, "opencode\r")
             end
-          end, 100)
+          end, 200)
         end
       end,
     })
