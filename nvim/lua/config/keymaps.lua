@@ -109,6 +109,9 @@ map({ "n", "v" }, "<Left>", ":vertical resize -2<CR>", {})
 map({ "n", "v", "i" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
 map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
+-- Claude Code keybinding (override any conflicts)
+vim.keymap.set({ "n", "i", "v", "t" }, "<C-.>", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude Code", noremap = true, silent = true })
+
 if vim.g.neovide then
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta

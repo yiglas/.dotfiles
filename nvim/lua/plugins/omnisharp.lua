@@ -64,11 +64,7 @@ return {
         config = true,
       },
     },
-    lazy = false,
     config = function()
-      -- Use one of the methods in the Integration section to compose the command.
-      local mason_registry = require("mason-registry")
-
       local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
       local cmd = {
         "roslyn",
@@ -83,13 +79,22 @@ return {
 
       local rz_handlers = require("rzls.roslyn_handlers")
 
-      rz_handlers["$/progress"] = function(err, result, ctx, cfg)
-        if not result or result.token == nil then
-          return
-        end
+      -- Disable semantic tokens handlers
+      rz_handlers["textDocument/semanticTokens/full"] = nil
+      rz_handlers["textDocument/semanticTokens/full/delta"] = nil
+      rz_handlers["textDocument/semanticTokens/range"] = nil
 
-        --after guarding, forward to whatever global handler (e.g. Noice) is installed
-        local h = vim.lsp.handlers["$/progress"]
+      -- Suppress harmless Roslyn errors about Document vs TextDocument
+      rz_handlers["window/logMessage"] = function(err, result, ctx, cfg)
+        if result and result.message then
+          local msg = tostring(result.message)
+          if msg:match("TextDocument was found instead") or 
+             msg:match("Attempted to retrieve a Document") then
+            return
+          end
+        end
+        
+        local h = vim.lsp.handlers["window/logMessage"]
         if type(h) == "function" then
           return h(err, result, ctx, cfg)
         end
@@ -98,6 +103,15 @@ return {
       vim.lsp.config("roslyn", {
         cmd = cmd,
         handlers = rz_handlers,
+        capabilities = {
+          textDocument = {
+            semanticTokens = vim.NIL,
+          },
+        },
+        on_attach = function(client, bufnr)
+          -- Completely disable semantic tokens
+          client.server_capabilities.semanticTokensProvider = nil
+        end,
         settings = {
           ["csharp|inlay_hints"] = {
             csharp_enable_inlay_hints_for_implicit_object_creation = false,

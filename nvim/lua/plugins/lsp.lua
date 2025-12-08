@@ -26,7 +26,7 @@ return {
       enabled = true,
     },
   } },
-  { "mason-lspconfig.nvim", event = "VeryLazy" },
+  { "mason-lspconfig.nvim" },
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)

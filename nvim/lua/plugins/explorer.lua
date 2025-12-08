@@ -20,7 +20,6 @@ return {
 
   {
     "nvim-neo-tree/neo-tree.nvim",
-    event = "VeryLazy",
     cmd = "Neotree",
     keys = {
       {
