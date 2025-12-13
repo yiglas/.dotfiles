@@ -41,7 +41,7 @@ return {
         "github:mason-org/mason-registry",
         "github:Crashdummyy/mason-registry",
       },
-      ensure_installed = { "csharpier", "netcoredbg", "roslyn", "rzls" },
+      ensure_installed = { "csharpier", "netcoredbg", "roslyn" },
     },
   },
 
@@ -53,86 +53,10 @@ return {
     opts = {
       -- your configuration comes here; leave empty for default settings
     },
-
-    -- ADD THIS:
-
-    dependencies = {
-      {
-        -- By loading as a dependencies, we ensure that we are available to set
-        -- the handlers for Roslyn.
-        "tris203/rzls.nvim",
-        config = true,
-      },
-    },
     config = function()
-      local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
-      local cmd = {
-        "roslyn",
-        "--stdio",
-        "--logLevel=Information",
-        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-        "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-        "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-        "--extension",
-        vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
-      }
-
-      local rz_handlers = require("rzls.roslyn_handlers")
-
-      -- Disable semantic tokens handlers
-      rz_handlers["textDocument/semanticTokens/full"] = nil
-      rz_handlers["textDocument/semanticTokens/full/delta"] = nil
-      rz_handlers["textDocument/semanticTokens/range"] = nil
-
-      -- Suppress harmless Roslyn errors about Document vs TextDocument
-      rz_handlers["window/logMessage"] = function(err, result, ctx, cfg)
-        if result and result.message then
-          local msg = tostring(result.message)
-          if msg:match("TextDocument was found instead") or 
-             msg:match("Attempted to retrieve a Document") then
-            return
-          end
-        end
-        
-        local h = vim.lsp.handlers["window/logMessage"]
-        if type(h) == "function" then
-          return h(err, result, ctx, cfg)
-        end
-      end
-
-      vim.lsp.config("roslyn", {
-        cmd = cmd,
-        handlers = rz_handlers,
-        capabilities = {
-          textDocument = {
-            semanticTokens = vim.NIL,
-          },
-        },
-        on_attach = function(client, bufnr)
-          -- Completely disable semantic tokens
-          client.server_capabilities.semanticTokensProvider = nil
-        end,
-        settings = {
-          ["csharp|inlay_hints"] = {
-            csharp_enable_inlay_hints_for_implicit_object_creation = false,
-            csharp_enable_inlay_hints_for_implicit_variable_types = false,
-
-            csharp_enable_inlay_hints_for_lambda_parameter_types = false,
-            csharp_enable_inlay_hints_for_types = false,
-            dotnet_enable_inlay_hints_for_indexer_parameters = false,
-            dotnet_enable_inlay_hints_for_literal_parameters = false,
-            dotnet_enable_inlay_hints_for_object_creation_parameters = false,
-            dotnet_enable_inlay_hints_for_other_parameters = false,
-            dotnet_enable_inlay_hints_for_parameters = false,
-            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = false,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = false,
-            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = false,
-          },
-          ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = true,
-          },
-        },
-      })
+      -- Load mason settings to make $MASON available
+      local _ = require("mason.settings").current.install_root_dir
+      vim.lsp.config("roslyn", {})
       vim.lsp.enable("roslyn")
     end,
     init = function()

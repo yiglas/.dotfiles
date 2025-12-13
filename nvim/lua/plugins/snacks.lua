@@ -7,6 +7,8 @@ return {
       -- explorer = {
       --   sync_cwd = false,
       -- },
+      input = {}, -- Enable input for opencode.nvim
+      terminal = {}, -- Enable terminal for opencode.nvim
       picker = {
         enabled = true,
         sources = {

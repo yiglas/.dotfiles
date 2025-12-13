@@ -7,7 +7,6 @@ return {
     "folke/snacks.nvim",
     opts = {
       dashboard = { enabled = false },
-      terminal = { enabled = false },
       explorer = { enabled = false },
     },
   },
