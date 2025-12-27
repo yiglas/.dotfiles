@@ -31,6 +31,22 @@ config = {
 		},
 	},
 
+	window_frame = {
+		-- Black background for title bar
+		active_titlebar_bg = "#000000",
+		inactive_titlebar_bg = "#000000",
+		
+		-- White text (bright when active, darker gray when inactive)
+		active_titlebar_fg = "#ffffff",
+		inactive_titlebar_fg = "#888888",
+		
+		-- Simple button styling
+		button_fg = "#ffffff",
+		button_bg = "#000000",
+		button_hover_fg = "#ffffff",
+		button_hover_bg = "#1a1a1a",
+	},
+
 	window_background_opacity = 0.9,
 }
 

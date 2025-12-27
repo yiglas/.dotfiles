@@ -6,6 +6,12 @@ end
 
 return {
   "mrjones2014/smart-splits.nvim",
+  opts = {
+    -- Enable Wezterm multiplexer integration for seamless navigation
+    multiplexer_integration = "wezterm",
+    -- When at edge of nvim, continue navigation into wezterm panes
+    at_edge = "wrap",
+  },
   keys = {
     { "<C-h>", lazymap("smart-splits", "move_cursor_left"), desc = "Move to left window" },
     { "<C-j>", lazymap("smart-splits", "move_cursor_down"), desc = "Move to downward window" },
