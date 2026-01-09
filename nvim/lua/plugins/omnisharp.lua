@@ -51,12 +51,70 @@ return {
     ---@type RoslynNvimConfig
     ft = { "cs", "razor" },
     opts = {
-      -- your configuration comes here; leave empty for default settings
+      config = {
+        -- Roslyn uses UTF-16 for character positions, must match to avoid
+        -- "character out of range" errors
+        positionEncoding = "utf-16",
+        capabilities = {
+          general = {
+            positionEncodings = { "utf-16" },
+          },
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+            fileOperations = {
+              dynamicRegistration = true,
+              didCreate = true,
+              willCreate = true,
+              didRename = true,
+              willRename = true,
+              didDelete = true,
+              willDelete = true,
+            },
+          },
+        },
+        settings = {
+          ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = false,
+            csharp_enable_inlay_hints_for_implicit_variable_types = false,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = false,
+            csharp_enable_inlay_hints_for_types = false,
+            dotnet_enable_inlay_hints_for_indexer_parameters = false,
+            dotnet_enable_inlay_hints_for_literal_parameters = false,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = false,
+            dotnet_enable_inlay_hints_for_other_parameters = false,
+            dotnet_enable_inlay_hints_for_parameters = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+          },
+          ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+            dotnet_enable_tests_code_lens = true,
+          },
+        },
+        on_attach = function(client, bufnr)
+          -- Enable file watcher for workspace changes
+          if client.server_capabilities.workspace then
+            client.server_capabilities.workspace.fileOperations = {
+              didCreate = true,
+              willCreate = true,
+              didRename = true,
+              willRename = true,
+              didDelete = true,
+              willDelete = true,
+            }
+          end
+        end,
+      },
     },
-    config = function()
+    config = function(_, opts)
       -- Load mason settings to make $MASON available
       local _ = require("mason.settings").current.install_root_dir
-      vim.lsp.config("roslyn", {})
+
+      -- Configure roslyn with proper capabilities
+      vim.lsp.config("roslyn", opts.config)
       vim.lsp.enable("roslyn")
     end,
     init = function()
@@ -71,59 +129,45 @@ return {
   },
   {
     "khoido2003/roslyn-filewatch.nvim",
+    ft = { "cs", "razor" },
     config = function()
-      require("roslyn_filewatch").setup({})
+      require("roslyn_filewatch").setup({
+        -- Watch for file changes in the workspace
+        watch_patterns = { "**/*.cs", "**/*.csproj", "**/*.sln" },
+      })
+
+      -- Auto-restart Roslyn on git branch changes
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "NeogitStatusRefresh",
+        callback = function()
+          -- Restart Roslyn clients when git state changes
+          for _, client in ipairs(vim.lsp.get_clients({ name = "roslyn" })) do
+            vim.lsp.stop_client(client.id, true)
+            vim.defer_fn(function()
+              vim.cmd("edit") -- Reload buffer to restart LSP
+            end, 500)
+          end
+        end,
+      })
+
+      -- Watch for .csproj and .sln changes
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        pattern = { "*.csproj", "*.sln" },
+        callback = function()
+          -- Restart Roslyn when project files change
+          for _, client in ipairs(vim.lsp.get_clients({ name = "roslyn" })) do
+            vim.notify("Restarting Roslyn due to project file changes", vim.log.levels.INFO)
+            vim.lsp.stop_client(client.id, true)
+            vim.defer_fn(function()
+              vim.cmd("edit")
+            end, 500)
+          end
+        end,
+      })
     end,
   },
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    event = "VeryLazy",
-    opts = function()
-      local dap = require("dap")
-      local netcoredbg_adapter = {
-        type = "executable",
-        command = vim.fn.exepath("netcoredbg"),
-        args = { "--interpreter=vscode" },
-      }
-
-      dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
-      dap.adapters.coreclr = netcoredbg_adapter -- needed for unit test debugging
-
-      dap.configurations.cs = {
-        {
-          type = "coreclr",
-          name = "launch - netcoredbg",
-          request = "launch",
-          program = function()
-            -- return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/src/", "file")
-            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/net9.0/", "file")
-          end,
-
-          -- justMyCode = false,
-          -- stopAtEntry = false,
-          -- -- program = function()
-          -- --   -- todo: request input from ui
-          -- --   return "/path/to/your.dll"
-          -- -- end,
-          -- env = {
-          --   ASPNETCORE_ENVIRONMENT = function()
-          --     -- todo: request input from ui
-          --     return "Development"
-          --   end,
-          --   ASPNETCORE_URLS = function()
-          --     -- todo: request input from ui
-          --     return "http://localhost:5050"
-          --   end,
-          -- },
-          -- cwd = function()
-          --   -- todo: request input from ui
-          --   return vim.fn.getcwd()
-          -- end,
-        },
-      }
-    end,
-  },
+  -- DAP adapter configuration is handled in .lazy.lua for proper Windows path handling
+  -- This section is intentionally minimal to avoid conflicts
   {
     "nvim-neotest/neotest",
     optional = true,
