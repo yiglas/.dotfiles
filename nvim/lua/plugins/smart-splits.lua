@@ -6,6 +6,9 @@ end
 
 return {
   "mrjones2014/smart-splits.nvim",
+  -- Disabled when using tmux; use vim-tmux-navigator instead
+  -- Enable this and set multiplexer_integration = "wezterm" for wezterm
+  enabled = false,
   opts = {
     -- Enable Wezterm multiplexer integration for seamless navigation
     multiplexer_integration = "wezterm",

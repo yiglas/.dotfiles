@@ -66,6 +66,7 @@ return {
           run_sql()
         end,
         mode = "n",
+        ft = "sql",
         desc = "Run SQL under cursor",
       },
       {
@@ -74,6 +75,7 @@ return {
           run_sql()
         end,
         mode = "v",
+        ft = "sql",
         desc = "Run selected SQL",
       },
     },
