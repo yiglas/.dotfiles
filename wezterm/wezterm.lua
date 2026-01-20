@@ -56,17 +56,6 @@ config = {
 -- require("plugins.smart-splits").apply_to_config(config, {})
 -- require("plugins.tabline").apply_to_config(config, {})
 
-if is_windows then
-	config.default_prog = { "nu" }
-	table.insert(
-		config.keys,
-		{ key = "c", mods = "WIN", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") }
-	)
-
-	table.insert(config.keys, { key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") })
-	table.insert(config.keys, { key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("PrimarySelection") })
-end
-
 config.window_padding = {
 	left = 5,
 	right = 5,
@@ -75,6 +64,18 @@ config.window_padding = {
 }
 
 config.window_decorations = "RESIZE"
+
+-- Initialize keys table for keybindings
+config.keys = {}
+
+if is_windows then
+	config.default_prog = { "nu" }
+	table.insert(
+		config.keys,
+		{ key = "c", mods = "WIN", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") }
+	)
+	table.insert(config.keys, { key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") })
+end
 
 wezterm.on("gui-startup", function()
 	local tab, pane, window = mux.spawn_window({})
