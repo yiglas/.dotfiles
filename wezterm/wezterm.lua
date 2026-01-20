@@ -3,7 +3,7 @@ local config = {}
 local mux = wezterm.mux
 
 local is_windows = string.match(wezterm.target_triple, "^.*%-windows%-.+$")
-local font_size = (is_windows and 9 or 11)
+local font_size = (is_windows and 9 or 12)
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
@@ -16,6 +16,7 @@ config = {
 	status_update_interval = 1,
 	use_fancy_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
+	enable_tab_bar = false,
 
 	font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" }),
 	font_size = font_size,
@@ -35,11 +36,11 @@ config = {
 		-- Black background for title bar
 		active_titlebar_bg = "#000000",
 		inactive_titlebar_bg = "#000000",
-		
+
 		-- White text (bright when active, darker gray when inactive)
 		active_titlebar_fg = "#ffffff",
 		inactive_titlebar_fg = "#888888",
-		
+
 		-- Simple button styling
 		button_fg = "#ffffff",
 		button_bg = "#000000",
@@ -51,9 +52,9 @@ config = {
 }
 
 -- plugins
-require("keymaps").apply_to_config(config, {})
-require("plugins.smart-splits").apply_to_config(config, {})
-require("plugins.tabline").apply_to_config(config, {})
+-- require("keymaps").apply_to_config(config, {})
+-- require("plugins.smart-splits").apply_to_config(config, {})
+-- require("plugins.tabline").apply_to_config(config, {})
 
 if is_windows then
 	config.default_prog = { "nu" }
@@ -73,7 +74,7 @@ config.window_padding = {
 	bottom = 10,
 }
 
-config.window_decorations = "TITLE | RESIZE"
+config.window_decorations = "RESIZE"
 
 wezterm.on("gui-startup", function()
 	local tab, pane, window = mux.spawn_window({})
