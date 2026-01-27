@@ -132,11 +132,39 @@ return {
     ft = { "cs", "razor" },
     config = function()
       require("roslyn_filewatch").setup({
-        -- Watch for file changes in the workspace
-        watch_patterns = { "**/*.cs", "**/*.csproj", "**/*.sln" },
+        -- LSP client names to hook into
+        client_names = { "roslyn_ls", "roslyn", "roslyn_lsp" },
+
+        -- Auto-detect project type (unity, console, large, etc.)
+        preset = "auto",
+
+        -- Parse .sln to limit watch scope to project folders (improves performance)
+        solution_aware = true,
+
+        -- Respect .gitignore patterns
+        respect_gitignore = true,
+
+        -- Enable dotnet CLI commands (:RoslynBuild, :RoslynRun, :RoslynWatch, :RoslynClean)
+        enable_dotnet_commands = true,
+
+        -- Enable NuGet commands (:RoslynNuget, :RoslynNugetRemove, :RoslynRestore)
+        enable_nuget_commands = true,
+
+        -- Auto-restore NuGet packages when .csproj changes
+        enable_autorestore = true,
+
+        -- Diagnostic throttling to reduce UI lag during heavy file changes
+        diagnostic_throttling = {
+          enabled = true,
+          debounce_ms = 500,
+          visible_only = true,
+        },
+
+        -- Logging level (set to INFO for debugging, WARN for normal use)
+        log_level = vim.log.levels.WARN,
       })
 
-      -- Auto-restart Roslyn on git branch changes
+      -- Auto-restart Roslyn on git branch changes (via Neogit)
       vim.api.nvim_create_autocmd("User", {
         pattern = "NeogitStatusRefresh",
         callback = function()
@@ -145,21 +173,6 @@ return {
             vim.lsp.stop_client(client.id, true)
             vim.defer_fn(function()
               vim.cmd("edit") -- Reload buffer to restart LSP
-            end, 500)
-          end
-        end,
-      })
-
-      -- Watch for .csproj and .sln changes
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        pattern = { "*.csproj", "*.sln" },
-        callback = function()
-          -- Restart Roslyn when project files change
-          for _, client in ipairs(vim.lsp.get_clients({ name = "roslyn" })) do
-            vim.notify("Restarting Roslyn due to project file changes", vim.log.levels.INFO)
-            vim.lsp.stop_client(client.id, true)
-            vim.defer_fn(function()
-              vim.cmd("edit")
             end, 500)
           end
         end,
