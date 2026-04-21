@@ -190,6 +190,16 @@ return {
       local dap = require("dap")
       local M = {}
 
+      -- Set up DAP signs with nice icons
+      vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DiagnosticError", linehl = "", numhl = "" })
+      vim.fn.sign_define("DapBreakpointCondition", { text = "●", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
+      vim.fn.sign_define("DapLogPoint", { text = "◆", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
+      vim.fn.sign_define("DapStopped", { text = "→", texthl = "DiagnosticOk", linehl = "DapStoppedLine", numhl = "" })
+      vim.fn.sign_define("DapBreakpointRejected", { text = "○", texthl = "DiagnosticError", linehl = "", numhl = "" })
+
+      -- Yellow background for stopped line
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#3d3d00" })
+
       -- Configuration options
       M.config = {
         project_dirs = { "Source", "src", "." },
