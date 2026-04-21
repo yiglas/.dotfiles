@@ -80,6 +80,33 @@ return {
       },
     },
   },
+  {
+    "Maxteabag/sqlit.nvim",
+    opts = {},
+    build = function()
+      if vim.fn.executable("sqlit") == 0 then
+        if vim.fn.executable("pipx") == 0 then
+          vim.notify("Installing pipx...", vim.log.levels.INFO)
+          vim.fn.system({ "brew", "install", "pipx" })
+          if vim.v.shell_error ~= 0 then
+            vim.notify("Failed to install pipx. Install manually: pip install --user pipx", vim.log.levels.ERROR)
+            return
+          end
+          vim.fn.system({ "pipx", "ensurepath" })
+        end
+        vim.notify("Installing sqlit-tui...", vim.log.levels.INFO)
+        vim.fn.system({ "pipx", "install", "sqlit-tui" })
+        if vim.v.shell_error == 0 then
+          vim.notify("sqlit-tui installed successfully", vim.log.levels.INFO)
+        else
+          vim.notify("Failed to install sqlit-tui. Install manually: pipx install sqlit-tui", vim.log.levels.ERROR)
+        end
+      end
+    end,
+    keys = {
+      { "<leader>D", function() require("sqlit").open() end, desc = "Database (sqlit)" },
+    },
+  },
   -- {
   --   "kndndrj/nvim-dbee",
   --   dependencies = {
