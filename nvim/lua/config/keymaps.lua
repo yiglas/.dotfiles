@@ -106,8 +106,8 @@ map({ "n", "v" }, "<Right>", ":vertical resize +2<CR>", {})
 map({ "n", "v" }, "<Left>", ":vertical resize -2<CR>", {})
 
 -- terminal
-map({ "n", "v", "i" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toogle Terminal" })
-map({ "n", "t", "i" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+map({ "n", "v", "x", "i", "t" }, "<C-/>", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
+map({ "n", "v", "x", "i", "t" }, "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- Claude Code keybinding (override any conflicts)
 vim.keymap.set({ "n", "i", "v", "t" }, "<C-.>", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude Code", noremap = true, silent = true })

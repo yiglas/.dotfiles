@@ -36,7 +36,7 @@ return {
     cmd = { "ToggleTerm" },
     keys = {
       -- Keep existing default toggle
-      { "<C-/>", "<cmd>ToggleTerm<cr>", mode = { "n", "v", "i" }, desc = "Toggle Terminal" },
+      { "<C-/>", "<cmd>ToggleTerm<cr>", mode = { "n", "v", "x", "i", "t" }, desc = "Toggle Terminal" },
       -- { "<C-_>", "<cmd>ToggleTerm<cr>", mode = { "n", "t", "i" }, desc = "Toggle Terminal" },
 
       -- New specific terminal toggles
