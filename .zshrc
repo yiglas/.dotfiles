@@ -121,4 +121,5 @@ export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
