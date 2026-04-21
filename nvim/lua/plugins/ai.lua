@@ -34,6 +34,17 @@ return {
         end,
         desc = "Continue Claude in tmux",
       },
+      {
+        "<leader>ap",
+        function()
+          vim.ui.input({ prompt = "Plugin directory: ", completion = "dir" }, function(dir)
+            if dir and dir ~= "" then
+              vim.fn.system("tmux split-window -h -l 30% 'claude --plugin-dir " .. vim.fn.shellescape(dir) .. "'")
+            end
+          end)
+        end,
+        desc = "Claude with plugin-dir",
+      },
       { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
       { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
       { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
@@ -55,29 +66,29 @@ return {
     },
     lazy = false,
     config = function()
-      -- Detect OS and set provider accordingly
       local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-      local provider_name = is_windows and "wezterm" or "tmux"
+      local opencode_cmd = "opencode --port"
 
       ---@type opencode.Opts
-      vim.g.opencode_opts = {
-        provider = {
-          enabled = provider_name,
-          snacks = {
-            win = {
-              position = "right",
-              width = 0.3, -- 30%
-            },
+      if is_windows then
+        -- Use built-in terminal on Windows
+        vim.g.opencode_opts = {}
+      else
+        -- Use tmux on Linux/macOS
+        vim.g.opencode_opts = {
+          server = {
+            start = function()
+              vim.fn.system("tmux split-window -h -l 30% '" .. opencode_cmd .. "'")
+            end,
+            stop = function()
+              vim.fn.system("tmux kill-pane -t right")
+            end,
+            toggle = function()
+              vim.fn.system("tmux split-window -h -l 30% '" .. opencode_cmd .. "'")
+            end,
           },
-          wezterm = {
-            direction = "right",
-            percent = 30,
-          },
-          tmux = {
-            options = "-h -l 30%", -- horizontal split at 30% width
-          },
-        },
-      }
+        }
+      end
 
       vim.o.autoread = true
 
