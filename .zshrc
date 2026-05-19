@@ -52,3 +52,8 @@ eval "$(starship init zsh)"
 
 # Created by `pipx` on 2026-04-22 22:49:54
 export PATH="$PATH:/Users/devin/.local/bin"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+unsetopt CASE_GLOB
+
+# Added by get-aspire-cli.sh
+export PATH="$HOME/.aspire/bin:$PATH"
