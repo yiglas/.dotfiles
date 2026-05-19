@@ -1,149 +1,102 @@
 # Machine Configuration
 
-## MacOS config changes
+## Mac config changes
 
 ### Install
 
-#### [Homebrew](https://brew.sh/)
+#### 1. [Homebrew](https://brew.sh/)
 
-#### DisplayLink Manager
+#### 2. Install
 
 ```bash
+# DisplayLink
 brew install --cask displaylink
-```
 
-#### Fonts
+# Dotfiles
+git clone https://github.com/yiglas/.dotfiles.git
 
-```bash
-brew install --cask font-meslo-lg-nerd-font
+# Tmux
+brew install tmux
+cd ~/.config
+mkdir tmux
+ln -sf ~/.dotfiles/tmux.conf ~/.config/tmux/tmux.conf
 
-~/install-fonts.sh
-```
+# Kitty (then: Kitty menu → Reload Preferences)
+brew install --cask kitty
+ln -sf ~/.dotfiles/kitty ~/.config/kitty
 
-#### Terminal
+# Font
+brew install --cask font-jetbrains-mono-nerd-font
 
-```bash
-brew install --cask wezterm
-brew install nushell
+# Starship
 brew install starship
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ln -sf ~/.dotfiles/.oh-my-zsh/themes/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme
-ln -sf ~/.dotfiles/wezterm ~/.config/wezterm
-ln -sf ~/.dotfiles/nushell ~/Library/Application\ Support/nushell
+echo 'eval "$(starship init zsh)"' >> ~/.zprofile
 ln -sf ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
 
-git config --global alias.ignore 'update-index --skip-worktree'
-git config --global alias.uningnore 'update-index --no-skip-worktree'
-git config --global alais.ignored 'ls-files -v | grep "^S"'
-```
+# Windows tiling manager
+brew install asmvik/formulae/yabai
+brew install asmvik/formulae/skhd
+ln -sf ~/.dotfiles/yabai ~/.config/yabai
+ln -sf ~/.dotfiles/skhd ~/.config/skhd
+yabai --start-service
+skhd --start-service
 
-#### Developer Tools
 
-```bash
+# Developer Tools
+brew install go
 brew install ripgrep
 brew install neovim
 ln -sf ~/.dotfiles/nvim ~/.config/nvim
 
-brew install --cask visual-studio-code
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+# Key Repeat
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
-brew install --cask docker
-brew install dotnet
-brew install node
-```
-
-#### Browsers
-
-```bash
-brew install --cask google-chrome
+# Browsers
 brew install --cask arc
-brew install --cask finicky
-ln -sf ~/.dotfiles/.finicky.js ~/.finicky.js
-```
 
-#### Extras
-
-```bash
-brew install --cask windows-app # remote desktop
-brew install --cask slack
-brew install --cask itsycal # [itsycal](https://www.mowglii.com/itsycal)
+# Apps
+brew install --cask itsycal
 brew install --cask logi-options+
 brew install --cask meetingbar
-brew install --cask zoom
-brew install --cask cleanmymac
-brew install --cask chatgpt
 brew install --cask raycast
-```
 
-#### Legacy installs
+# Zshrc
+ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
-```bash
-# Terminal
-brew install --cask ghostty
-brew install --cask iterm2
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/iTerm" # Specify the preferences directory
-defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true # Tell iTerm2 to use the custom preferences in the directory
-
-# Browsers
-brew install --cask brave-browser
-brew install --cask zen-browser
-brew install --cask microsoft-edge
-
-# Development
-brew install --cask azure-data-studio
-brew install node
-brew install pnpm
-brew install watchman
-brew install ruby
-gem install -n /usr/local/bin ffi
-brew install awscli
-brew install cocoapods
-npm install -g @aws-amplify/cli
-
-# Extras
-brew install --cask miro
-brew install --cask figma
-brew install --cask handbrake
-brew install --cask alt-tab
-brew install --cask nordvpn
-brew install --cask folx # [Folx](https://mac.eltima.com/download-manager.html)
-brew install --cask hiddenbar
-brew install --cask notion
-brew install --cask obsidian
+# Claude & Productivity
+brew install --cask claude-code
+brew install --cask claude
+brew install --cask linear-linear
+brew install glab
 ```
 
 #### Finder Configuration
 
-1. Open Finder
-2. Under the View menu
-   - Show Path Bar
-   - Show Status Bar
+Open Finder → View menu:
+
+- Show Path Bar
+- Show Status Bar
 
 #### Open at Login
 
-1. Open `System Settings`
-2. Search: `Open at Login`
-3. Add `DisplayLink Manager` Application to the list
-4. Add `Finicky` Application to the list
-5. Add `Itsycal` Application to the list
-6. Add `MeetingBar` Application to the list
-7. Add `Raycast` Application to the list
+Open System Settings → Search: **Open at Login** → Add:
 
-#### Keyboard changes
+- DisplayLink Manager
+- Itsycal
+- MeetingBar
+- Raycast
 
-1. Open `System Settings`
-2. Search: `Keyboard shortcuts`
-3. Under `Launchpad & Dock`
-   - Set `Show Launchpad` = **F4**
+#### Keyboard Shortcuts
 
-4. Under `Mission Control`
-   - Set `Mission Control` = **F3**
-   - Set `Show Desktop` = **Ctrl + F11**
+Open System Settings → Search: **Keyboard Shortcuts**
 
-5. Under `Function Keys`
-   - Enable `Use F1, F2, etc. keys as standard function keys`
+- **Spotlight**: uncheck "Show Spotlight search"
+- **Spotlight**: Show Apps = `F4`
+- **Mission Control**: Mission Control = `F3`
+- **Mission Control**: Show Desktop = `Ctrl+F11`
+- **Function Keys**: check "Use F1, F2, etc. keys as standard function keys"
+- **Modifier Keys**: Caps Lock Key = `Control`
 
 #### Setup react-native environment
 
