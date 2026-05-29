@@ -1,11 +1,9 @@
 return {
-  -- { import = "lazyvim.plugins.extras.ai.claudecode" },
+  { import = "lazyvim.plugins.extras.ai.claudecode" },
   { import = "lazyvim.plugins.extras.ai.copilot" },
 
-  -- Claude Code integration (disabled)
   {
     "coder/claudecode.nvim",
-    -- enabled = false,
     dependencies = { "folke/snacks.nvim" },
     opts = {
       terminal = {
