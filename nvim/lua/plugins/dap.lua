@@ -61,11 +61,10 @@ return {
       })
 
       -- nvim-dap reads .vscode/launch.json on demand (see :help dap-providers).
-      -- We override the coreclr adapter to the current netcoredbg arm64 build
-      -- bundled by Cliffback/netcoredbg-macOS-arm64.nvim. mason-nvim-dap defaults
-      -- coreclr to Mason's netcoredbg, which is a 2020 build that can't attach
-      -- to .NET 8+. We also register the VS Code `type` -> filetype map and
-      -- wire overseer once nvim-dap finishes loading.
+      -- We override the coreclr adapter to a locally-built netcoredbg with
+      -- Roslyn 4.11 (vs upstream's Roslyn 2.3.0-beta4 from 2017). Source at
+      -- ~/code/netcoredbg, built per docs/build.md. If the local build is
+      -- missing, falls back to the Cliffback arm64 plugin's bundled binary.
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyLoad",
         callback = function(args)
@@ -76,7 +75,9 @@ return {
           local dap = require("dap")
           dap.set_log_level("TRACE")
 
-          local netcoredbg = vim.fn.stdpath("data") .. "/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg"
+          local local_build = vim.fn.expand("~/code/netcoredbg/build/src/netcoredbg")
+          local plugin_build = vim.fn.stdpath("data") .. "/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg"
+          local netcoredbg = vim.fn.filereadable(local_build) == 1 and local_build or plugin_build
           dap.adapters.coreclr = {
             type = "executable",
             command = netcoredbg,
@@ -117,6 +118,43 @@ return {
             ["pwa-chrome"] = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
             chrome = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
           })
+
+          -- LazyVim's dap extra auto-opens dap-ui on event_initialized. On
+          -- nvim 0.12, that timing is flaky during heavy DAP startup. For
+          -- coreclr we defer the open until the first event_stopped, when
+          -- the session is in a stable state. Non-coreclr sessions keep
+          -- the original eager-open behavior.
+          local coreclr_dapui_opened = false
+          dap.listeners.after.event_initialized["dapui_config"] = function(session)
+            if session and session.config and session.config.type == "coreclr" then
+              coreclr_dapui_opened = false
+              return
+            end
+            local dapui_ok, dapui = pcall(require, "dapui")
+            if dapui_ok then
+              pcall(dapui.open, {})
+            end
+          end
+          dap.listeners.after.event_stopped["dapui_config_coreclr"] = function(session)
+            if session and session.config and session.config.type == "coreclr" and not coreclr_dapui_opened then
+              local dapui_ok, dapui = pcall(require, "dapui")
+              if dapui_ok then
+                pcall(dapui.open, {})
+              end
+              coreclr_dapui_opened = true
+            end
+          end
+          local function safe_dapui_close(session)
+            local dapui_ok, dapui = pcall(require, "dapui")
+            if dapui_ok then
+              pcall(dapui.close, {})
+            end
+            if session and session.config and session.config.type == "coreclr" then
+              coreclr_dapui_opened = false
+            end
+          end
+          dap.listeners.before.event_terminated["dapui_config"] = safe_dapui_close
+          dap.listeners.before.event_exited["dapui_config"] = safe_dapui_close
 
           local ok, overseer = pcall(require, "overseer")
           if ok and overseer.patch_dap then
