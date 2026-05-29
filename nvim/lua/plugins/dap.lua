@@ -20,6 +20,38 @@ return {
   -- Configure the stopped line highlight
   {
     "mfussenegger/nvim-dap",
+    -- nvim-dap's libuv stdout/stderr read callbacks contain unsafe
+    -- `assert(not err, err)` calls. When the adapter's pipe gets a transient
+    -- libuv error (e.g., EAGAIN/EINTR during .NET runtime startup), the
+    -- assert throws inside the libuv callback with no Lua frame to catch it,
+    -- crashing nvim. We replace the asserts with a silent skip: drop the
+    -- problem chunk and keep reading. EOF still arrives via `chunk == nil`.
+    -- Re-run with `:Lazy build nvim-dap` after plugin updates.
+    build = function()
+      local session_path = vim.fn.stdpath("data") .. "/lazy/nvim-dap/lua/dap/session.lua"
+      if vim.fn.filereadable(session_path) ~= 1 then
+        return
+      end
+      local lines = vim.fn.readfile(session_path)
+      local changed = false
+      for i, line in ipairs(lines) do
+        if line:match("^%s*assert%(not err, err%)%s*$")
+          or line:match("^%s*if err then pipe:close%(%); return end%s*$")
+          or line:match("^%s*if err then stderr:close%(%); return end%s*$")
+        then
+          local indent = line:match("^(%s*)") or ""
+          lines[i] = indent .. "if err then return end"
+          changed = true
+        end
+      end
+      if changed then
+        vim.fn.writefile(lines, session_path)
+        local cache_dir = vim.fn.stdpath("cache") .. "/luac"
+        for _, f in ipairs(vim.fn.glob(cache_dir .. "/*session.luac", false, true)) do
+          vim.fn.delete(f)
+        end
+      end
+    end,
     init = function()
       -- Set highlight on VimEnter and ColorScheme to ensure it persists
       vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
