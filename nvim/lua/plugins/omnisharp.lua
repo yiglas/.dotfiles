@@ -1,27 +1,28 @@
-vim.lsp.enable("roslyn_ls")
-vim.lsp.config("roslyn_ls", {
-  filetypes = { "cshtml", "razor", "cs" },
-  settings = {
-    ["csharp|background_analysis"] = {
-      dotnet_analyzer_diagnostic_scope = "openFiles",
-      dotnet_compiler_diagnostic_scope = "openFiles",
-    },
-    ["csharp|inlay_hints"] = {
-      csharp_enable_inlay_hints_for_implicit_object_creation = false,
-      csharp_enable_inlay_hints_for_implicit_variable_types = false,
-      csharp_enable_inlay_hints_for_lambda_parameter_types = false,
-      csharp_enable_inlay_hints_for_types = false,
-      dotnet_enable_inlay_hints_for_indexer_parameters = false,
-      dotnet_enable_inlay_hints_for_literal_parameters = false,
-      dotnet_enable_inlay_hints_for_object_creation_parameters = false,
-      dotnet_enable_inlay_hints_for_other_parameters = false,
-      dotnet_enable_inlay_hints_for_parameters = false,
-      dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-      dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-      dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-    },
-  },
-})
+-- Disabled in favor of seblyng/roslyn.nvim below.
+-- vim.lsp.enable("roslyn_ls")
+-- vim.lsp.config("roslyn_ls", {
+--   filetypes = { "cshtml", "razor", "cs" },
+--   settings = {
+--     ["csharp|background_analysis"] = {
+--       dotnet_analyzer_diagnostic_scope = "openFiles",
+--       dotnet_compiler_diagnostic_scope = "openFiles",
+--     },
+--     ["csharp|inlay_hints"] = {
+--       csharp_enable_inlay_hints_for_implicit_object_creation = false,
+--       csharp_enable_inlay_hints_for_implicit_variable_types = false,
+--       csharp_enable_inlay_hints_for_lambda_parameter_types = false,
+--       csharp_enable_inlay_hints_for_types = false,
+--       dotnet_enable_inlay_hints_for_indexer_parameters = false,
+--       dotnet_enable_inlay_hints_for_literal_parameters = false,
+--       dotnet_enable_inlay_hints_for_object_creation_parameters = false,
+--       dotnet_enable_inlay_hints_for_other_parameters = false,
+--       dotnet_enable_inlay_hints_for_parameters = false,
+--       dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+--       dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+--       dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+--     },
+--   },
+-- })
 
 return {
   -- We don't call the plugin's setup() because dap.lua wires the coreclr
@@ -60,103 +61,103 @@ return {
     },
   },
 
-  -- {
-  --   "mason-org/mason.nvim",
-  --   opts = {
-  --     registries = {
-  --       "github:mason-org/mason-registry",
-  --       "github:Crashdummyy/mason-registry",
-  --     },
-  --     ensure_installed = { "csharpier", "netcoredbg", "roslyn" },
-  --   },
-  -- },
-  --
-  -- {
-  --   "seblyng/roslyn.nvim",
-  --   ---@module 'roslyn.config'
-  --   ---@type RoslynNvimConfig
-  --   ft = { "cs", "razor" },
-  --   opts = {
-  --     config = {
-  --       -- Roslyn uses UTF-16 for character positions, must match to avoid
-  --       -- "character out of range" errors
-  --       positionEncoding = "utf-16",
-  --       capabilities = {
-  --         general = {
-  --           positionEncodings = { "utf-16" },
-  --         },
-  --         workspace = {
-  --           didChangeWatchedFiles = {
-  --             -- Disabled: nvim's built-in watch.watch uses assert(not err, err) in a
-  --             -- libuv callback with no pcall — crashes nvim when FSEvents fires an error
-  --             -- during heavy .NET module loading. roslyn-filewatch.nvim provides file
-  --             -- watching independently with proper error handling.
-  --             dynamicRegistration = false,
-  --           },
-  --           fileOperations = {
-  --             dynamicRegistration = true,
-  --             didCreate = true,
-  --             willCreate = true,
-  --             didRename = true,
-  --             willRename = true,
-  --             didDelete = true,
-  --             willDelete = true,
-  --           },
-  --         },
-  --       },
-  --       settings = {
-  --         ["csharp|inlay_hints"] = {
-  --           csharp_enable_inlay_hints_for_implicit_object_creation = false,
-  --           csharp_enable_inlay_hints_for_implicit_variable_types = false,
-  --           csharp_enable_inlay_hints_for_lambda_parameter_types = false,
-  --           csharp_enable_inlay_hints_for_types = false,
-  --           dotnet_enable_inlay_hints_for_indexer_parameters = false,
-  --           dotnet_enable_inlay_hints_for_literal_parameters = false,
-  --           dotnet_enable_inlay_hints_for_object_creation_parameters = false,
-  --           dotnet_enable_inlay_hints_for_other_parameters = false,
-  --           dotnet_enable_inlay_hints_for_parameters = false,
-  --           dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-  --           dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-  --           dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-  --         },
-  --         ["csharp|code_lens"] = {
-  --           dotnet_enable_references_code_lens = true,
-  --           dotnet_enable_tests_code_lens = true,
-  --         },
-  --       },
-  --       on_attach = function(client, bufnr)
-  --         -- Enable file watcher for workspace changes
-  --         if client.server_capabilities.workspace then
-  --           client.server_capabilities.workspace.fileOperations = {
-  --             didCreate = true,
-  --             willCreate = true,
-  --             didRename = true,
-  --             willRename = true,
-  --             didDelete = true,
-  --             willDelete = true,
-  --           }
-  --         end
-  --       end,
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     -- Load mason settings to make $MASON available
-  --     local _ = require("mason.settings").current.install_root_dir
-  --
-  --     -- Configure roslyn with proper capabilities
-  --     vim.lsp.config("roslyn", opts.config)
-  --     vim.lsp.enable("roslyn")
-  --   end,
-  --   init = function()
-  --     -- We add the Razor file types before the plugin loads.
-  --     vim.filetype.add({
-  --       extension = {
-  --         razor = "razor",
-  --         cshtml = "razor",
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+      },
+      ensure_installed = { "csharpier", "netcoredbg", "roslyn" },
+    },
+  },
+
+  {
+    "seblyng/roslyn.nvim",
+    ---@module 'roslyn.config'
+    ---@type RoslynNvimConfig
+    ft = { "cs", "razor" },
+    opts = {
+      config = {
+        -- Roslyn uses UTF-16 for character positions, must match to avoid
+        -- "character out of range" errors
+        positionEncoding = "utf-16",
+        capabilities = {
+          general = {
+            positionEncodings = { "utf-16" },
+          },
+          workspace = {
+            didChangeWatchedFiles = {
+              -- Disabled: nvim's built-in watch.watch uses assert(not err, err) in a
+              -- libuv callback with no pcall — crashes nvim when FSEvents fires an error
+              -- during heavy .NET module loading. roslyn-filewatch.nvim provides file
+              -- watching independently with proper error handling.
+              dynamicRegistration = false,
+            },
+            fileOperations = {
+              dynamicRegistration = true,
+              didCreate = true,
+              willCreate = true,
+              didRename = true,
+              willRename = true,
+              didDelete = true,
+              willDelete = true,
+            },
+          },
+        },
+        settings = {
+          ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = false,
+            csharp_enable_inlay_hints_for_implicit_variable_types = false,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = false,
+            csharp_enable_inlay_hints_for_types = false,
+            dotnet_enable_inlay_hints_for_indexer_parameters = false,
+            dotnet_enable_inlay_hints_for_literal_parameters = false,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = false,
+            dotnet_enable_inlay_hints_for_other_parameters = false,
+            dotnet_enable_inlay_hints_for_parameters = false,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+          },
+          ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+            dotnet_enable_tests_code_lens = true,
+          },
+        },
+        on_attach = function(client, bufnr)
+          -- Enable file watcher for workspace changes
+          if client.server_capabilities.workspace then
+            client.server_capabilities.workspace.fileOperations = {
+              didCreate = true,
+              willCreate = true,
+              didRename = true,
+              willRename = true,
+              didDelete = true,
+              willDelete = true,
+            }
+          end
+        end,
+      },
+    },
+    config = function(_, opts)
+      -- Load mason settings to make $MASON available
+      local _ = require("mason.settings").current.install_root_dir
+
+      -- Configure roslyn with proper capabilities
+      vim.lsp.config("roslyn", opts.config)
+      vim.lsp.enable("roslyn")
+    end,
+    init = function()
+      -- We add the Razor file types before the plugin loads.
+      vim.filetype.add({
+        extension = {
+          razor = "razor",
+          cshtml = "razor",
+        },
+      })
+    end,
+  },
   -- {
   --   "khoido2003/roslyn-filewatch.nvim",
   --   ft = { "cs", "razor" },
