@@ -60,11 +60,11 @@ return {
         end,
       })
 
-      -- nvim-dap reads .vscode/launch.json on demand (see :help dap-providers).
-      -- We override the coreclr adapter to a locally-built netcoredbg with
-      -- Roslyn 4.11 (vs upstream's Roslyn 2.3.0-beta4 from 2017). Source at
-      -- ~/code/netcoredbg, built per docs/build.md. If the local build is
-      -- missing, falls back to the Cliffback arm64 plugin's bundled binary.
+      -- nvim-dap reads .vscode/launch.json on demand (see :help dap-providers
+      -- and the F5 keymap below). We override the coreclr adapter to a
+      -- locally-built netcoredbg with Roslyn 4.11 (vs upstream's Roslyn
+      -- 2.3.0-beta4 from 2017). Source at ~/code/netcoredbg, built per
+      -- docs/build.md. Skipped when dotnet-debug.nvim owns coreclr.
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyLoad",
         callback = function(args)
@@ -75,14 +75,18 @@ return {
           local dap = require("dap")
           dap.set_log_level("TRACE")
 
-          local local_build = vim.fn.expand("~/code/netcoredbg/build/src/netcoredbg")
-          local plugin_build = vim.fn.stdpath("data") .. "/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg"
-          local netcoredbg = vim.fn.filereadable(local_build) == 1 and local_build or plugin_build
-          dap.adapters.coreclr = {
-            type = "executable",
-            command = netcoredbg,
-            args = { "--interpreter=vscode" },
-          }
+          -- Skip the netcoredbg coreclr adapter when dotnet-debug.nvim is
+          -- installed — that plugin owns coreclr (vsdbg-ui). See the
+          -- dotnet-debug.nvim spec in ./omnisharp.lua. Remove that spec to
+          -- switch back to the local netcoredbg build.
+          local dotnet_debug_installed = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/dotnet-debug.nvim") == 1
+          if not dotnet_debug_installed then
+            dap.adapters.coreclr = {
+              type = "executable",
+              command = vim.fn.expand("~/code/netcoredbg/build/src/netcoredbg"),
+              args = { "--interpreter=vscode" },
+            }
+          end
 
           dap.configurations.cs = {
             {
@@ -119,42 +123,18 @@ return {
             chrome = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
           })
 
-          -- LazyVim's dap extra auto-opens dap-ui on event_initialized. On
-          -- nvim 0.12, that timing is flaky during heavy DAP startup. For
-          -- coreclr we defer the open until the first event_stopped, when
-          -- the session is in a stable state. Non-coreclr sessions keep
-          -- the original eager-open behavior.
-          local coreclr_dapui_opened = false
-          dap.listeners.after.event_initialized["dapui_config"] = function(session)
-            if session and session.config and session.config.type == "coreclr" then
-              coreclr_dapui_opened = false
-              return
-            end
+          -- Open dap-ui as soon as a session initializes (launch or attach),
+          -- including coreclr. The earlier coreclr-specific defer-until-stop
+          -- workaround was for nvim-dap pipe-error crashes during netcoredbg
+          -- startup; those are addressed by the session.lua patch in `build`
+          -- above and we're on vsdbg-ui now anyway. LazyVim's dap extra
+          -- already wires the matching close listeners on terminate/exit.
+          dap.listeners.after.event_initialized["dapui_config"] = function()
             local dapui_ok, dapui = pcall(require, "dapui")
             if dapui_ok then
               pcall(dapui.open, {})
             end
           end
-          dap.listeners.after.event_stopped["dapui_config_coreclr"] = function(session)
-            if session and session.config and session.config.type == "coreclr" and not coreclr_dapui_opened then
-              local dapui_ok, dapui = pcall(require, "dapui")
-              if dapui_ok then
-                pcall(dapui.open, {})
-              end
-              coreclr_dapui_opened = true
-            end
-          end
-          local function safe_dapui_close(session)
-            local dapui_ok, dapui = pcall(require, "dapui")
-            if dapui_ok then
-              pcall(dapui.close, {})
-            end
-            if session and session.config and session.config.type == "coreclr" then
-              coreclr_dapui_opened = false
-            end
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = safe_dapui_close
-          dap.listeners.before.event_exited["dapui_config"] = safe_dapui_close
 
           local ok, overseer = pcall(require, "overseer")
           if ok and overseer.patch_dap then
