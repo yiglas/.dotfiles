@@ -1,6 +1,9 @@
 zmodload zsh/zprof
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
+# Enable the completion system (skip if you already have it / use a framework)
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -52,7 +55,6 @@ eval "$(starship init zsh)"
 
 # Created by `pipx` on 2026-04-22 22:49:54
 export PATH="$PATH:/Users/devin/.local/bin"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 unsetopt CASE_GLOB
 
 # Added by get-aspire-cli.sh
