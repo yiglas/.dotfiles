@@ -53,6 +53,40 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 
 eval "$(starship init zsh)"
 
+# `ls -al` annotated with the current branch of every git repo listed
+gs() {
+  emulate -L zsh
+  local dir=${1:-.} d name branch line width=0
+  local -A branches
+  local -a lines
+
+  _gs_branch() {
+    local top=$(git -C $1 rev-parse --show-toplevel 2>/dev/null)
+    [[ $top == ${1:A} ]] || return 1
+    git -C $1 symbolic-ref --quiet --short HEAD 2>/dev/null \
+      || git -C $1 rev-parse --short HEAD 2>/dev/null
+  }
+
+  for d in $dir/*(N-/) $dir/.*(N-/); do
+    branch=$(_gs_branch $d) && branches[${d:t}]=$branch
+  done
+  branch=$(_gs_branch $dir) && print -P "%F{cyan}${dir:A:t}%f on %F{magenta}$branch%f"
+  unfunction _gs_branch
+
+  lines=("${(@f)$(ls -al $dir)}")
+  for line in $lines; do (( ${#line} > width )) && width=${#line}; done
+  for line in $lines; do
+    name=
+    [[ $line =~ '^([^ ]+ +){8}(.*)$' ]] && name=${match[2]%% -> *}
+    if [[ -n ${branches[$name]-} ]]; then
+      printf '%-*s  ' $width $line
+      print -P "%F{magenta}${branches[$name]}%f"
+    else
+      print -r -- $line
+    fi
+  done
+}
+
 # Created by `pipx` on 2026-04-22 22:49:54
 export PATH="$PATH:/Users/devin/.local/bin"
 unsetopt CASE_GLOB
