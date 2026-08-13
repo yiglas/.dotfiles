@@ -21,6 +21,17 @@ return {
       {
         "<leader>ar",
         function()
+          vim.ui.input({ prompt = "Resume Id: " }, function(id)
+            if id and id ~= "" then
+              vim.fn.system("tmux split-window -h -l 30% 'skim resume " .. vim.fn.shellescape(id) .. "'")
+            end
+          end)
+        end,
+        desc = "Resume skim session in tmux",
+      },
+      {
+        "<leader>aR",
+        function()
           vim.fn.system("tmux split-window -h -l 30% 'claude --resume'")
         end,
         desc = "Resume Claude in tmux",
