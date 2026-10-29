@@ -78,6 +78,9 @@ return {
     codelens = {
       enabled = true,
     },
+    inlay_hints = {
+      enabled = false,
+    },
   } },
   { "mason-lspconfig.nvim" },
   {
