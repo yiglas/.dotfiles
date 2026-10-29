@@ -113,6 +113,10 @@ return {
     ft = { "cs", "razor" },
     opts = {
       config = {
+        -- The shared roslyn daemon inherits the cwd of whichever nvim spawned
+        -- it. If that was a since-deleted worktree, every MSBuild launch fails
+        -- in GetCwd() and no project loads. Pin it to a dir that always exists.
+        cmd_cwd = vim.env.HOME,
         -- Roslyn uses UTF-16 for character positions, must match to avoid
         -- "character out of range" errors
         positionEncoding = "utf-16",
